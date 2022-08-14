@@ -23,7 +23,6 @@ int main(void){
             can = false;
             break;
         }
-
     }
     if(can) cout << "YES" << endl;
     else cout << "NO" << endl;
