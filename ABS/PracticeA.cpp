@@ -6,5 +6,6 @@ int main(void){
     string s;
     cin >> a >> b >> c >> s;
     cout << a + b + c << " " << s << endl;
+    
     return 0;
 }
