@@ -4,14 +4,16 @@ using namespace std;
 int main(void){
     int h,w;
     cin >> h >> w;
-    // 入力
+
+    // Input
     vector<vector<int>> grid(h,vector<int>(w));
     for(int i = 0; i < h; i++){
         for(int j = 0; j < w; j++){
             cin >> grid[i][j];
         }
     }
-    // 前計算
+
+    // Precalc
     vector<int> Row(h);
     vector<int> Column(w);
     for(int i = 0; i < h; i++){
@@ -20,7 +22,9 @@ int main(void){
             Column[j] += grid[i][j];
         }
     }
-    // 答えの計算、出力
+    
+    // Calc of the answer
+    //Output
     vector<vector<int>> ans(h,vector<int>(w));
     for(int i = 0; i < h; i++){
         for(int j = 0; j < w; j++){
