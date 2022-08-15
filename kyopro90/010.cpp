@@ -2,7 +2,7 @@
 using namespace std;
 
 int main(void){
-    // 入力
+    // Input
     int n;
     cin >> n;
     vector<int> c(n),p(n);
@@ -24,7 +24,7 @@ int main(void){
         }
     }
 
-    // 出力
+    // Output
     for(int j = 0; j < q; j++){
         int ans1 = sum1[r[j]] - sum1[l[j] - 1]; 
         int ans2 = sum2[r[j]] - sum2[l[j] - 1];
