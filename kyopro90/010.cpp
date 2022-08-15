@@ -2,6 +2,7 @@
 using namespace std;
 
 int main(void){
+    
     // Input
     int n;
     cin >> n;
