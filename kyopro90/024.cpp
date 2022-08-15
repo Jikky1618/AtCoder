@@ -2,7 +2,6 @@
 using namespace std;
 
 int main(void){
-    
     // input
     int n,k;
     cin >> n >> k;
