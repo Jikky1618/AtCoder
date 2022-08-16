@@ -4,7 +4,7 @@ using namespace std;
 int main() {
     int a,b;
     cin >> a >> b;
-    cout << ((a <= b && b <= 6 * a) ? "Yes" : "No") << endl;
+    cout << max(0,b - a + 1) << endl;
 
     return 0;
 }
