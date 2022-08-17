@@ -1,9 +1,0 @@
-{
-    "files.associations": {
-        "*.dat": "plaintext",
-        "iostream": "cpp",
-        "ostream": "cpp",
-        "stdio.h": "c",
-        "numeric": "cpp"
-    }
-}
