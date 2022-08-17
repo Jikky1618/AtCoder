@@ -1,5 +1,6 @@
 # VScode settings
 .vscode/
+
 # Test 
 test.cpp
 test.exe
