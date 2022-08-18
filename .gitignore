@@ -1,8 +1,10 @@
 # VScode settings
 .vscode/
 
-# Executable file
-a.out
-
 # AtCoder library
 ac-library/
+
+# Executable file
+*.exe
+*.out
+*.app
