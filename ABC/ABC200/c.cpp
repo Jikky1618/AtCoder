@@ -14,8 +14,8 @@ int main(){
     }
 
     ll total = 0;
-    for(int i = 0; i < 200; i++){
-        total += mod[i] * (mod[i] - 1) / 2; //mod[i]C2
+    for(int j = 0; j < 200; j++){
+        total += mod[j] * (mod[j] - 1) / 2; //mod[j]C2
     }
     cout << total << endl;
 
