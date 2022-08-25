@@ -11,7 +11,7 @@ int main(){
     int _ac = c % 2 == 1 && a < 0;
     int _bc = c % 2 == 1 && b < 0;
 
-    //Check
+    // Check
     if(_ac == _bc){
         if(abs(a) > abs(b)) cout << ">" << endl;
         if(abs(a) < abs(b)) cout << "<" << endl;
