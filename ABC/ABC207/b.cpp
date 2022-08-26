@@ -1,9 +1,9 @@
 #include <bits/stdc++.h>
 using namespace std;
-typedef long long ll;
+using ll = long long;
 
 int main(void){
-    ll a,b,c,d;
+    int a,b,c,d;
     cin >> a >> b >> c >> d;
     ll blue = a,red = 0;
 
