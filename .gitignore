@@ -5,7 +5,7 @@
 ac-library/
 
 # test file
-text.cpp
+test.cpp
 
 # Executable file
 *.exe
