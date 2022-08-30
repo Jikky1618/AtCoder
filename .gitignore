@@ -4,6 +4,9 @@
 # AtCoder library
 ac-library/
 
+# test file
+text.cpp
+
 # Executable file
 *.exe
 *.out
