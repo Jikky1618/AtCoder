@@ -8,7 +8,7 @@ int main(){
     cin >> s[0] >> s[1] >> s[2] >> t;
 
     string ans;
-    for(int i = 0; i < t.length(); i++){
+    for(int i = 0; i < t.length(); i++){ // thonk
         ans += s[t[i]];
     }
 
