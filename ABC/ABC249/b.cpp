@@ -11,6 +11,12 @@ int main(){
         if('a' <= s[i] && s[i] <= 'z') lower = true;
         if('A' <= s[i] && s[i] <= 'Z') upper = true;
     }
+    // bool diff = true;
+    //     for(int i = 0; i < s.size(); i++){
+    //         for(int j = i + 1; j < s.size(); j++){
+    //             if(s[i] == s[j]) diff = false;
+    //         }
+    //     }
     set<int> st;
     bool diff = false;
     for(int i = 0; i < s.length(); i++){
