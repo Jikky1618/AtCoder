@@ -7,19 +7,16 @@ int main(){
     string s;
     cin >> n >> s;
 
-    char dir = 'E';
+    int dir = 0;
     int x = 0,y = 0;
     for(int i = 0; i < n; i++){
         if(s[i] == 'S'){
-            if(dir == 'E') x++;
-            else if(dir == 'S') y--;
-            else if(dir == 'W') x--;
-            else if(dir == 'N') y++;
+            if(dir == 0) x++;
+            if(dir == 1) y--;
+            if(dir == 2) x--;
+            if(dir == 3) y++;
         }else if(s[i] == 'R'){
-            if(dir == 'E') dir = 'S';
-            else if(dir == 'S') dir = 'W';
-            else if(dir == 'W') dir = 'N';
-            else if(dir == 'N') dir = 'E';
+            dir = (dir + 1) % 4;
         }
     }
 
