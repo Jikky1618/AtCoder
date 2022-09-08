@@ -8,8 +8,9 @@ int main(){
 
     int ans;
     if(y % 4 == 0) ans = y + 2;
-    else if(y % 4 == 2) ans = y;
-    else ans = y + (y % 4);
+    if(y % 4 == 1) ans = y + 1;
+    if(y % 4 == 2) ans = y;
+    if(y % 4 == 3) ans = y + 3;
 
     cout << ans << endl;
 
