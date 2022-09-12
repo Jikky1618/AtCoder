@@ -8,11 +8,8 @@ int main(){
     cin >> s >> k;
 
     sort(s.begin(), s.end());
-    while(k > 1){
-        next_permutation(s.begin(), s.end());
-        k--;
-    }
-
+    for(int i = 0; i < k - 1; i++) next_permutation(s.begin(), s.end());
+    
     cout << s << endl;
 
     return 0;
