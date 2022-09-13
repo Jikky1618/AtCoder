@@ -10,9 +10,11 @@ int main(){
     vector<int> p(n);
     for(int i = 0; i < n; i++) cin >> p[i];
 
+    // 何回回したら何人喜ぶかのカウント用配列
     vector<int> count(n);
     for(int i = 0; i < n; i++){
         for(int j = -1; j <= 1; j++){
+            // 料理Piがiを喜ばせる配置ならカウント
             count[(p[i]-i+j+n)%n]++;
         }
     }
