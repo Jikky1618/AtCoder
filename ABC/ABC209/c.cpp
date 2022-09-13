@@ -12,8 +12,7 @@ int main() {
     sort(c.begin(), c.end());
     ll count = 1;
     for(int i = 0; i < n; i++){
-        count *= max(0,c[i] - i);
-        count %= MOD;
+        count *= max(0,c[i] - i) % MOD;
     }
     cout << count << endl;
 
