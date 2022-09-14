@@ -1,0 +1,27 @@
+#include <bits/stdc++.h>
+using namespace std;
+using ll = long long;
+
+int main(){
+    cin.tie(nullptr);
+    ios::sync_with_stdio(false);
+    int n;
+    cin >> n;
+    vector<int> a(n);
+    for(int i = 0; i < n;i++) cin >> a[i];
+
+    ll same = 0;
+    // a[i] = i,a[j] = jの個数
+    for(int i = 0; i < n; i++){
+        if(i == a[i] - 1) same++;
+    }
+    ll ans = same * (same - 1) / 2;
+    for(int i = 0; i < n; i++){
+        // i < j &&  a[j] == i
+        if(i < a[i] - 1 && a[a[i] - 1] - 1 == i) ans++;
+    }
+
+    cout << ans << endl;
+
+    return 0;
+}
