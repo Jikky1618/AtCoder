@@ -3,18 +3,18 @@ using namespace std;
 using ll = long long;
 
 int main(){
+    cin.tie(nullptr);
+    ios::sync_with_stdio(false);
     ll n;
     cin >> n;
 
-    ll k = 0,value = 1;
-    while(1){
-        if(value > n){
-            break;
-        }
+    ll k = 0,val = 1;
+    while(val <= n){
+        val *= 2;
         k++;
-        value *= 2;
     }
-    cout << k - 1 << endl;
 
+    cout << k - 1 << endl;
+    
     return 0;
 }
