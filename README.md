@@ -1,6 +1,6 @@
 # AtCoder精進用
+[![Jikky1618](https://img.shields.io/endpoint?url=https%3A%2F%2Fatcoder-badges.now.sh%2Fapi%2Fatcoder%2Fjson%2FJikky1618)](https://atcoder.jp/users/Jikky1618)
 AtCoderの問題をC++で解く、個人精進用プロジェクトです。
-[![Jikky1618](https://img.shields.io/endpoint?url=https%3A%2F%2Fatcoder-badges.now.sh%2Fapi%2Fatcoder%2Fjson%2FJikky1618?style=for-the-badge)](https://atcoder.jp/users/Jikky1618)
 
 ## ABC
 - [ABC150-199](https://github.com/Jikky1618/AtCoder/tree/main/ABC/ABC150-199)
