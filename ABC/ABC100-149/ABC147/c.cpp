@@ -31,7 +31,7 @@ int main(){
             for(auto p: a_xy[i]){
                 int x = p.first; // x人目は
                 int y = p.second; // 1:「正直者」, 0: 「不親切な人」と証言
-                // 証言と実際の人が矛盾していたらfalse
+                // 証言と実際の人が異なれば矛盾
                 if(y != ((bit >> x) & 1)) check = false;
             }
         }
