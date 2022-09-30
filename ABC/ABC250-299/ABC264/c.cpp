@@ -23,7 +23,7 @@ int main(){
     for(int bit_h = 0; bit_h < (1 << h1); bit_h++){
         // 列に対してBit全探索
         for(int bit_w = 0; bit_w < (1 << w1); bit_w++){
-            // 新しく作る行列の行: new_h, 列: new_w
+            // Aの残す行列の行: new_h, 列: new_w
             vector<int> new_h,new_w;
             for(int i = 0; i < h1; i++){
                 if((bit_h >> i) & 1) new_h.push_back(i);
