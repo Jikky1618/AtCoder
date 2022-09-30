@@ -10,27 +10,27 @@ int main(){
     cin >> s;
 
     for(int bit = 0; bit < (1 << 3); bit++){
-        vector<char> op(3);
-        for(int i = 0; i < 3; i++){
-            if((bit >> i) & 1){
-                op[i] = '+';
-            }else{
-                op[i] = '-';
-            }
-        }
-
         int calc = s[0] - '0';
         for(int i = 0; i < 3; i++){
-            if(op[i] == '+'){
+            if((bit >> i) & 1){
                 calc += (s[i + 1] - '0');
             }else{
                 calc -= (s[i + 1] - '0');
             }
-            if(calc == 7){
-                cout << s[0] << op[0] << s[1] << op[1] <<  s[2] << op[2] << s[3] << "=7" << endl;
-                return 0;
+        }
+
+        if(calc == 7){
+            cout << s[0];
+            for(int i = 0; i < 3; i++){
+                if((bit >> i) & 1){
+                    cout << '+';
+                }else{
+                    cout << '-';
+                }
+                cout << s[i + 1];
             }
+            cout << "=7" << endl;
+            return 0;
         }
     }
-    return 0;
 }
