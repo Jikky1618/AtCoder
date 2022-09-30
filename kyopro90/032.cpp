@@ -2,7 +2,6 @@
 using namespace std;
 using ll = long long;
 const int INF = (1 << 30) - 1;
-#define debug(x) cerr << "\033[33m[" << __LINE__ << "] " << #x << ": " << x << "\033[m" << endl;
 
 int main(){
     cin.tie(nullptr);
