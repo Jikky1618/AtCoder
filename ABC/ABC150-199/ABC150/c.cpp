@@ -13,7 +13,7 @@ int main(){
 
     vector<int> r;
     for(int i = 1; i <= n; i++) r.push_back(i);
-    int a = -1, b = -1,cnt = 1;
+    int a = -1,b = -1,cnt = 1;
     do{
         bool found_p = true, found_q = true;
         for(int i = 0; i < n; i++){
