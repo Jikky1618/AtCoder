@@ -2,22 +2,28 @@
 using namespace std;
 using ll = long long;
 
+#define debug(x) cerr << "\033[33m[" << __LINE__ << "] " << #x << ": " << x << "\033[m" << endl;
+
 int main(){
+    cin.tie(nullptr);
+    ios::sync_with_stdio(false);
     int n,k;
     cin >> n >> k;
     vector<int> c(n);
     for(int i = 0; i < n; i++) cin >> c[i];
 
-    set<int> st;
-    unsigned int max = 0;
-    for(int i = 0; i < n - k + 1; i++){
-        for(int j = 0; j < k; j++){
-            st.insert(c[i + j]);
+    map<int,int> mp;
+    int ans = 0, now = 0;
+    for(int i = 0; i < n; i++){
+        if(mp[c[i]] == 0) now++;
+        mp[c[i]]++;
+        if(k <= i){
+            mp[c[i - k]]--;
+            if(mp[c[i - k]] == 0) now--;
         }
-        if(max < st.size()) max = st.size();
+        ans = max(ans,now);
     }
 
-    cout << max << endl;
-
+    cout << ans << endl;
     return 0;
 }
