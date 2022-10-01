@@ -25,13 +25,14 @@ int main(){
     vector<bool> pt = makeIsPrime(100009);
     // a[i] := 数iが2017に似た数ならば1、そうでないなら0
     vector<int> a(100009);
-    for(int i = 1; i < 100009; i++){
-        if(pt[i] && pt[(i + 1) / 2]) a[i] = 1;
+    for(int i = 1; i <= 100000; i++){
+        if(pt[i] && pt[(i + 1) / 2]) a[i] = 1; // 1-indexed
     }
 
     // s[i] := [0,i]の数の中で2017に似た数の個数
     vector<int> s(100009);
-    for(int i = 1; i < 100009; i++) s[i] = s[i - 1] + a[i];
+    s[0] = 0;
+    for(int i = 0; i <= 100000; i++) s[i + 1] = s[i] + a[i + 1];
 
     // クエリ
     for(int i = 0; i < q; i++){
