@@ -21,18 +21,19 @@ int main(){
     cin >> q;
     vector<int> l(q),r(q);
     for(int i = 0; i < q; i++) cin >> l[i] >> r[i];
-
-    vector<bool> pt = makeIsPrime(100009);
+    
+    int MAX = 100009;
+    vector<bool> pt = makeIsPrime(MAX);
     // a[i] := 数iが2017に似た数ならば1、そうでないなら0
-    vector<int> a(100009);
-    for(int i = 1; i <= 100000; i++){
+    vector<int> a(MAX + 1);
+    for(int i = 1; i <= MAX; i++){
         if(pt[i] && pt[(i + 1) / 2]) a[i] = 1; // 1-indexed
     }
 
     // s[i] := [0,i]の数の中で2017に似た数の個数
-    vector<int> s(100009);
+    vector<int> s(MAX + 1);
     s[0] = 0;
-    for(int i = 0; i <= 100000; i++) s[i + 1] = s[i] + a[i + 1];
+    for(int i = 0; i < MAX; i++) s[i + 1] = s[i] + a[i + 1];
 
     // クエリ
     for(int i = 0; i < q; i++){
