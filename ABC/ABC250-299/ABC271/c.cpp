@@ -13,17 +13,13 @@ int main(){
     set<int> st;
     for(int i = 0; i < n; i++) st.insert(a[i]);
 
-    int book = n,cnt = 1;
-    while(1){
-        if(st.count(cnt)){
-            book -= 1;
-        }else{
-            book -= 2;
-        }
-        if(book <= 0) break;
-        cnt++;
+    int ans = 0;
+    for(int i = 1;; i++){
+        if(st.count(i)) n -= 1; else n -= 2;
+        if(n < 0) break;
+        ans = i;
     }
-    int ans = cnt - 1;
+
     cout << ans << endl;
     return 0;
 }
