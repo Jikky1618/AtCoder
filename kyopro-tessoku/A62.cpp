@@ -1,14 +1,12 @@
 #include <bits/stdc++.h>
 using namespace std;
 using ll = long long;
-#define debug(x) cerr << "\033[33m[" << __LINE__ << "] " << #x << ": " << x << "\033[m" << endl;
 
 vector<bool> visited;
 void dfs(int pos, const vector<vector<int>> &graph){
     visited[pos] = true;
-    for(int i = 0; i < graph[i].size(); i++){
-        int nex = graph[pos][i];
-        if(visited[nex] == false) dfs(nex, graph);
+    for(auto next_pos: graph[pos]){
+        if(visited[next_pos] == false) dfs(next_pos, graph);
     }
 }
 
@@ -30,7 +28,6 @@ int main(){
 
     bool flag = true;
     for(int i = 0; i < n; i++){
-        debug(visited[i]);
         if(visited[i] == false) flag = false;
     }
 
