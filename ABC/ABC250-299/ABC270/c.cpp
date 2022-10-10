@@ -33,6 +33,7 @@ int main(){
     visited.resize(n);
     dfs(x,y,graph);
 
-    for(auto i:ans) cout << i + 1 << endl;
+    for(auto i:ans) cout << i + 1 << " ";
+    cout << endl;
     return 0;
 }
