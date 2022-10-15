@@ -2,14 +2,6 @@
 using namespace std;
 using ll = long long;
 
-vector<bool> visited;
-void dfs(int pos, vector<vector<int>> &graph){
-    visited[pos] = true;
-    for(auto next_pos: graph[pos]){
-        if(visited[next_pos] == false) dfs(next_pos, graph);
-    }
-}
-
 int main(){
     cin.tie(nullptr);
     ios::sync_with_stdio(false);
@@ -23,11 +15,22 @@ int main(){
         graph[a].push_back(b);
     }
 
-    visited.resize(n);
     int ans = 0;
     for(int i = 0; i < n; i++){
-        for(int j = 0; j < n; j++) visited[j] = false;
-        dfs(i, graph);
+        vector<bool> visited(n, false);
+        queue<int> que;
+        // 初期化
+        visited[i] = true;
+        que.push(i);
+        // 幅優先探索
+        while(!que.empty()){
+            int pos = que.front(); que.pop();
+            visited[pos] = true;
+            for(auto next_pos: graph[pos]){
+                if(visited[next_pos] == false) que.push(next_pos);
+            }
+        }
+        // ans計算
         for(int j = 0; j < n; j++) ans += (visited[j] == true);
     }
 
