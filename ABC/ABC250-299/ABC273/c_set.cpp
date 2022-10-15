@@ -20,16 +20,15 @@ int main(){
     }
 
     vector<int> ans(n);
-    vector<int> bucket(n);
     for(int i = 0; i < n; i++){
         auto itr = lower_bound(fix_st.begin(), fix_st.end(),a[i]);
         itr++;
-        ans[i] = distance(itr,fix_st.end());
-        bucket[ans[i]]++;
+        int cnt = distance(itr,fix_st.end());
+        ans[cnt]++;
     }
 
     for(int k = 0; k < n; k++){
-        cout << bucket[k] << '\n';
+        cout << ans[k] << '\n';
     }
     return 0;
 }
