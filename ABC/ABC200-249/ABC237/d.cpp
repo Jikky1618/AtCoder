@@ -15,10 +15,10 @@ int main(){
         else ans.push_front(i);
     }
 
-    for(auto itr = ans.begin(); itr != ans.end(); itr++){
-        cout << *itr << " ";
+    for(int i = 0; i <= n; i++){
+        if(i < n) cout << ans[i] << " ";
+        else cout << ans[i] << endl;
     }
-    cout << endl;
 
     return 0;
 }
