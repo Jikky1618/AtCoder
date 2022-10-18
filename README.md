@@ -37,7 +37,7 @@ AtCoderの問題をC++で解く、個人精進用プロジェクトです。
 
 - [鉄則本 例題(A問題)](https://github.com/Jikky1618/AtCoder/tree/main/kyopro-tessoku/A)
 - [鉄則本 応用問題(B問題)](https://github.com/Jikky1618/AtCoder/tree/main/kyopro-tessoku/B)
-- 鉄則本力だめし問題(C問題)
+- 鉄則本 力だめし問題(C問題)
 
 <a name="kyopro90"></a>
 
