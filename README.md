@@ -43,4 +43,4 @@ AtCoderの問題をC++で解く、個人精進用プロジェクトです。
 
 ## kyopro90
 
-- [競プロ典型 90 問 問題](https://github.com/Jikky1618/AtCoder/tree/main/kyopro90)
+- [競プロ典型 90 問](https://github.com/Jikky1618/AtCoder/tree/main/kyopro90)
