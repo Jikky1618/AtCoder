@@ -7,25 +7,20 @@ AtCoderの問題をC++で解く、個人精進用プロジェクトです。
 |---|---|
 |**[ABC](#abc)**|ABCの問題|
 |**[ABC-Like](#abc-like)**|難易度がABC相当の企業主催コンテストの問題|
-|**[ABS](#abs)**|過去問精選10問の問題|
 
 
 <a name="abc"></a>
 ## ABC
+#### ABCの問題です。(50区切り)
 - [ABC001-049](https://github.com/Jikky1618/AtCoder/tree/main/ABC/ABC001-049)
 - [ABC050-099](https://github.com/Jikky1618/AtCoder/tree/main/ABC/ABC050-099)
 - [ABC100-149](https://github.com/Jikky1618/AtCoder/tree/main/ABC/ABC100-149)
 - [ABC150-199](https://github.com/Jikky1618/AtCoder/tree/main/ABC/ABC150-199)
 - [ABC200-249](https://github.com/Jikky1618/AtCoder/tree/main/ABC/ABC200-249)
 - [ABC250-299](https://github.com/Jikky1618/AtCoder/tree/main/ABC/ABC250-299)
+#### [「AtCoder に登録したら次にやること ～ これだけ解けば十分闘える！過去問精選 10 問 ～」](https://qiita.com/drken/items/fd4e5e3630d0f5859067)の問題です。
 - [ABS](https://github.com/Jikky1618/AtCoder/tree/main/ABC/ABS)
 
 <a name="abc-like"></a>
 ## ABC-Like
 - [ABS-Like](https://github.com/Jikky1618/AtCoder/tree/main/ABC-Like)
-
-
-
-### リンク
-[AtCoder Problems](https://kenkoooo.com/atcoder/#/table/Jikky1618)  
-[Notion - 01_AtCoder](https://www.notion.so/01_Atcoder-2a3deb8db583488c89873d1cab66d867)
