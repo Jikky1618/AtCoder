@@ -17,19 +17,16 @@ AtCoderの問題をC++で解く、個人精進用プロジェクトです。
 
 ## ABC
 
-- [過去問精選 10 問](https://github.com/Jikky1618/AtCoder/tree/main/ABC/ABS)
 - [ABC001-049](https://github.com/Jikky1618/AtCoder/tree/main/ABC/ABC001-049)
 - [ABC050-099](https://github.com/Jikky1618/AtCoder/tree/main/ABC/ABC050-099)
 - [ABC100-149](https://github.com/Jikky1618/AtCoder/tree/main/ABC/ABC100-149)
 - [ABC150-199](https://github.com/Jikky1618/AtCoder/tree/main/ABC/ABC150-199)
 - [ABC200-249](https://github.com/Jikky1618/AtCoder/tree/main/ABC/ABC200-249)
 - [ABC250-299](https://github.com/Jikky1618/AtCoder/tree/main/ABC/ABC250-299)
-
 <a name="abc-like"></a>
 
-## ABC-Like
-
 - [ABC相当の企業主催コンテスト過去問](https://github.com/Jikky1618/AtCoder/tree/main/ABC-Like)
+- [過去問精選 10 問](https://github.com/Jikky1618/AtCoder/tree/main/ABC/ABS)
 
 <a name="arc"></a>
 
