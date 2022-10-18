@@ -35,12 +35,12 @@ AtCoderの問題をC++で解く、個人精進用プロジェクトです。
 
 ## kyopro-tessoku
 
-- [鉄則本例題(A問題)](https://github.com/Jikky1618/AtCoder/tree/main/kyopro-tessoku/A)
-- [鉄則本応用問題(B問題)](https://github.com/Jikky1618/AtCoder/tree/main/kyopro-tessoku/B)
+- [鉄則本 例題(A問題)](https://github.com/Jikky1618/AtCoder/tree/main/kyopro-tessoku/A)
+- [鉄則本 応用問題(B問題)](https://github.com/Jikky1618/AtCoder/tree/main/kyopro-tessoku/B)
 - 鉄則本力だめし問題(C問題)
 
 <a name="kyopro90"></a>
 
 ## kyopro90
 
-- [kyopro90](https://github.com/Jikky1618/AtCoder/tree/main/kyopro90)
+- [競プロ典型 90 問 問題](https://github.com/Jikky1618/AtCoder/tree/main/kyopro90)
