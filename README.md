@@ -7,7 +7,6 @@ AtCoderの問題をC++で解く、個人精進用プロジェクトです。
 |分類|内容|
 |---|---|
 |**[ABC](#abc)**|ABCの問題|
-|**[ABC-Like](#abc-like)**|ABC相当の企業主催コンテスト過去問|
 |**[ARC](#arc)**|ARCの問題|
 |**[kyopro-tessoku](#kyopro-tessoku)**|「競技プログラミングの鉄則」の演習問題|
 |**[kyopro90](#kyopro90)**|「競プロ典型 90 問」の問題|
