@@ -13,8 +13,8 @@ int main(){
     sort(a.begin(), a.end());
     for(int i = 0; i < q; i++){
         int x; cin >> x;
-        auto itr = lower_bound(a.begin(), a.end(), x); 
-        cout << a.end() - itr << endl;
+        int ans = a.end() - lower_bound(a.begin(), a.end(), x); 
+        cout << ans << endl;
     }
 
     return 0;
