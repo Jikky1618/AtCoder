@@ -27,31 +27,20 @@ AtCoderの問題をC++で解く、個人精進用プロジェクトです。
 
 #### その他
 
+- [ABC相当の企業主催コンテスト過去問](https://github.com/Jikky1618/AtCoder/tree/main/ABC-Like)
 - [過去問精選 10 問](https://github.com/Jikky1618/AtCoder/tree/main/ABC/ABS)
-- [ABC相当の企業主催コンテストの過去問](https://github.com/Jikky1618/AtCoder/tree/main/ABC-Like)
 
 <a name="arc"></a>
 
 ## ARC
 
-#### ARC過去問
-
 - [ARC](https://github.com/Jikky1618/AtCoder/tree/main/ARC)
 
 <a name="kyopro-tessoku"></a>
 
-## kyopro-tessoku
-
-#### 鉄則本例題(A問題)
-
-- [A問題](https://github.com/Jikky1618/AtCoder/tree/main/kyopro-tessoku/A)
-
-#### 鉄則本例題(B問題)
-
-- [B問題](https://github.com/Jikky1618/AtCoder/tree/main/kyopro-tessoku/B)
+- [鉄則本例題(A問題)](https://github.com/Jikky1618/AtCoder/tree/main/kyopro-tessoku/A)
+- [鉄則本応用問題(B問題)](https://github.com/Jikky1618/AtCoder/tree/main/kyopro-tessoku/B)
 
 <a name="kyopro90"></a>
-
-## kyopro90
 
 - [kyopro90](https://github.com/Jikky1618/AtCoder/tree/main/kyopro90)
