@@ -7,6 +7,7 @@ AtCoderの問題をC++で解く、個人精進用プロジェクトです。
 |分類|内容|
 |---|---|
 |**[ABC](#abc)**|ABCの問題|
+|**[ABC-Like](#abc-like)**|ABC相当の企業主催コンテスト過去問|
 |**[ARC](#arc)**|ARCの問題|
 |**[kyopro-tessoku](#kyopro-tessoku)**|「競技プログラミングの鉄則」の演習問題|
 |**[kyopro90](#kyopro90)**|「競プロ典型 90 問」の問題|
@@ -16,8 +17,7 @@ AtCoderの問題をC++で解く、個人精進用プロジェクトです。
 
 ## ABC
 
-#### ABC過去問( 50 問区切り)
-
+- [過去問精選 10 問](https://github.com/Jikky1618/AtCoder/tree/main/ABC/ABS)
 - [ABC001-049](https://github.com/Jikky1618/AtCoder/tree/main/ABC/ABC001-049)
 - [ABC050-099](https://github.com/Jikky1618/AtCoder/tree/main/ABC/ABC050-099)
 - [ABC100-149](https://github.com/Jikky1618/AtCoder/tree/main/ABC/ABC100-149)
@@ -25,10 +25,11 @@ AtCoderの問題をC++で解く、個人精進用プロジェクトです。
 - [ABC200-249](https://github.com/Jikky1618/AtCoder/tree/main/ABC/ABC200-249)
 - [ABC250-299](https://github.com/Jikky1618/AtCoder/tree/main/ABC/ABC250-299)
 
-#### その他
+<a name="abc-like"></a>
+
+## ABC-Like
 
 - [ABC相当の企業主催コンテスト過去問](https://github.com/Jikky1618/AtCoder/tree/main/ABC-Like)
-- [過去問精選 10 問](https://github.com/Jikky1618/AtCoder/tree/main/ABC/ABS)
 
 <a name="arc"></a>
 
@@ -42,6 +43,7 @@ AtCoderの問題をC++で解く、個人精進用プロジェクトです。
 
 - [鉄則本例題(A問題)](https://github.com/Jikky1618/AtCoder/tree/main/kyopro-tessoku/A)
 - [鉄則本応用問題(B問題)](https://github.com/Jikky1618/AtCoder/tree/main/kyopro-tessoku/B)
+- 鉄則本力だめし問題(C問題)
 
 <a name="kyopro90"></a>
 
