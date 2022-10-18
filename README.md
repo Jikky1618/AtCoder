@@ -45,9 +45,13 @@ AtCoderの問題をC++で解く、個人精進用プロジェクトです。
 
 ## kyopro-tessoku
 
-#### 競技プログラミングの鉄則演習問題
+#### 鉄則本例題(A問題)
 
-- [kyopro-tessoku](https://github.com/Jikky1618/AtCoder/tree/main/kyopro-tessoku)
+- [A問題](https://github.com/Jikky1618/AtCoder/tree/main/kyopro-tessoku/A)
+
+#### 鉄則本例題(B問題)
+
+- [B問題](https://github.com/Jikky1618/AtCoder/tree/main/kyopro-tessoku/B)
 
 <a name="kyopro90"></a>
 
