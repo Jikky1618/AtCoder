@@ -7,20 +7,20 @@ int main(){
     ios::sync_with_stdio(false);
     int n;
     cin >> n;
-    deque<int> a(n);
-    for(int i = 0; i < n; i++) cin >> a[i];
+    vector<int> h(n);
+    for(int i = 0; i < n; i++) cin >> h[i];
 
     int ans = 0, cnt = 0;
-    while(!a.empty()){
-        int num = a.front(); a.pop_front();
-        if(num == cnt){
+    for(int i = 0; i < n - 1; i++){
+        if(h[i] >= h[i + 1]){
             cnt++;
         }else{
-            ans++;
+            ans = max(ans, cnt);
+            cnt = 0;
         }
     }
+    ans = max(ans, cnt);
 
     cout << ans << endl;
-
     return 0;
 }
