@@ -33,6 +33,5 @@ int main(){
     dfs(1, 0, dep, graph);
 
     for(int i = 1; i <= 2 * n + 1; i++) cout << dep[i] << endl;
-
     return 0;
 }
