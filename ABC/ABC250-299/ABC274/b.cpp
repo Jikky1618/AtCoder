@@ -17,6 +17,6 @@ int main(){
         }
     }
 
-    for(auto && ans: x) cout << ans << endl;
+    for(auto &&ans: x) cout << ans << endl;
     return 0;
 }
