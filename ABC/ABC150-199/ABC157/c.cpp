@@ -11,7 +11,7 @@ int main(){
     vector<char> c(m);
     for(int i  = 0; i < m; i++) cin >> s[i] >> c[i];
 
-    for(int i = 0; i < 999; i++){
+    for(int i = 0; i <= 999; i++){
         if(to_string(i).size() != n) continue;
         bool flag = true;
         for(int j = 0; j < m; j++){
