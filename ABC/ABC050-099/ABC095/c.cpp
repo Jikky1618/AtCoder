@@ -10,15 +10,11 @@ int main(){
     cin >> a >> b >> c >> x >> y;
 
     ll ans = LINF;
-    // aピザとabピザを全探索
-    for(int A = 0; A <= 5000; A++){
-        for(int AB = 0; AB <= 5000; AB++){
-            int B = max((int)y - AB / 2, 0);
-            if(x <= A + AB / 2 && y <= B + AB / 2){
-                ll sum = A * a + B * b + AB * c;
-                ans = min(ans, sum);
-            }
-        }
+    for(int AB = 0; AB < 200005; AB++){
+        int A = x - AB / 2; if(A < 0) A = 0;
+        int B = y - AB / 2; if(B < 0) B = 0;
+        ll sum = A * a + B * b + AB * c;
+        ans = min(ans, sum);
     }
 
     cout << ans << endl;
