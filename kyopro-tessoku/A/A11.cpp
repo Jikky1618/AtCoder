@@ -11,7 +11,7 @@ int main(){
     for(int i = 0; i < n; i++) cin >> a[i];
 
     // 二分探索
-    int l = 1, r = n,ans = 0;
+    int l = 1, r = n, ans = 0;
     while(l <= r){
         int mid = (l + r) / 2;
         if(x < a[mid]) r = mid - 1;
