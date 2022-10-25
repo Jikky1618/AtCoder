@@ -52,5 +52,5 @@ AtCoderの問題をC++で解く、個人精進用プロジェクトです。
 
 <a name="other"></a>
 
-## other contest
-- パ研合宿2019　第3日「パ研杯2019」
+## other-contest
+- [パ研合宿2019　第3日「パ研杯2019」](https://github.com/Jikky1618/AtCoder/tree/main/other-contest/pakencamp-2019-day3)
