@@ -1,7 +1,6 @@
 #include <bits/stdc++.h>
 using namespace std;
 using ll = long long;
-const ll LINF = 1LL << 60;
 
 ll price(ll &a, ll &b, ll &n){
     ll sum = a * n + b * to_string(n).size();
@@ -17,7 +16,7 @@ int main(){
     ll ok = 0;
     ll ng = pow(10, 9) + 1;
     while (abs(ok - ng) > 1) {
-        ll mid = ng + (ok - ng) / 2;
+        ll mid = (ok + ng) / 2;
         if (price(a, b, mid) <= x) ok = mid;
         else ng = mid;
     }
