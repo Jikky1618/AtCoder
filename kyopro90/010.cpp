@@ -23,7 +23,7 @@ int main(void){
         }
     }
 
-    // Output
+    // クエリ処理
     for(int j = 0; j < q; j++){
         int l,r; cin >> l >> r;
         l--; // 半開区間にするため調整
