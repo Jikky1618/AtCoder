@@ -10,8 +10,6 @@ int main(void){
     for(int i = 0; i < n; i++) cin >> c[i] >> p[i];
     int q;
     cin >> q;
-    vector<int> l(q),r(q);
-    for(int i = 0; i < q; i++) cin >> l[i] >> r[i];
 
     // 累積和
     vector<int> sum1(n + 1),sum2(n + 1);
@@ -27,8 +25,10 @@ int main(void){
 
     // Output
     for(int j = 0; j < q; j++){
-        int ans1 = sum1[r[j]] - sum1[l[j] - 1]; 
-        int ans2 = sum2[r[j]] - sum2[l[j] - 1];
+        int l,r; cin >> l >> r;
+        l--; // 半開区間にするため調整
+        int ans1 = sum1[r] - sum1[l]; 
+        int ans2 = sum2[r] - sum2[l];
         cout << ans1 << " " << ans2 << endl;
     }
 
