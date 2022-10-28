@@ -54,3 +54,4 @@ AtCoderの問題をC++で解く、個人精進用プロジェクトです。
 
 ## other-contest
 - [パ研合宿2019　第3日「パ研杯2019」](https://github.com/Jikky1618/AtCoder/tree/main/other-contest/pakencamp-2019-day3)
+- [全国統一プログラミング王決定戦本戦](https://github.com/Jikky1618/AtCoder/tree/main/other-contest/nikkei2019-final)
