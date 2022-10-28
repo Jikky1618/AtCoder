@@ -9,17 +9,16 @@ int main(){
     cin >> n >> q;
     vector<int> a(n);
     for(int i = 0; i < n; i++) cin >> a[i];
-    vector<int> l(q),r(q);
-    for(int i = 0; i < q; i++) cin >> l[i] >> r[i];
 
     // 累積和
-    vector<int> S(n + 1);
-    S[0] = 0;
-    for(int i = 0; i < n; i++) S[i + 1] = S[i] + a[i];
+    vector<int> s(n + 1);
+    for(int i = 0; i < n; i++) s[i + 1] = s[i] + a[i];
 
     // クエリ処理
     for(int i = 0; i < q; i++){
-        cout << S[r[i]] - S[l[i] - 1] << endl;
+        int l,r; cin >> l >> r; 
+        l--; // 半開区間にするため調整
+        cout << s[r] - s[l] << endl;
     }
     return 0;
 }
