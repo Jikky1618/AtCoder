@@ -11,8 +11,6 @@ int main(){
     for(int i = 0; i < n; i++) cin >> a[i];
     int d;
     cin >> d;
-    vector<int> l(d), r(d);
-    for(int i = 0; i < d; i++) cin >> l[i] >> r[i];
 
     // 累積max
     vector<int> p(n+1),q(n+1);
@@ -20,7 +18,8 @@ int main(){
     for(int i = 0; i < n; i++) q[i+1] = max(q[i], a[n-i-1]);
     
     for(int i = 0; i < d; i++){
-        cout << max(p[l[i]-1], q[n-r[i]]) << endl;
+        int l,r; cin >> l >> r; l--; r--;
+        cout << max(p[l], q[n-r-1]) << endl;
     }
     return 0;
 }
