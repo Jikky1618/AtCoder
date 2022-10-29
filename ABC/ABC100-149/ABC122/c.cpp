@@ -1,7 +1,6 @@
 #include <bits/stdc++.h>
 using namespace std;
 using ll = long long;
-#define debug(x) cerr << "\033[33m[" << __LINE__ << "] " << #x << ": " << x << "\033[m" << endl;
 
 int main(){
     cin.tie(nullptr);
@@ -9,22 +8,21 @@ int main(){
     int n,q;
     string s;
     cin >> n >> q >> s;
-    vector<int> l(q),r(q);
-    for(int i = 0; i < q; i++) cin >> l[i] >> r[i];
 
     vector<int> ac(n + 1);
-    for(int i = 1; i <= n; i++){
-        if(s[i - 1] == 'A' && s[i] == 'C') ac[i]++;
+    for(int i = 0; i < n; i++){
+        if(s[i] == 'A' && s[i + 1] == 'C') ac[i]++;
     }
 
-    vector<int> ps(n + 1);
-    ps[0] = 0;
-    for(int i = 0; i < n; i++) ps[i + 1] = ps[i] + ac[i + 1];
+    vector<int> sum(n + 1);
+    sum[0] = 0;
+    for(int i = 0; i < n; i++) sum[i + 1] = sum[i] + ac[i];
 
     for(int i = 0; i < q; i++){
-        cout << ps[r[i] - 1] - ps[l[i] - 1] << endl;
+        int l,r; cin >> l >> r;
+        l--; r--;
+        cout << sum[r] - sum[l] << endl;
     }
 
-    // for(int i = 0; i < n; i++) debug(ps[i]);
     return 0;
 }
