@@ -10,9 +10,9 @@ int main(){
     string s;
     cin >> n >> s;
 
-    // se: 右から東に向いている人の累積和
-    // sw: 左から西に向いている人の累積和
-    vector<int> se(n + 1), sw(n + 1);
+    // sw[i]: 区間 [0, i) についてのWの人数
+    // se[i]: 区間 [i, N) についてのEの人数
+    vector<int> sw(n + 1),se(n + 1);
     for(int i = 0; i < n; i++){
         if(s[i] == 'W') sw[i + 1] = sw[i] + 1;
         else sw[i + 1] = sw[i];
