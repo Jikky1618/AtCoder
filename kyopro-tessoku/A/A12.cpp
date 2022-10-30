@@ -16,15 +16,12 @@ bool check(int index, int key, vector<int> to_search) {
 int binary_search(int key, vector<int> to_search) {
     ll left = -1;
     ll right = pow(10, 9);
-
     /* どんな二分探索でもここの書き方を変えずにできる！ */
     while (right - left > 1) {
         ll mid = left + (right - left) / 2;
-
         if (check(mid, key, to_search)) right = mid;
         else left = mid;
     }
-
     /* left は条件を満たさない最大の値、right は条件を満たす最小の値になっている */
     return right;
 }
