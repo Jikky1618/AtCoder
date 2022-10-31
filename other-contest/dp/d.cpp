@@ -16,7 +16,7 @@ int main(){
     vector<vector<ll>> dp(N+1,vector<ll>(W+1));
     for(int i = 0; i < N; i++){
         for(int j = 0; j <= W; j++){
-            if(j-w[i] >= 0) dp[i+1][j] = max(dp[i][j], dp[i][j-w[i]]+v[i]);
+            if(0 <= j-w[i]) dp[i+1][j] = max(dp[i][j], dp[i][j-w[i]]+v[i]);
             else dp[i+1][j] = dp[i][j];
         }
     }
