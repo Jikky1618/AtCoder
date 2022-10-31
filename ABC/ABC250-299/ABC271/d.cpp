@@ -8,18 +8,24 @@ int main(){
     cout << fixed << setprecision(20);
     int n,s;
     cin >> n >> s;
-    vector<int> a(n+1), b(n+1);
-    for(int i = 1; i <= n; i++) cin >> a[i] >> b[i];
+    vector<int> a(n), b(n);
+    for(int i = 0; i < n; i++) cin >> a[i] >> b[i];
 
     // dp[i][j] := カード1,2,...,iを使い、合計をjにできるか
     // 1: できる 0: できない
     vector<vector<int>> dp(n+1,vector<int>(s+1));
     dp[0][0] = 1;
-    for(int i = 1; i <= n; i++){
+    for(int i = 0; i < n; i++){
         for(int j = 0; j <= s; j++){
-            if(0 <= j-a[i]) dp[i][j] |= dp[i-1][j-a[i]];
-            if(0 <= j-b[i]) dp[i][j] |= dp[i-1][j-b[i]];
+            if(0 <= j-a[i]) dp[i+1][j] |= dp[i][j-a[i]];
+            if(0 <= j-b[i]) dp[i+1][j] |= dp[i][j-b[i]];
         }
+    }
+    for(auto &&i: dp){
+        for(auto &&j: i){
+            cout << j << " ";
+        }
+        cout << endl;
     }
 
     // dp判定
@@ -33,8 +39,8 @@ int main(){
     // dp復元
     string ans;
     int val = s;
-    for(int i = n; i > 0; i--){
-        if(val-a[i] >= 0 && dp[i-1][val-a[i]]){
+    for(int i = n-1; i >= 0; i--){
+        if(val-a[i] >= 0 && dp[i][val-a[i]]){
             ans.push_back('H');
             val -= a[i];
         }else{
