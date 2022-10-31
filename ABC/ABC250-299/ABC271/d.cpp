@@ -21,12 +21,6 @@ int main(){
             if(0 <= j-b[i]) dp[i+1][j] |= dp[i][j-b[i]];
         }
     }
-    for(auto &&i: dp){
-        for(auto &&j: i){
-            cout << j << " ";
-        }
-        cout << endl;
-    }
 
     // dp判定
     if(dp[n][s]){
