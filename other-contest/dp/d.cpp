@@ -20,8 +20,7 @@ int main(){
             else dp[i+1][j] = dp[i][j];
         }
     }
-    
-    ll ans = *max_element(dp[N].begin(), dp[N].end());
-    cout << ans << endl;
+
+    cout << dp[N][W] << endl;
     return 0;
 }
