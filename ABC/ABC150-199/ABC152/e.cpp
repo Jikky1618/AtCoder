@@ -54,6 +54,7 @@ int main(){
 
     ll LCM = 1;
     for(auto p: num){
+        // LCM = i ^ num[i]
         for(int i = 0; i < p.second; i++){
             LCM *= p.first;
             LCM %= MOD;
