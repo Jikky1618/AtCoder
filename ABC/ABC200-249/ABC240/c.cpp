@@ -10,6 +10,8 @@ int main(){
     vector<int> a(n), b(n);
     for(int i = 0; i < n; i++) cin >> a[i] >> b[i];
 
+    //dp[i][j] := i回ジャンプをして、jに到達することが可能か
+    // 1: できる 0: できない
     vector<vector<int>> dp(n + 1,vector<int>(x + 1));
     dp[0][0] = 1;
     for(int i = 0; i < n; i++){
