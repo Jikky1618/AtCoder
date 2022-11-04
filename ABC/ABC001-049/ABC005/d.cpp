@@ -19,11 +19,6 @@ int main(){
         for(int j = 0; j < n; j++) s[i+1][j+1] = s[i+1][j] + s[i][j+1] - s[i][j] + d[i][j];
     }
 
-    // for(int i = 0; i <= n; i++){
-    //     for(int j = 0; j <= n; j++) cout << s[i][j] << " ";
-    //     cout << endl;
-    // }
-
     // 全ての長方形区間の面積を全探索
     // val[i] := 面積がiのときの美味しさの合計の最大値
     vector<ll> val(n*n+1);
