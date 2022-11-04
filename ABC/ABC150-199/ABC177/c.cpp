@@ -9,14 +9,19 @@ int main(){
     cout << fixed << setprecision(20);
     int n;
     cin >> n;
-    vector<int> a(n);
+    vector<ll> a(n);
     for(int i = 0; i < n; i++) cin >> a[i];
 
     // 累積和
-    vector<int> s(n+1);
+    vector<ll> s(n+1);
     for(int i = 0; i < n; i++) s[i+1] = s[i] + a[i];
 
-    for(auto &&i: s) cout << i << endl;
+    ll ans = 0;
+    for(int i = 0; i < n; i++){
+        ans += a[i] * ((s[n] - s[i+1]) % MOD);
+        ans %= MOD;
+    }
 
+    cout << ans << endl;
     return 0;
 }
