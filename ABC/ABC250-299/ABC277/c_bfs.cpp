@@ -23,10 +23,10 @@ int main(){
     while(!que.empty()){
         int pos = que.front(); que.pop();
         for(auto next_pos: graph[pos]){
-            if(!st.count(next_pos)){
-                st.insert(next_pos);
-                que.push(next_pos);
-            }
+            // 訪問済みならcontinue
+            if(st.count(next_pos)) continue;
+            st.insert(next_pos);
+            que.push(next_pos);
         }
     }
 
