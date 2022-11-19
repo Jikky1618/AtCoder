@@ -2,7 +2,7 @@
 using namespace std;
 using ll = long long;
 
-vector<pair<char, int>> rle(string& s){
+vector<pair<char, int>> rle(string s){
     int n = s.size();
     vector<pair<char, int>> res;
     int cnt = 1;
