@@ -19,11 +19,8 @@ int main(){
             graph[a].erase(b);
         }
         if(t == 3){
-            if(graph[a].count(b) && graph[b].count(a)){
-                cout << "Yes" << endl;
-            }else{
-                cout << "No" << endl;
-            }
+            if(graph[a].count(b) && graph[b].count(a)) cout << "Yes" << endl;
+            else cout << "No" << endl;
         }
     }
 
