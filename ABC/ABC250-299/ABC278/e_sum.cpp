@@ -35,7 +35,6 @@ int main(){
     for(int i = 0; i <= H - h; i++){
         for(int j = 0; j <= W - w; j++){
             int ans = 0;
-            // s[x2][y2] - s[x1][y2] - s[x2][y1] + s[x1][y1];
             for(int n = 1; n <= N; n++){
                 if(s[n][H][W] - (s[n][i+h][j+w] - s[n][i][j+w] - s[n][i+h][j] + s[n][i][j]) > 0) ans++;
             }
