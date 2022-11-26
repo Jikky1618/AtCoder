@@ -15,18 +15,9 @@ int main(){
     cout << fixed << setprecision(20);
     cin >> a >> b;
 
-    ll l = 0, r = a / b;
-    while(r - l > 2){
-        ll p1 = (l * 2 + r) / 3;
-        ll p2 = (l + r * 2) / 3;
-        if(f(p1) < f(p2)){
-            r = p2;
-        }else{
-            l = p1;
-        }
-    }
+    ll Min = pow((ld)(2 * b) / (ld)a, -2.0 / 3.0) - 1;
     ld ans = LINF;
-    for (ll i = l; i <= r; i++){
+    for(ll i = max(Min - 5 ,0LL); i <= min(Min + 5, a / b); i++){
         ans = min(ans, f(i));
     }
 
