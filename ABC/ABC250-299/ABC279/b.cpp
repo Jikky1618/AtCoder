@@ -8,15 +8,16 @@ int main(){
     cout << fixed << setprecision(20);
     string s,t;
     cin >> s >> t;
+    int n = s.size(), m = t.size();
     
-    if(s.size() < t.size()){
+    if(n < m){
         cout << "No" << endl;
         return 0;
     }
 
-    for(int i = 0; i < s.size() - t.size() + 1; i++){
+    for(int i = 0; i < n - m + 1; i++){
         bool same = true;
-        for(int j = 0; j < t.size(); j++){
+        for(int j = 0; j < m; j++){
             if(s[i + j] != t[j]){
                 same = false;
             }
