@@ -1,7 +1,6 @@
 #include <bits/stdc++.h>
 using namespace std;
 using ll = long long;
-
 int main(){
     cin.tie(nullptr);
     ios::sync_with_stdio(false);
@@ -12,20 +11,17 @@ int main(){
     for(int i = 0; i < h; i++) cin >> s[i];
     for(int i = 0; i < h; i++) cin >> t[i];
 
-
-    for(int i = 0; i < h; i++){
-        sort(s[i].begin(), s[i].end());
-        sort(t[i].begin(), t[i].end());
-    }
-
-    bool flag = true;
-    for(int i = 0; i < h; i++){
-        for(int j = 0; j < w; j++){
-            if(s[i][j] != t[i][j]) flag = false;
+    vector<string> Ts(w),Tt(w);
+    for(int i = 0; i < w; i++){
+        for(int j = 0; j < h; j++){
+            Ts[i].push_back(s[j][i]);
+            Tt[i].push_back(t[j][i]);
         }
     }
 
-    if(flag) cout << "Yes" << endl;
+    sort(Ts.begin(),Ts.end());
+    sort(Tt.begin(),Tt.end());
+
+    if(Ts == Tt) cout << "Yes" << endl;
     else cout << "No" << endl;
-    return 0;
 }
