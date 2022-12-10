@@ -1,56 +1,39 @@
 #include <bits/stdc++.h>
 using namespace std;
 using ll = long long;
-
-struct UnionFind{
-    vector<int> par, sizes;
-    UnionFind(int n): par(n,-1), sizes(n,1) {}
-
-    int root(int x){
-        if(par[x] == -1) return x; // xが根の場合xを返す
-        return par[x] = root(par[x]); // 経路圧縮
-    }
-
-    bool same(int x, int y){
-        return root(x) == root(y);
-    }
-
-    bool merge(int x, int y){
-        int rx = root(x), ry = root(y);
-        if(rx == ry) return false;
-        // union by size
-        if(sizes[rx] > sizes[ry]) swap(rx, ry); 
-        sizes[rx] += sizes[ry]; 
-        par[ry] = rx;
-        return true;
-    }
-    
-    int size(int x){
-        return sizes[root(x)];
-    }
-};
+const ll INF = 1LL << 60;
 
 int main(){
     cin.tie(nullptr);
     ios::sync_with_stdio(false);
     cout << fixed << setprecision(20);
-    int N, M, K;
-    cin >> N >> M >> K;
+    ll X, A, D, N;
+    cin >> X >> A >> D >> N;
 
-    vector<set<int>> st(N);
-    UnionFind uf(N);
-    for(int i = 0; i < M; i++){
-        int a, b; cin >> a >> b; a--, b--;
-        st[a].insert(b), st[b].insert(a);
-        uf.merge(a,b);
-    }
-    for(int i = 0; i < K; i++){
-        int c, d; cin >> c >> d; c--, d--;
-        st[c].insert(d), st[d].insert(c);
+    // 等差数列の反転
+    if(D < 0){
+        D *= -1;
+        A = (N - 1) * D + A;
     }
 
-    for(int i = 0; i < N; i++){
-        cout << uf.size(i) - st[i].size() - 1 << endl;
+    auto check  = [&](ll mid) -> bool {
+        ll val = (mid - 1) * D + A;
+        return val > X;
+    };
+
+    // Xを超える最小のSiを求める: ng: Xを超えない, ok: Xを超える
+    ll ng = -1, ok = N + 1;
+    while(ok - ng > 1){
+        ll mid = (ng + ok) / 2;
+        if(check(mid)) ok = mid;
+        else ng = mid;
     }
+    // cout << ok << " " << ng << endl;
+    ll ans = INF;
+    for(ll i = max(0ll, ok-5); i <= min(N, ok+5); i++){
+        ans = min(ans, abs(X - ((i - 1) * D + A)));
+    }
+
+    cout << ans << endl;
     return 0;
 }
