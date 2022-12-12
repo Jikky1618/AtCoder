@@ -2,33 +2,33 @@
 using namespace std;
 using ll = long long;
 
-int n,m;
-void dfs(vector<int> a){
-    // 終了条件
-    if((int)a.size() == n){
-        for(int i = 0; i < n; i++){
-            cout << a[i] << " ";
+void dfs(vector<int> &A, int N, int M){
+    int size = A.size();
+    if(size == N){
+        for(auto i: A){
+            cout << i << " ";
         }
         cout << endl;
-    }
-    // 末尾の数字pos
-    int pos = 1;
-    if(a.size() > 0){ // 数列aが空ではないとき
-        pos = a.back() + 1;
-    }
-    a.push_back(pos);
-    // 再起呼び出し
-    while(a.back() <= m){
-        dfs(a);
-        a.back()++;
+        return;
+    };
+
+    int pos = 0;
+    if(size != 0) pos = A.back();
+    for(int i = pos + 1; i <= M; i++){
+        A.push_back(i);
+        dfs(A, N, M);
+        A.pop_back();
     }
 }
+
 int main(){
     cin.tie(nullptr);
     ios::sync_with_stdio(false);
-    cin >> n >> m;
-
-    dfs({});
-
+    cout << fixed << setprecision(20);
+    int N, M;
+    cin >> N >> M;
+    
+    vector<int> A;
+    dfs(A, N, M);
     return 0;
 }
