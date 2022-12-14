@@ -14,6 +14,7 @@ int main(){
 
     int H, W;
     cin >> H >> W;
+    assert(H <= 30 && W <= 30);
     vector A(H, vector<int>(W));
     for(int i = 0; i < H; i++){
         for(int j = 0; j < W; j++){
