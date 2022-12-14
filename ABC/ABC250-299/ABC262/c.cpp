@@ -11,14 +11,16 @@ int main(){
     for(int i = 0; i < n;i++) cin >> a[i];
 
     ll same = 0;
-    // a[i] = i,a[j] = jの個数
+    // a[i] == iの個数
     for(int i = 0; i < n; i++){
         if(i == a[i] - 1) same++;
     }
     ll ans = same * (same - 1) / 2;
+
+    // a[a[j]] == j, a[a[i]] == iの個数
     for(int i = 0; i < n; i++){
-        // i < j &&  a[j] == i
-        if(i < a[i] - 1 && a[a[i] - 1] - 1 == i) ans++;
+        int j = a[i] - 1;
+        if(i < j && a[j] - 1 == i) ans++;
     }
 
     cout << ans << endl;
