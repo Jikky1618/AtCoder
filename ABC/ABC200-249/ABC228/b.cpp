@@ -3,21 +3,23 @@ using namespace std;
 using ll = long long;
 
 int main(){
-    int n,x;
-    cin >> n >> x;
-    vector<int> a(n);
-    for(int i = 0; i < n; i++) cin >> a[i];
+    cin.tie(nullptr);
+    ios::sync_with_stdio(false);
+    cout << fixed << setprecision(20);
+    int N, X;
+    cin >> N >> X;
+    vector<int> A(N);
+    for(int i = 0; i < N; i++) cin >> A[i];
 
-    vector<bool>known(n);
-    for(int i = 0; i < n; i++){
-        known[x - 1] = true;
-        x = a[x - 1];
+    vector<bool> flag(N, false);
+    for(int i = 0; i < N; i++){
+        flag[X-1] = true;
+        X = A[X-1];
     }
-    int count = 0;
-    for(int i = 0; i < n; i++){
-        if(known[i]) count++;
-    }
-    cout << count << endl;
 
+    int ans = 0;
+    for(int i = 0; i < N; i++) if(flag[i]) ans++;
+
+    cout << ans << endl;
     return 0;
 }
