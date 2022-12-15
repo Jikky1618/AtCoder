@@ -3,16 +3,18 @@ using namespace std;
 using ll = long long;
 
 int main(){
-    int s,t,x;
-    cin >> s >> t >> x;
-
-    if(s < t){
-        if(s <= x && x < t) cout << "Yes" << endl;
+    cin.tie(nullptr);
+    ios::sync_with_stdio(false);
+    cout << fixed << setprecision(20);
+    int S, T, X;
+    cin >> S >> T >> X;
+    
+    if(S < T){
+        if(S <= X && X < T) cout << "Yes" << endl;
         else cout << "No" << endl;
     }else{
-        if(s <= x && x < 24 || 0 <= x && x < t) cout << "Yes" << endl;
+        if(S <= X || X < T) cout << "Yes" << endl;
         else cout << "No" << endl;
     }
-
     return 0;
 }
