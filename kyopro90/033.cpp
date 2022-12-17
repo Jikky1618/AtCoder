@@ -8,7 +8,7 @@ int main(){
     cout << fixed << setprecision(20);
     int H, W;
     cin >> H >> W;
-    if(H == 1 || W == 1) cout << H * W << endl;
+    if(H == 1 || W == 1) cout << H * W << endl; // コーナーケース
     else cout << ((H + 1) / 2) * ((W + 1) / 2) << endl;
     return 0;
 }
