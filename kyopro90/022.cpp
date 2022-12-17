@@ -1,11 +1,17 @@
 #include <bits/stdc++.h>
 using namespace std;
+using ll = long long;
 
-int main(void){
-    long long int a,b,c,gcd;
-    cin >> a >> b >> c;
-    gcd = __gcd(a,__gcd(b,c));
-    cout << (a / gcd - 1) + (b / gcd - 1) + (c / gcd - 1) << endl;
+int main(){
+    cin.tie(nullptr);
+    ios::sync_with_stdio(false);
+    cout << fixed << setprecision(20);
+    ll A, B, C;
+    cin >> A >> B >> C;
 
+    ll G = gcd(gcd(A, B), C);
+    ll Ans = A / G + B / G + C / G - 3;
+
+    cout << Ans << endl;
     return 0;
 }
