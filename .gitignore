@@ -1,8 +1,8 @@
 # VScode settings
 .vscode/
 
-# AtCoder library
-ac-library/
+# C++ library
+library/
 
 # test file
 test.cpp
