@@ -1,13 +1,14 @@
 #include <bits/stdc++.h>
 using namespace std;
+using ll = long long;
 
 int main(){
-    int h,w;
-    cin >> h >> w;
-    // Corner case
-    if(h == 1 || w == 1) cout << h * w << endl;
-    // Output
-    else cout << ((h + 1) / 2) * ((w + 1) / 2) << endl;
-
+    cin.tie(nullptr);
+    ios::sync_with_stdio(false);
+    cout << fixed << setprecision(20);
+    int H, W;
+    cin >> H >> W;
+    if(H == 1 || W == 1) cout << H * W << endl;
+    else cout << ((H + 1) / 2) * ((W + 1) / 2) << endl;
     return 0;
 }
