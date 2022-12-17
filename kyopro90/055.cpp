@@ -1,31 +1,30 @@
 #include <bits/stdc++.h>
 using namespace std;
-typedef long long ll;
+using ll = long long;
 
 int main(){
+    cin.tie(nullptr);
+    ios::sync_with_stdio(false);
+    cout << fixed << setprecision(20);
+    ll N, P, Q;
+    cin >> N >> P >> Q;
+    vector<ll> A(N);
+    for(int i = 0; i < N; i++) cin >> A[i];
 
-    //input
-    int n,p,q;
-    cin >> n >> p >> q;
-    vector<int> a(n);
-    for(int i = 0; i < n; i++) cin >> a[i];
-
-    // 全探索 nC5
-    ll count = 0;
-    for(int i = 0; i < n; i++){
-        for(int j = 0; j < i; j++){
-            for(int k = 0; k < j; k++){
-                for(int l = 0; l < k; l++){
-                    for(int m = 0; m < l; m++){
-                        if(1LL * a[i] * a[j] % p * a[k] % p * a[l] % p * a[m] % p == q) count++;
+    int ans = 0;
+    for(int a = 0; a < N; a++){
+        for(int b = a + 1; b < N; b++){
+            for(int c = b + 1; c < N; c++){
+                for(int d = c + 1; d < N; d++){
+                    for(int e = d + 1; e < N; e++){
+                        ll val = A[a] * A[b] % P * A[c] % P * A[d] % P * A[e] % P;
+                        if(val % P == Q) ans++;
                     }
                 }
             }
         }
     }
 
-    //Output
-    cout << count << endl;
-
+    cout << ans << endl;
     return 0;
 }
