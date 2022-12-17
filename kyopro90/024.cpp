@@ -1,33 +1,23 @@
 #include <bits/stdc++.h>
 using namespace std;
+using ll = long long;
 
-int main(void){
+int main(){
+    cin.tie(nullptr);
+    ios::sync_with_stdio(false);
+    cout << fixed << setprecision(20);
+    int N, K;
+    cin >> N >> K;
+    vector<int> A(N), B(N);
+    for(int i = 0; i < N; i++) cin >> A[i];
+    for(int i = 0; i < N; i++) cin >> B[i];
 
-    // Input
-    int n,k;
-    cin >> n >> k;
-    vector<int> a(n),b(n);
-    for(int i = 0; i < n; i++) cin >> a[i];
-    for(int i = 0; i < n; i++) cin >> b[i];
-
-    // Check diff
-    long long int diff = 0;
-    for(int i = 0; i < n; i++){
-        diff += abs(a[i] - b[i]);
-    }
-    if(diff > k){
-        cout << "No" << endl;
-        return 0;
+    int diff = 0;
+    for(int i = 0; i < N; i++){
+        diff += abs(A[i] - B[i]);
     }
 
-    // Check parity
-    if(k % 2 != diff % 2){
-        cout << "No" << endl;
-        return 0;
-    }
-    
-    // Output
-    cout << "Yes" << endl;
-
+    if(diff <= K && diff % 2 == K % 2) cout << "Yes" << endl;
+    else cout << "No" << endl;
     return 0;
 }
