@@ -6,6 +6,7 @@ library/
 
 # test file
 test.cpp
+tempCodeRunnerFile.cpp
 
 # Executable file
 *.exe
