@@ -5,11 +5,12 @@ using ll = long long;
 int main(){
     cin.tie(nullptr);
     ios::sync_with_stdio(false);
-    cout << fixed << setprecision(20);
-    ll N, K;
-    cin >> N >> K;
+    ll n,k;
+    cin >> n >> k;
+    
+    while(n > n%k) n %= k;
+    while(n > abs(n-k)) n = abs(n-k);
 
-    ll ans = min(N % K, abs((N % K) - K));
-    cout << ans << endl;
+    cout << n << endl;
     return 0;
 }
