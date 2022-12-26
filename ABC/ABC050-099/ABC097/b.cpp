@@ -9,9 +9,9 @@ int main(){
     int X;
     cin >> X;
 
-    int ans = 0;
-    for(int b = 1; b <= X; b++){
-        for(int p = 2; p <= 1000; p++){
+    int ans = 1;
+    for(int b = 1; b * b <= X; b++){
+        for(int p = 2; p <= X; p++){
             if(X < pow(b, p)) continue;
             ans = max(ans, (int)pow(b, p));
         }
