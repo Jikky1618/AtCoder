@@ -11,7 +11,7 @@ int main(){
     vector<int> A(N);
     for(int i = 0; i < N; i++) cin >> A[i];
 
-    priority_queue<int, vector<int>> pq;
+    priority_queue<int> pq;
     for(int i = 0; i < N; i++) pq.push(A[i]);
     for(int i = 0; i < M; i++){
         int a = pq.top(); pq.pop();
