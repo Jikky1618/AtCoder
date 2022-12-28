@@ -6,14 +6,13 @@ int main(){
     cin.tie(nullptr);
     ios::sync_with_stdio(false);
     cout << fixed << setprecision(20);
-    ll n;
-    cin >> n;
+    ll N;
+    cin >> N;
 
     ll ans = 0;
-    for(ll a = 1; a * a * a <= n; a++){
-        for(ll b = a; a * b * b <= n; b++){
-            ll max_c = n / (a * b);
-            ans += max_c - b + 1;
+    for(ll A = 1; A * A * A <= N; A++){
+        for(ll B = A; B <= N / (A * B); B++){
+            ans += N / (A * B) - B + 1;
         }
     }
 
