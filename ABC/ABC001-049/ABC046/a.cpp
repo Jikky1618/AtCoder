@@ -6,12 +6,12 @@ int main(){
     cin.tie(nullptr);
     ios::sync_with_stdio(false);
     cout << fixed << setprecision(20);
-    int N, K;
-    cin >> N >> K;
+    vector<int> A(3);
+    for(int i = 0; i < 3; i++) cin >> A[i];
+    
+    set<int> st;
+    for(int i = 0; i < 3; i++) st.insert(A[i]);
 
-    ll ans = K;
-    for(int i = 1; i < N; i++) ans *= (K - 1);
-
-    cout << ans << endl;
+    cout << st.size() << endl;
     return 0;
 }
