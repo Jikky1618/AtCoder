@@ -5,37 +5,41 @@ using ll = long long;
 int main(){
     cin.tie(nullptr);
     ios::sync_with_stdio(false);
-    int n;
-    cin >> n;
+    cout << fixed << setprecision(20);
+    int N;
+    cin >> N;
+
+    // 正しいカッコ列かを判定する
+    auto judge = [&](string &S) -> bool {
+        bool res = true;
+        int dep = 0;
+        for(auto&& c: S){
+            dep += (c == '(' ? 1 : -1);
+            if(dep < 0) res = false;
+        }
+        if(dep != 0) res = false;
+        return res;
+    };
 
     vector<string> ans;
-    for(int bit = 0; bit < (1 << n); bit++){
-        string str;
-        for(int i = 0; i < n; i++){
-            // bitのi桁目が
-            if((bit >> i) & 1) str += ")"; // 1なら")"
-            else str += "("; // 0なら"("
-        }
-        // strが正しいカッコ列かどうかを表すflag
-        bool correct = true;
-        // ()を調べるための変数:  ( = set++, ) = set--
-        int set = 0;
-        for(int i = 0; i < n; i++){
-            if(str[i] == '('){
-                set++;
+
+    // Bit全探索
+    for(int Bit = 0; Bit < (1 << N); Bit++){
+        string S = "";
+        for(int i = 0; i < N; i++){
+            if(Bit >> i & 1){
+                S += ')';
+            }else{
+                S += '(';
             }
-            if(str[i] == ')'){
-                set--;
-            }
-            if(set < 0) correct = false;
         }
-        if(set != 0) correct = false;
-        if(correct) ans.push_back(str);
+        if(judge(S)){
+            ans.push_back(S);
+        }
     }
-    
+
+    // 辞書順に出力
     sort(ans.begin(), ans.end());
-    for(auto s: ans){
-        cout << s << endl;
-    }
+    for(auto&& S: ans) cout << S << endl;
     return 0;
 }
