@@ -13,6 +13,7 @@ int main(){
     for(int i = 0; i < N; i++) cin >> B[i];
     for(int i = 0; i < N; i++) cin >> C[i];
 
+    // 46で割った余りの個数
     vector<ll> A_cnt(46), B_cnt(46), C_cnt(46);
     for(int i = 0; i < N; i++) A_cnt[A[i] % 46]++;
     for(int i = 0; i < N; i++) B_cnt[B[i] % 46]++;
