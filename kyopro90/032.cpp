@@ -6,39 +6,39 @@ const int INF = (1 << 30) - 1;
 int main(){
     cin.tie(nullptr);
     ios::sync_with_stdio(false);
-    int n; cin >> n;
-    vector<vector<int>> a(n,vector<int>(n));
-    for(int i = 0; i < n; i++){
-        for(int j = 0; j < n; j++) cin >> a[i][j];
+    cout << fixed << setprecision(20);
+    int N;
+    cin >> N;
+    vector A(N, vector<int>(N));
+    for(int i = 0; i < N; i++){
+        for(int j = 0; j < N; j++) cin >> A[i][j];
     }
-    int m; cin >> m;
-    vector<int> x(m),y(m);
-    for(int i = 0; i < m; i++) cin >> x[i] >> y[i];
+    int M;
+    cin >> M;
+    vector<int> X(M), Y(M);
+    for(int i = 0; i < M; i++) cin >> X[i] >> Y[i], X[i]--, Y[i]--;
 
-    vector<vector<bool>> ng(n + 1,vector<bool>(n + 1));
-    for(int i = 0; i < m; i++){
-        ng[x[i]][y[i]] = true;
-        ng[y[i]][x[i]] = true;
+    // 走ることができない組を配列に入れる
+    vector ng(N, vector<int>(N));
+    for(int i = 0; i < M; i++){
+        ng[X[i]][Y[i]] = 1;
+        ng[Y[i]][X[i]] = 1;
     }
-    vector<int> p;
-    for(int i = 1; i <= n; i++) p.push_back(i);
+
+    // 順列全探索
     int ans = INF;
+    vector<int> P(N);
+    iota(P.begin(), P.end(), 0); // 0, 1, ..., N-1
     do{
         int time = 0;
-        bool can = true;
-        for(int i = 0; i < n - 1; i++){
-            if(ng[p[i]][p[i + 1]]) can = false;
+        bool flag = true;
+        for(int i = 0; i < N; i++){
+            time += A[P[i]][i];
+            if(i < N - 1 && ng[P[i]][P[i + 1]] == 1) flag = false;
         }
-        for(int i = 0; i < n; i++){
-            time += a[p[i] - 1][i];
-        }
+        if(flag) ans = min(ans, time);
+    }while(next_permutation(P.begin(), P.end()));
 
-        if(can){
-            ans = min(ans,time);
-        }
-    }while(next_permutation(p.begin(), p.end()));
-
-    if(ans == INF) cout << -1 << endl;
-    else cout << ans << endl;
+    cout << (ans == INF ? -1 : ans) << endl;
     return 0;
 }
