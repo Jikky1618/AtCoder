@@ -11,7 +11,7 @@ int main(){
 
     int N = S.size(), M = T.size();
 
-    // dp[i][j] := Sのi文字、Tのj文字までのLIS
+    // dp[i][j] := Sのi文字、Tのj文字までのLCS
     vector<vector<int>> dp(N + 1, vector<int>(M + 1));
     for(int i = 0; i <= N; i++){
         for(int j = 0; j <= M; j++){
