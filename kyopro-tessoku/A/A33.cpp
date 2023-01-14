@@ -11,8 +11,8 @@ int main(){
     vector<int> A(N);
     for(int i = 0; i < N; i++) cin >> A[i];
 
-    int xor_sum = A[0];
-    for(int i = 1; i < N; i++) xor_sum ^= A[i];
+    int xor_sum = 0;
+    for(int i = 0; i < N; i++) xor_sum ^= A[i];
 
     cout << (xor_sum != 0 ? "First" : "Second") << endl;
 }
