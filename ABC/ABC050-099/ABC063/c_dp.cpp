@@ -26,4 +26,4 @@ int main(){
     for(int j = 0; j < 10010; j++) if(dp[N][j] && j % 10 != 0) ans = max(ans, j);
 
     cout << ans << endl;
-}v
+}
