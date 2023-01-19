@@ -3,18 +3,19 @@ using namespace std;
 using ll = long long;
 
 int main(){
-    vector<string> s(3);
-    string t;
-    cin >> s[0] >> s[1] >> s[2] >> t;
+    cin.tie(nullptr);
+    ios::sync_with_stdio(false);
+    cout << fixed << setprecision(20);
+    vector<string> S(3);
+    for(int i = 0; i < 3; i++) cin >> S[i];
+    string T;
+    cin >> T;
 
-    string ans = "";
-    for(int i = 0; i < t.size(); i++){
-        // s[t[i](char) - '1'(char)]
-        // 1 is not type int
-        ans += s[t[i] - '1'];
+    int N = T.size();
+    string ans;
+    for(int i = 0; i < N; i++){
+        ans += S[T[i] - '0' - 1];
     }
-
+    
     cout << ans << endl;
-
-    return 0;
 }
