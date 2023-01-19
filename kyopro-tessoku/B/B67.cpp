@@ -10,7 +10,7 @@ struct Edge {
 
 // Edgeの比較関数
 bool comp(const Edge &x, const Edge &y){
-    return x.cost < y.cost;
+    return x.cost > y.cost;
 }
 
 struct UnionFind{
@@ -63,7 +63,7 @@ int main(){
     sort(edges.begin(), edges.end(), comp);
     // UnionFindで全域木を表現
     UnionFind uf(N);
-    // 最小全域木を求める
+    // 最大全域木を求める
     int ans = 0;
     for(int i = 0; i < M; i++){
         auto [A, B, C] = edges[i];
