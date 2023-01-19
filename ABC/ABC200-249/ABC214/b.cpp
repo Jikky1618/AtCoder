@@ -3,20 +3,20 @@ using namespace std;
 using ll = long long;
 
 int main(){
-    int s,t;
-    cin >> s >> t;
+    cin.tie(nullptr);
+    ios::sync_with_stdio(false);
+    cout << fixed << setprecision(20);
+    int S, T;
+    cin >> S >> T;
 
-    int count = 0;
-    for(int i = 0; i <= s; i++){
-        for(int j = 0; j <= s; j++){
-            for(int k = 0; k <= s; k++){
-                if(i + j + k <= s && i * j * k <= t){
-                    count++;
-                }
+    int ans = 0;
+    for(int a = 0; a <= 100; a++){
+        for(int b = 0; b <= 100; b++){
+            for(int c = 0; c <= 100; c++){
+                if(a + b + c <= S && a * b * c <= T) ans++;
             }
         }
     }
-    cout << count << endl;
 
-    return 0;
+    cout << ans << endl;
 }
