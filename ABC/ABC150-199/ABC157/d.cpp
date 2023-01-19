@@ -37,21 +37,23 @@ int main(){
     int N, M, K;
     cin >> N >> M >> K;
 
-    vector<set<int>> st(N);
+    // G[i] := 人iと直接関係(友人、ブロック)を持つ人
+    vector<vector<int>> G(N);
+    // 友人関係のUnionFind
     UnionFind uf(N);
     for(int i = 0; i < M; i++){
         int a, b; cin >> a >> b; a--, b--;
-        st[a].insert(b), st[b].insert(a);
+        G[a].push_back(b), G[b].push_back(a);
         uf.merge(a,b);
     }
     for(int i = 0; i < K; i++){
         int c, d; cin >> c >> d; c--, d--;
         if(!uf.same(c,d)) continue;
-        st[c].insert(d), st[d].insert(c);
+        G[c].push_back(d), G[d].push_back(c);
     }
 
     for(int i = 0; i < N; i++){
-        cout << uf.size(i) - st[i].size() - 1 << endl;
+        cout << uf.size(i) - G[i].size() - 1 << endl;
     }
     return 0;
 }
