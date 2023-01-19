@@ -5,16 +5,15 @@ using ll = long long;
 int main(){
     cin.tie(nullptr);
     ios::sync_with_stdio(false);
-    ll n;
-    cin >> n;
-
-    ll k = 0,val = 1;
-    while(val <= n){
+    cout << fixed << setprecision(20);
+    ll N;
+    cin >> N;
+    
+    ll k = 0, val = 1;
+    while(val * 2 <= N){
         val *= 2;
         k++;
     }
 
-    cout << k - 1 << endl;
-    
-    return 0;
+    cout << k << endl;
 }
