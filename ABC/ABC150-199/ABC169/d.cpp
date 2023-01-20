@@ -32,7 +32,8 @@ int main(){
         // 各素因数pについて、Nがp^1, p^2,...で割れるか判定
         while(val <= exp){
             ans++;
-            exp -= val++;
+            exp -= val;
+            val++;
         }
     }
 
