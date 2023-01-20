@@ -1,29 +1,31 @@
 #include <bits/stdc++.h>
 using namespace std;
 using ll = long long;
-const ll INF = pow(10,18);
- 
+
+const ll Max = 1e18;
+
 int main(){
     cin.tie(nullptr);
     ios::sync_with_stdio(false);
-    int n;
-    cin >> n;
-    vector<ll> a(n);
-    for(int i = 0; i < n; i++) cin >> a[i];
+    int N;
+    cin >> N;
+    vector<ll> A(N);
+    for(int i = 0; i < N; i++) cin >> A[i];
     
     // find 0
-    if(find(a.begin(), a.end(),0) != a.end()){
+    if(find(A.begin(), A.end(),0) != A.end()){
         cout << 0 << endl;
         return 0;
     }
+
     ll ans = 1;
-    for(int  i = 0; i < n; i++){
+    for(int  i = 0; i < N; i++){
         // find overflow
-        if(INF / ans < a[i]){
+        if(Max / ans < A[i]){
             cout << -1 << endl;
             return 0;
         }
-        ans *= a[i];
+        ans *= A[i];
     }
 
     cout << ans << endl;
