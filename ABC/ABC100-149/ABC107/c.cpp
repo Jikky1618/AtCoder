@@ -3,7 +3,7 @@ using namespace std;
 using ll = long long;
 const ll INF = 1LL << 60;
 #ifdef LOCAL
-#include <debug.hpp>
+#include <debug_print.hpp>
 #define debug(...) debug_print::multi_print(#__VA_ARGS__, __VA_ARGS__)
 #else
 #define debug(...) (static_cast<void>(0))
