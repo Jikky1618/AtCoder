@@ -13,18 +13,19 @@ int main(){
     cin.tie(nullptr);
     ios::sync_with_stdio(false);
     cout << fixed << setprecision(20);
-    int D, N;
-    cin >> D >> N;
-
+    int T, N;
+    cin >> T >> N;
+    
     // imos法
-    vector<int> imos(D + 1);
+    vector<int> imos(T + 1);
     for(int i = 0; i < N; i++){
-        int L, R; cin >> L >> R, R++;
-        imos[L]++, imos[R]--;
+        int L, R; cin >> L >> R;
+        imos[L]++;
+        imos[R]--;
     }
-    for(int i = 0; i < D; i++) imos[i + 1] += imos[i];
+    for(int i = 0; i < T; i++) imos[i + 1] += imos[i];
 
-    for(int i = 1; i <= D; i++){
+    for(int i = 0; i < T; i++){
         cout << imos[i] << endl;
     }
 }
