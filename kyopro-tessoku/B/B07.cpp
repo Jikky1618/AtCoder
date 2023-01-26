@@ -26,6 +26,6 @@ int main(){
     for(int i = 0; i < T; i++) imos[i + 1] += imos[i];
 
     for(int i = 0; i < T; i++){
-        cout << imos[i] << endl;
+        cout << imos[i] << '\n';
     }
 }
