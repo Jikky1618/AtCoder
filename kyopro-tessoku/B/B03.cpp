@@ -13,16 +13,18 @@ int main(){
     cin.tie(nullptr);
     ios::sync_with_stdio(false);
     cout << fixed << setprecision(20);
-    int N, K;
-    cin >> N >> K;
-    vector<int> P(N), Q(N);
-    for(int i = 0; i < N; i++) cin >> P[i];
-    for(int i = 0; i < N; i++) cin >> Q[i];
+    int N;
+    cin >> N;
+    vector<int> A(N);
+    for(int i = 0; i < N; i++) cin >> A[i];
 
     bool flag = false;
     for(int i = 0; i < N; i++){
-        for(int j = 0; j < N; j++){
-            if(P[i] + Q[j] == K) flag = true;
+        for(int j = i + 1; j < N; j++){
+            for(int k = j + 1; k < N; k++){
+                int sum = A[i] + A[j] + A[k];
+                if(sum == 1000) flag = true;
+            }
         }
     }
 
