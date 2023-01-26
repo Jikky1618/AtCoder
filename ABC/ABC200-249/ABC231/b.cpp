@@ -2,25 +2,35 @@
 using namespace std;
 using ll = long long;
 
-int main(){
-    int n;
-    cin >> n;
-    vector<string> s(n);
-    for(int i = 0; i < n; i++) cin >> s[i];
+#ifdef LOCAL
+#include <debug_print.hpp>
+#define debug(...) debug_print::multi_print(#__VA_ARGS__, __VA_ARGS__)
+#else
+#define debug(...) (static_cast<void>(0))
+#endif
 
-    string res = s[0];
-    int max = 0;
-    for(int i = 0; i < n; i++){
-        int count = 0;
-        for(int j = 0; j < n; j++){
-            if(s[i] == s[j]) count++;
-        }
-        if(max < count){
-            max = count;
-            res = s[i];
+int main(){
+    cin.tie(nullptr);
+    ios::sync_with_stdio(false);
+    cout << fixed << setprecision(20);
+    int N;
+    cin >> N;
+    vector<string> S(N);
+    for(int i = 0; i < N; i++) cin >> S[i];
+
+    map<string, int> mp;
+    for(int i = 0; i < N; i++){
+        mp[S[i]]++;
+    }
+
+    string ans;
+    int Max = -1;
+    for(auto&& [key, val]: mp){
+        if(Max < val){
+            Max = val;
+            ans = key;
         }
     }
-    cout << res << endl;
 
-    return 0;
+    cout << ans << endl;
 }
