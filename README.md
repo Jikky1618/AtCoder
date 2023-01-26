@@ -72,3 +72,6 @@ AtCoderの問題をC++で解く、個人精進用プロジェクトです。全�
 - [パ研合宿2019　第3日「パ研杯2019」](https://github.com/Jikky1618/AtCoder/tree/main/other-contest/pakencamp-2019-day3)
 - [全国統一プログラミング王決定戦本戦](https://github.com/Jikky1618/AtCoder/tree/main/other-contest/nikkei2019-final)
 - [Educational DP Contest / DP まとめコンテスト](https://github.com/Jikky1618/AtCoder/tree/main/other-contest/dp)
+
+# License
+[![CC0](http://i.creativecommons.org/p/zero/1.0/88x31.png "CC0")](http://creativecommons.org/publicdomain/zero/1.0/deed.ja)
