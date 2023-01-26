@@ -13,32 +13,35 @@ int main(){
     cin.tie(nullptr);
     ios::sync_with_stdio(false);
     cout << fixed << setprecision(20);
-    int H, W, N;
-    cin >> H >> W >> N;
+    int N;
+    cin >> N;
 
-    vector imos(H + 1, vector<int>(W + 1));
+    vector imos(1511, vector<int>(1511));
     for(int i = 0; i < N; i++){
-        int A, B, C, D; cin >> A >> B >> C >> D, A--, B--;
+        int A, B, C, D; cin >> A >> B >> C >> D;
         imos[A][B]++;
         imos[A][D]--;
         imos[C][B]--;
         imos[C][D]++;
     }
-    for(int i = 0; i < H; i++){
-        for(int j = 0; j < W; j++){
-            imos[i][j + 1] += imos[i][j];
-        }
-    }
-    for(int j = 0; j < W; j++){
-        for(int i = 0; i < H; i++){
+    for(int i = 0; i < 1510; i++){
+        for(int j = 0; j < 1510; j++){
             imos[i + 1][j] += imos[i][j];
         }
     }
-
-    for(int i = 0; i < H; i++){
-        for(int j = 0; j < W; j++){
-            cout << imos[i][j] << " ";
+    for(int i = 0; i < 1510; i++){
+        for(int j = 0; j < 1510; j++){
+            imos[i][j + 1] += imos[i][j];
         }
-        cout << endl;
     }
+    
+
+    int ans = 0;
+    for(int i = 0; i < 1510; i++){
+        for(int j = 0; j < 1510; j++){
+            if(imos[i][j]) ans++;
+        }
+    }
+
+    cout << ans << endl;
 }
