@@ -2,23 +2,29 @@
 using namespace std;
 using ll = long long;
 
+#ifdef LOCAL
+#include <debug_print.hpp>
+#define debug(...) debug_print::multi_print(#__VA_ARGS__, __VA_ARGS__)
+#else
+#define debug(...) (static_cast<void>(0))
+#endif
+
 int main(){
     cin.tie(nullptr);
     ios::sync_with_stdio(false);
-    int n,q;
-    cin >> n >> q;
-    vector<int> a(n);
-    for(int i = 0; i < n; i++) cin >> a[i];
+    cout << fixed << setprecision(20);
+    int N, Q;
+    cin >> N >> Q;
+    vector<int> A(N);
+    for(int i = 0; i < N; i++) cin >> A[i];
 
     // 累積和
-    vector<int> s(n + 1);
-    for(int i = 0; i < n; i++) s[i + 1] = s[i] + a[i];
+    vector<int> S(N + 1);
+    for(int i = 0; i < N; i++) S[i + 1] = S[i] + A[i];
 
-    // クエリ処理
-    for(int i = 0; i < q; i++){
-        int l,r; cin >> l >> r; 
-        l--; // 半開区間にするため調整
-        cout << s[r] - s[l] << endl;
+    // クエリに答える
+    while(Q--){
+        int L, R; cin >> L >> R, L--;
+        cout << S[R] - S[L] << '\n'; 
     }
-    return 0;
 }
