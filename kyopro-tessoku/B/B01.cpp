@@ -13,7 +13,7 @@ int main(){
     cin.tie(nullptr);
     ios::sync_with_stdio(false);
     cout << fixed << setprecision(20);
-    int N;
-    cin >> N;
-    cout << N * N << endl;
+    int A, B;
+    cin >> A >> B;
+    cout << A + B << endl;
 }
