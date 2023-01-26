@@ -2,30 +2,39 @@
 using namespace std;
 using ll = long long;
 
+#ifdef LOCAL
+#include <debug_print.hpp>
+#define debug(...) debug_print::multi_print(#__VA_ARGS__, __VA_ARGS__)
+#else
+#define debug(...) (static_cast<void>(0))
+#endif
+
 int main(){
     cin.tie(nullptr);
     ios::sync_with_stdio(false);
-    int h,w;
-    cin >> h >> w;
-    vector<vector<int>> x(h + 1,vector<int>(w + 1));
-    for(int i = 0; i < h; i++){
-        for(int j = 0; j < w; j++) cin >> x[i][j];
+    cout << fixed << setprecision(20);
+    int H, W;
+    cin >> H >> W;
+    vector X(H, vector<int>(W));
+    for(int i = 0; i < H; i++){
+        for(int j = 0; j < W; j++){
+            cin >> X[i][j];
+        }
     }
+    int Q;
+    cin >> Q;
 
     // 二次元累積和
-    vector<vector<int>> s(h + 1,vector<int>(w + 1));
-    for(int i = 0; i < h; i++){
-        for(int j = 0; j < w; j++) s[i+1][j+1] = s[i+1][j] + s[i][j+1] - s[i][j] + x[i][j];
+    vector S(H + 1, vector<int>(W + 1));
+    for(int i = 0; i < H; i++){
+        for(int j = 0; j < W; j++){
+            S[i + 1][j + 1] = S[i][j + 1] + S[i + 1][j] - S[i][j] + X[i][j];
+        }
     }
 
-    // クエリ処理
-    int q;
-    cin >> q;
-    for(int i = 0; i < q; i++){
-        int a,b,c,d;
-        cin >> a >> b >> c >> d;
-        int ans = s[c][d] - s[a-1][d] - s[c][b-1] + s[a-1][b-1];
-        cout << ans << endl;
+    // クエリに答える
+    while(Q--){
+        int A, B, C, D; cin >> A >> B >> C >> D, A--, B--;
+        cout << S[C][D] - S[A][D] - S[C][B] + S[A][B] << '\n';
     }
-    return 0;
 }
