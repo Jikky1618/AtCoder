@@ -9,14 +9,14 @@ using ll = long long;
 #define debug(...) (static_cast<void>(0))
 #endif
 
-ll to_binary(ll n){
-    if(n == 0) return 0;
-    ll base = 1, res = 0;
-    while(n > 0){
-        res += (n % 2) * base;
-        base *= 10;
-        n /= 2;
+ll to_dec(string n){
+    ll res = 0;
+    for(int i = 0; i < n.size(); i++){
+        ll base = (1 << n.size() - 1 - i);
+        ll d = n[i] - '0';
+        res += base * d;
     }
+
     return res;
 }
 
@@ -24,9 +24,9 @@ int main(){
     cin.tie(nullptr);
     ios::sync_with_stdio(false);
     cout << fixed << setprecision(20);
-    int N;
+    string N;
     cin >> N;
 
-    ll ans = to_binary(N);
-    printf("%010d", ans);
+    ll ans = to_dec(N);
+    cout << ans << endl;
 }
