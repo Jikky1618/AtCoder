@@ -13,10 +13,13 @@ int main(){
     cin.tie(nullptr);
     ios::sync_with_stdio(false);
     cout << fixed << setprecision(20);
-    int N, X;
-    cin >> N >> X;
-    vector<int> A(N);
-    for(int i = 0; i < N; i++) cin >> A[i];
+    int A, B;
+    cin >> A >> B;
 
-    cout << (find(A.begin(), A.end(), X) != A.end() ? "Yes" : "No") << endl;
+    bool flag = false;
+    for(int i = A; i <= B; i++){
+        if(100 % i == 0) flag = true;
+    }
+
+    cout << (flag ? "Yes" : "No") << endl;
 }
