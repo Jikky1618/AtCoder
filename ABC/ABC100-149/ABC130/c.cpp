@@ -2,18 +2,28 @@
 using namespace std;
 using ll = long long;
 
-int main(){
-    int W,H,x,y;
-    cin >> W >> H >> x >> y;
+#ifdef LOCAL
+#include <debug_print.hpp>
+#define debug(...) debug_print::multi_print(#__VA_ARGS__, __VA_ARGS__)
+#else
+#define debug(...) (static_cast<void>(0))
+#endif
 
-    double ans_1; int ans_2;
-    ans_1 = (double)(W) * H / 2;
-    if(x * 2 == W && y * 2 == H){
-        ans_2 = 1;
+int main(){
+    cin.tie(nullptr);
+    ios::sync_with_stdio(false);
+    cout << fixed << setprecision(20);
+    double W, H, x, y;
+    cin >> W >> H >> x >> y;
+    // 分割する面積は半分
+    double ans1 = W * H / 2;
+    int ans2;
+    // 長方形の中心にあれば複数ある
+    if(W == 2 * x && H == 2 * y){
+        ans2 = 1;
     }else{
-        ans_2 = 0;
+        ans2 = 0;
     }
 
-    printf("%.10lf %d\n",ans_1, ans_2);
-    return 0;
+    cout << ans1 << " " << ans2 << endl;
 }
