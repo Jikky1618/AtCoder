@@ -2,40 +2,44 @@
 using namespace std;
 using ll = long long;
 
+#ifdef LOCAL
+#include <debug_print.hpp>
+#define debug(...) debug_print::multi_print(#__VA_ARGS__, __VA_ARGS__)
+#else
+#define debug(...) (static_cast<void>(0))
+#endif
+
 int main(){
     cin.tie(nullptr);
     ios::sync_with_stdio(false);
     cout << fixed << setprecision(20);
-    int n,k;
-    cin >> n >> k;
-    vector<int> a(n),b(n),c(n),d(n);
-    for(int i = 0; i < n; i++) cin >> a[i];
-    for(int i = 0; i < n; i++) cin >> b[i];
-    for(int i = 0; i < n; i++) cin >> c[i];
-    for(int i = 0; i < n; i++) cin >> d[i];
+    int N, K;
+    cin >> N >> K;
+    vector<int> A(N), B(N), C(N), D(N);
+    for(int i = 0; i < N; i++) cin >> A[i];
+    for(int i = 0; i < N; i++) cin >> B[i];
+    for(int i = 0; i < N; i++) cin >> C[i];
+    for(int i = 0; i < N; i++) cin >> D[i];
 
-    vector<int> p(n*n);
-    for(int i = 0; i < n; i++){
-        for(int j = 0; j < n; j++){
-            p[i*n+j] = a[i]+b[j];
-        }
-    }
-    vector<int> q(n*n);
-    for(int i = 0; i < n; i++){
-        for(int j = 0; j < n; j++){
-            q[i*n+j] = c[i]+d[j];
+    vector<int> P, Q;
+    for(int i = 0; i < N; i++){
+        for(int j = 0; j < N; j++){
+            P.push_back(A[i] + B[j]);
+            Q.push_back(C[i] + D[j]);
         }
     }
 
-    sort(p.begin(), p.end());
-    sort(q.begin(), q.end());
+    sort(P.begin(), P.end());
+    sort(Q.begin(), Q.end());
+    // Pを全探索
     bool flag = false;
-    for(int i = 0; i < n*n; i++){
-        int pos = lower_bound(q.begin(),q.end(),k-p[i]) - q.begin();
-        if(pos < n*n && q[pos] == k-p[i]) flag = true;
+    int p = P.size(), q = Q.size();
+    for(int i = 0; i < p; i++){
+        int X = K - P[i];
+        // QにXがあるか二分探索
+        auto pos = lower_bound(Q.begin(), Q.end(), X) - Q.begin();
+        if(pos < q && Q[pos] == X) flag = true;
     }
 
-    if(flag) cout << "Yes" << endl;
-    else cout << "No" << endl;
-    return 0;
+    cout << (flag ? "Yes" : "No") << endl;
 }
