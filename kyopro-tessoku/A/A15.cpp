@@ -2,23 +2,28 @@
 using namespace std;
 using ll = long long;
 
+#ifdef LOCAL
+#include <debug_print.hpp>
+#define debug(...) debug_print::multi_print(#__VA_ARGS__, __VA_ARGS__)
+#else
+#define debug(...) (static_cast<void>(0))
+#endif
+
 int main(){
     cin.tie(nullptr);
     ios::sync_with_stdio(false);
     cout << fixed << setprecision(20);
-    int n;
-    cin >> n;
-    vector<int> a(n);
-    for(int i = 0; i < n; i++) cin >> a[i];
+    int N;
+    cin >> N;
+    vector<int> A(N);
+    for(int i = 0; i < N; i++) cin >> A[i];
 
-    vector<int> an = a;
-    sort(an.begin(), an.end());
-    an.erase(unique(an.begin(),an.end()),an.end());
-    for(int i = 0; i < n; i++){
-        a[i] = lower_bound(an.begin(), an.end(),a[i]) - an.begin() + 1;
+    vector<int> B = A;
+    sort(B.begin(), B.end());
+    B.erase(unique(B.begin(), B.end()), B.end());
+    debug(A, B);
+    for(int i = 0; i < N; i++){
+        int pos = lower_bound(B.begin(), B.end(), A[i]) - B.begin() + 1;
+        cout << pos << " \n"[i == N - 1];
     }
-
-    for(auto &&ans: a) cout << ans << " ";
-    cout << endl;
-    return 0;
 }
