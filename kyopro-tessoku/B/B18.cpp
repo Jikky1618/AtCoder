@@ -28,6 +28,25 @@ int main(){
         }
     }
 
-    debug(dp);
-    cout << (dp[N][S] ? "Yes" : "No") << endl;
+    if(!dp[N][S]){
+        cout << -1 << endl;
+        return 0;
+    }
+
+    // 経路復元
+    vector<int> ans;
+    int val = S;
+    for(int i = N - 1; i >= 0; i--){
+        if(dp[i][val] == 0){
+            ans.push_back(i + 1);
+            val -= A[i];
+        }
+    }
+
+    reverse(ans.begin(), ans.end());
+    int K = ans.size();
+    cout << K << endl;
+    for(int i = 0; i < K; i++){
+        cout << ans[i] << " \n"[i == K - 1];
+    }
 }
