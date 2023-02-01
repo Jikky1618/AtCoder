@@ -3,23 +3,30 @@ using namespace std;
 using ll = long long;
 const int INF = (1 << 30) - 1;
 
+#ifdef LOCAL
+#include <debug_print.hpp>
+#define debug(...) debug_print::multi_print(#__VA_ARGS__, __VA_ARGS__)
+#else
+#define debug(...) (static_cast<void>(0))
+#endif
+
 int main(){
     cin.tie(nullptr);
     ios::sync_with_stdio(false);
-    int n;
-    cin >> n;
-    vector<int> a(n);
-    vector<int> b(n);
-    for(int i = 1; i < n; i++) cin >> a[i];
-    for(int i = 2; i < n; i++) cin >> b[i];
+    cout << fixed << setprecision(20);
+    int N;
+    cin >> N;
+    vector<int> A(N - 1), B(N - 2);
+    for(int i = 0; i < N - 1; i++) cin >> A[i];
+    for(int i = 0; i < N - 2; i++) cin >> B[i];
 
-    vector<int> dp(n, INF);
+    // dp[i] := 部屋iにたどり着く最短
+    vector<int> dp(N + 1, INF);
     dp[0] = 0;
-    dp[1] = a[1];
-    for(int i = 2; i < n; i++){
-        dp[i] = min(dp[i - 1] + a[i], dp[i - 2] + b[i]);
+    for(int i = 0; i < N; i++){
+        if(i < N - 1) dp[i + 1] = min(dp[i + 1], dp[i] + A[i]);
+        if(i < N - 2) dp[i + 2] = min(dp[i + 2], dp[i] + B[i]);
     }
-
-    cout << dp[n - 1] << endl;
-    return 0;
+    
+    cout << dp[N - 1] << endl;
 }
