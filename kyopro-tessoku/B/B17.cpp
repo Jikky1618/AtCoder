@@ -16,26 +16,25 @@ int main(){
     cout << fixed << setprecision(20);
     int N;
     cin >> N;
-    vector<int> A(N - 1), B(N - 2);
-    for(int i = 0; i < N - 1; i++) cin >> A[i];
-    for(int i = 0; i < N - 2; i++) cin >> B[i];
+    vector<int> h(N);
+    for(int i = 0; i < N; i++) cin >> h[i];
 
-    // dp[i] := 部屋iにたどり着く最短
+    // dp[i] := 足場iにたどり着くまでに支払うコスト
     vector<int> dp(N, INF);
     dp[0] = 0;
     for(int i = 0; i < N; i++){
-        if(i + 1 < N) dp[i + 1] = min(dp[i + 1], dp[i] + A[i]);
-        if(i + 2 < N) dp[i + 2] = min(dp[i + 2], dp[i] + B[i]);
+        if(i + 1 < N) dp[i + 1] = min(dp[i + 1], dp[i] + abs(h[i] - h[i + 1])); 
+        if(i + 2 < N) dp[i + 2] = min(dp[i + 2], dp[i] + abs(h[i] - h[i + 2])); 
     }
+    debug(dp);
 
-    // 経路復元
     vector<int> ans;
     int pos = N - 1;
     while(1){
         ans.push_back(pos + 1);
         if(pos == 0) break;
-        
-        if(dp[pos - 1] + A[pos - 1] == dp[pos]) pos--;
+
+        if(dp[pos - 1] + abs(h[pos] - h[pos - 1]) == dp[pos]) pos--;
         else pos -= 2;
     }
 
