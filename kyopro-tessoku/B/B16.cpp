@@ -16,16 +16,15 @@ int main(){
     cout << fixed << setprecision(20);
     int N;
     cin >> N;
-    vector<int> A(N - 1), B(N - 2);
-    for(int i = 0; i < N - 1; i++) cin >> A[i];
-    for(int i = 0; i < N - 2; i++) cin >> B[i];
+    vector<int> h(N);
+    for(int i = 0; i < N; i++) cin >> h[i];
 
-    // dp[i] := 部屋iにたどり着く最短
-    vector<int> dp(N + 1, INF);
+    // dp[i] := 足場iにたどり着くまでに支払うコスト(配るdp)
+    vector dp(N, INF);
     dp[0] = 0;
     for(int i = 0; i < N; i++){
-        if(0 <= i - 1) dp[i] = min(dp[i], dp[i - 1] + A[i - 1]);
-        if(0 <= i - 2) dp[i] = min(dp[i], dp[i - 2] + B[i - 2]);
+        if(i + 1 < N) dp[i + 1] = min(dp[i + 1], dp[i] + abs(h[i + 1] - h[i]));
+        if(i + 2 < N) dp[i + 2] = min(dp[i + 2], dp[i] + abs(h[i + 2] - h[i]));
     }
 
     cout << dp[N - 1] << endl;
