@@ -19,6 +19,7 @@ int main(){
 
     vector<string> V;
     for(int i = 0; i < S.size(); i++){
+        // K番目に小さいsubstringは高々K文字
         for(int j = 1; j <= K; j++){
             V.push_back(S.substr(i, j));
         }
