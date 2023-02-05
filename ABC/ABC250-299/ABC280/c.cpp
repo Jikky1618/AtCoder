@@ -9,14 +9,11 @@ int main(){
     string s,t;
     cin >> s >> t;
 
-    int n = s.size();
+    int n = t.size();
     for(int i = 0; i < n; i++){
         if(s[i] != t[i]){
             cout << i + 1 << endl;
             return 0;
         }
     }
-
-    cout << n + 1 << endl;
-    return 0;
 }
