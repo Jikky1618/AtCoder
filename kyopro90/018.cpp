@@ -1,13 +1,15 @@
 #include <bits/stdc++.h>
 using namespace std;
 using ll = long long;
-
 using ld = long double;
-const ld PI = acos(-1);
+const double PI = acos(-1);
 
-ld to_rad(int deg){
-    return (ld)(deg) * PI / 180;
-}
+#ifdef LOCAL
+#include <debug_print.hpp>
+#define debug(...) debug_print::multi_print(#__VA_ARGS__, __VA_ARGS__)
+#else
+#define debug(...) (static_cast<void>(0))
+#endif
 
 ld to_deg(ld rad){
     return rad * 180 / PI;
@@ -24,18 +26,16 @@ int main(){
 
     while(Q--){
         ld E; cin >> E;
-
-        // E分後のy, z座標の値を求める
-        ld y = -L / 2 * sin(to_rad(360 * E / T));
-        ld z = L / 2 - L / 2 * cos(to_rad(360 * E / T));
-
-        // 俯角を求めるために隣辺、対辺の長さを求める
-        ld d1 = hypot(X, y - Y);
-        ld d2 = z;
+        // 観覧車のy, z座標を求める
+        ld y = -L / 2 * sin(E / T * 2 * PI);
+        ld z = -L / 2 * cos(E / T * 2 * PI) + L / 2;
+        
+        // 隣辺aと対辺bを求める
+        ld a = z;
+        ld b = hypot(X, Y - y);
 
         // 俯角を求める
-        ld ans = to_deg(atan2(d2, d1));
-        cout << ans << "\n";
+        ld ans = to_deg(atan2(a, b));
+        cout << ans << '\n';
     }
-    return 0;
 }
