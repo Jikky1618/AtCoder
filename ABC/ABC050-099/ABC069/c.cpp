@@ -28,7 +28,6 @@ int main(){
     bool flag = false;
     if(d <= d4) flag = true;
     if(d4 + 1 == d && d + d4 == N) flag = true;
-    debug(d, d2, d4);
 
     cout << (flag ? "Yes" : "No") << endl;
 }
