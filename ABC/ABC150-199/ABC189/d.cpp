@@ -1,7 +1,6 @@
 #include <bits/stdc++.h>
 using namespace std;
 using ll = long long;
-const ll INF = 1LL << 60;
 
 #ifdef LOCAL
 #include <debug_print.hpp>
@@ -20,18 +19,23 @@ int main(){
     for(int i = 0; i < N; i++) cin >> S[i];
 
     // dp[i][j] := y[i]がj(true = 1, false = 0)になるようなx_0, x_1, ..., x_iの決め方
-    vector dp(N + 1, vector<ll>(2, -INF));
-    dp[0][0] = 1, dp[0][1] = 1;
+    vector dp(N + 1, vector<ll>(2));
+    dp[0][0] = dp[0][1] = 1;
     for(int i = 0; i < N; i++){
-        if(S[i] == "OR"){
-            dp[i + 1][0] = dp[i][0];
-            dp[i + 1][1] = dp[i][1] * 2 + dp[i][0];
-        }
-        if(S[i] == "AND"){
-            dp[i + 1][0] = dp[i][0] * 2 + dp[i][1];
-            dp[i + 1][1] = dp[i][1];
+        // y[i - 1]がj(true = 1, false = 0)のとき
+        for(int j = 0; j <= 1; j++){
+            // x[i]がk(true = 1, false = 0)のとき
+            for(int k = 0; k <= 1; k++){
+                if(S[i] == "OR"){
+                    dp[i + 1][j | k] += dp[i][j];
+                }
+                if(S[i] == "AND"){
+                    dp[i + 1][j & k] += dp[i][j];
+                }
+            }
         }
     }
+    debug(dp);
     
     cout << dp[N][1] << endl;
 }
