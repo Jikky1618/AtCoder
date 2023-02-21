@@ -2,36 +2,37 @@
 using namespace std;
 using ll = long long;
 
-vector<bool> used;
-void dfs(int pos, const vector<vector<int>> &graph){
-    used[pos] = true;
-    for(auto next_pos: graph[pos]){
-        if(used[next_pos] == false) dfs(next_pos, graph);
-    }
-}
+#ifdef LOCAL
+#include <debug_print.hpp>
+#define debug(...) debug_print::multi_print(#__VA_ARGS__, __VA_ARGS__)
+#else
+#define debug(...) (static_cast<void>(0))
+#endif
 
 int main(){
     cin.tie(nullptr);
     ios::sync_with_stdio(false);
     cout << fixed << setprecision(20);
-    int n;
-    cin >> n;
-    vector<int> t(n), k(n);
-    vector<vector<int>> a(n);
-    for(int i = 0; i < n; i++){
-        cin >> t[i] >> k[i];
-        for(int j = 0; j < k[i]; j++){
-            int x; cin >> x; x--;
-            a[i].push_back(x);
-        }
+    int N;
+    cin >> N;
+    vector<int> T(N);
+    vector<vector<int>> A(N);
+    for(int i = 0; i < N; i++){
+        int K; cin >> T[i] >> K;
+        A[i].resize(K);
+        for(int j = 0; j < K; j++) cin >> A[i][j], A[i][j]--;
     }
 
-    used.resize(n);
-    dfs(n-1, a);
-
     ll ans = 0;
-    for(int i = 0; i < n; i++) if(used[i]) ans += t[i];
-
+    vector<bool> used(N);
+    auto dfs = [&](auto&& self, int pos) -> void {
+        for(auto e: A[pos]){
+            if(used[e] == false) self(self, e);
+        }
+        ans += T[pos];
+        used[pos] = true;
+    };
+    
+    dfs(dfs, N - 1);
     cout << ans << endl;
-    return 0;
 }

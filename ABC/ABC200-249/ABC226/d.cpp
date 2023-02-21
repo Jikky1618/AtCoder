@@ -2,25 +2,31 @@
 using namespace std;
 using ll = long long;
 
+#ifdef LOCAL
+#include <debug_print.hpp>
+#define debug(...) debug_print::multi_print(#__VA_ARGS__, __VA_ARGS__)
+#else
+#define debug(...) (static_cast<void>(0))
+#endif
+
 int main(){
     cin.tie(nullptr);
     ios::sync_with_stdio(false);
     cout << fixed << setprecision(20);
-    int n;
-    cin >> n;
-    vector<int> x(n),y(n);
-    for(int i = 0; i < n; i++) cin >> x[i] >> y[i];
+    int N;
+    cin >> N;
+    vector<int> x(N), y(N);
+    for(int i = 0; i < N; i++) cin >> x[i] >> y[i];
 
-    set<pair<int,int>> st;
-    for(int i = 0; i < n; i++){
-        for(int j = 0; j < n; j++){
+    set<pair<int, int>> st;
+    for(int i = 0; i < N; i++){
+        for(int j = 0; j < N; j++){
             if(i == j) continue;
-            int dx = x[i] - x[j];
-            int dy = y[i] - y[j];
-            int g = gcd(dx, dy);
-            st.insert(pair<int,int>(dx / g, dy / g));
+            int dx = x[i] - x[j], dy = y[i] - y[j];
+            int G = gcd(dx, dy);
+            st.insert({dx / G, dy / G});
         }
     }
+
     cout << st.size() << endl;
-    return 0;
 }
