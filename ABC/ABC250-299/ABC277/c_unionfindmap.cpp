@@ -49,7 +49,7 @@ struct UnionFindMap {
         n--; // 連結成分の数を1つ減らす
         return true;
     }
-    
+
 	// size(x): 要素xの連結成分の大きさを返す
     int size(T x){
         return sizes[root(x)];
