@@ -2,23 +2,29 @@
 using namespace std;
 using ll = long long;
 
+#ifdef LOCAL
+#include <debug_print.hpp>
+#define debug(...) debug_print::multi_print(#__VA_ARGS__, __VA_ARGS__)
+#else
+#define debug(...) (static_cast<void>(0))
+#endif
+
 int main(){
     cin.tie(nullptr);
     ios::sync_with_stdio(false);
     cout << fixed << setprecision(20);
-    ll N,A,B;
+    ll N, A, B;
     cin >> N >> A >> B;
 
-    auto sum = [&](ll n) -> ll {
-        return n * (n + 1) / 2;
+    // 1 ~ Nまでの総和
+    auto sum = [&](ll N) -> ll {
+        return N * (N + 1) / 2;
     };
 
-    ll s = sum(N);
-    ll a = A * sum(N / A);
-    ll b = B * sum(N / B);
-    ll l = lcm(A,B) * sum(N / lcm(A,B));
-    ll ans = (s - a - b + l);
+    ll all = sum(N);
+    ll a = sum(N / A) * A;
+    ll b = sum(N / B)* B;
+    ll l = sum(N / lcm(A, B)) * lcm(A, B);
 
-    cout << ans << endl;
-    return 0;
+    cout << all - a - b + l << endl;
 }
