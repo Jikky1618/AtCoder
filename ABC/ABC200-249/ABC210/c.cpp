@@ -2,28 +2,32 @@
 using namespace std;
 using ll = long long;
 
-#define debug(x) cerr << "\033[33m[" << __LINE__ << "] " << #x << ": " << x << "\033[m" << endl;
+#ifdef LOCAL
+#include <debug_print.hpp>
+#define debug(...) debug_print::multi_print(#__VA_ARGS__, __VA_ARGS__)
+#else
+#define debug(...) (static_cast<void>(0))
+#endif
 
 int main(){
     cin.tie(nullptr);
     ios::sync_with_stdio(false);
-    int n,k;
-    cin >> n >> k;
-    vector<int> c(n);
-    for(int i = 0; i < n; i++) cin >> c[i];
+    cout << fixed << setprecision(20);
+    int N, K;
+    cin >> N >> K;
+    vector<int> C(N);
+    for(int i = 0; i < N; i++) cin >> C[i];
 
-    map<int,int> mp;
-    int ans = 0, now = 0;
-    for(int i = 0; i < n; i++){
-        if(mp[c[i]] == 0) now++;
-        mp[c[i]]++;
-        if(k <= i){
-            mp[c[i - k]]--;
-            if(mp[c[i - k]] == 0) now--;
-        }
-        ans = max(ans,now);
+    map<int, int> mp;
+    for(int i = 0; i < K; i++) mp[C[i]]++;
+
+    int ans = mp.size();
+    for(int i = K; i < N; i++){
+        debug(mp.size());
+        mp[C[i]]++, mp[C[i - K]]--;
+        if(mp[C[i - K]] == 0) mp.erase(C[i - K]);
+        ans = max(ans, (int)mp.size());
     }
 
     cout << ans << endl;
-    return 0;
 }
