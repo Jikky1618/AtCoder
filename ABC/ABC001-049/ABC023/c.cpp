@@ -1,7 +1,6 @@
 #include <bits/stdc++.h>
 using namespace std;
 using ll = long long;
-const ll INF = 1LL << 60;
 
 #ifdef LOCAL
 #include <debug_print.hpp>
@@ -14,30 +13,34 @@ int main(){
     cin.tie(nullptr);
     ios::sync_with_stdio(false);
     cout << fixed << setprecision(20);
-    int N;
-    cin >> N;
-    vector<ll> H(N), S(N);
-    for(int i = 0; i < N; i++) cin >> H[i] >> S[i];
+    int R, C, K, N;
+    cin >> R >> C >> K >> N;
+    vector<int> r(N), c(N);
+    for(int i = 0; i < N; i++) cin >> r[i] >> c[i], r[i]--, c[i]--;
 
-    auto check = [&](ll mid) -> bool {
-        // 高度midまでに全ての風船を割ることができるかを判定
-        vector<ll> t(N); // 風船iを割るまでの制限時間
-        for(int i = 0; i < N; i++){
-            if(mid < H[i]) return false; // 既に高度mid以上にあるならfalse
-            t[i] = (mid - H[i]) / S[i];
-        }
-        sort(t.begin(), t.end());
-        for(int i = 0; i < N; i++) if(t[i] < i) return false;
-        return true;
-    };
-
-    // ペナルティの最小値を二分探索
-    ll ng = -1, ok = INF;
-    while(ok - ng > 1){
-        ll mid = (ok + ng) / 2;
-        if(check(mid)) ok = mid;
-        else ng = mid;
+    // 各行各列の飴マスの個数を前計算
+    vector<int> Row(R), Column(C);
+    for(int i = 0; i < N; i++){
+        Row[r[i]]++, Column[c[i]]++;
     }
-    
-    cout << ok << endl;
+
+    // 飴マスの個数がi個である各行各列の数を計算
+    map<int, ll> mpr, mpc;
+    for(int i = 0; i < R; i++) mpr[Row[i]]++;
+    for(int i = 0; i < C; i++) mpc[Column[i]]++;
+
+    ll ans = 0;
+    // 和がK個になるマス数を求める
+    for(int i = 0; i <= K; i++){
+        ans += mpc[i] * mpr[K - i];
+    }
+
+    for(int i = 0; i < N; i++){
+        // 起点に飴があり、和がK個となるマス数だけ引く
+        if(Row[r[i]] + Column[c[i]] == K) ans--;
+        // 起点に飴があり、和がK+1個となるマス数だけ足す
+        if(Row[r[i]] + Column[c[i]] == K + 1) ans++;
+    }
+
+    cout << ans << endl;
 }
