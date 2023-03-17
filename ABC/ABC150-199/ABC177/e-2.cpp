@@ -34,7 +34,7 @@ int main(){
     for(int i = 0; i < N; i++) num[A[i]]++;
 
     bool flag = true;
-    // 各iについて(iは素数だけ調べれば十分)
+    // 各iについて(iは素数だけ調べれば本当は十分)
     for(int i = 2; i < MAX; i++){
         int sum = 0;
         // iを素因数に持つAの要素数が高々1以下ならpairwise coprime
