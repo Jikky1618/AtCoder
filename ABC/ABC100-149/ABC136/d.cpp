@@ -33,24 +33,18 @@ int main(){
     int N = S.size();
 
     auto p = rle(S);
-    debug(p);
     vector<int> ans;
     int M = p.size();
+
     for(int i = 0; i < M; i += 2){
         int R = p[i].second, L = p[i + 1].second, val = R + L;
 
         for(int j = 0; j < R - 1; j++) ans.emplace_back(0);
-        // valが偶数なら半分ずつ
-        if(val % 2 == 0){
-            for(int j = 0; j < 2; j++) ans.emplace_back(val / 2);
-        // valが奇数なら
-        }else{
-            ans.emplace_back((R + 1) / 2 + L / 2);
-            ans.emplace_back((L + 1) / 2 + R / 2);
-        }
+        ans.emplace_back((R + 1) / 2 + L / 2);
+        ans.emplace_back((L + 1) / 2 + R / 2);
         for(int j = 0; j < L - 1; j++) ans.emplace_back(0);
     }
-    debug(ans);
+
     for(int i = 0; i < N; i++){
         cout << ans[i] << " \n"[i == N - 1];
     }
