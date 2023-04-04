@@ -82,8 +82,8 @@ int main(){
     vector<ll> A(N);
     for(int i = 0; i < N; i++) cin >> A[i];
 
-    // 重さが (x^y+y^x)%M の辺を構築する
-    vector<tuple<int, int, ll>> G;
+    // 重さが (x ^ y + y ^ x ) % M の辺を構築する
+    vector<tuple<int, int, int>> G;
     for(int i = 0; i < N; i++){
         for(int j = 0; j < N; j++){
             if(i == j) continue;
@@ -92,7 +92,7 @@ int main(){
         }
     }
 
-    sort(G.begin(), G.end(), greater<tuple<ll, int, int>>());
+    sort(G.begin(), G.end(), greater<tuple<int, int, int>>());
 
     ll ans = 0;
     // クラスカル法
