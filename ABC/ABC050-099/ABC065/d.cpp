@@ -89,7 +89,7 @@ int main(){
         G.emplace_back(cost, Y[i].second, Y[i + 1].second);
     }
 
-    // クラシカル法
+    // クラスカル法
     sort(G.begin(), G.end());
     ll ans = 0;
     UnionFind uf(N);
