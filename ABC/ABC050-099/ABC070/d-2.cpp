@@ -36,7 +36,6 @@ int main(){
     };
 
     dfs(dfs, K, -1, 0);
-    debug(dist);
     while(Q--){
         int x, y; cin >> x >> y, x--, y--;
         ll ans = dist[x] + dist[y];
