@@ -62,5 +62,6 @@ int main(){
 
 
     auto order = topological_sort(G);
+    // 有向グラフに閉路がなければYes
     cout << (!order.empty() ? "Yes" : "No") << endl;
 }
