@@ -33,7 +33,7 @@ int main(){
     compress(r);
     compress(c);
 
-    // row[i] = {i行の総和, i行目}, col[i] = {i列の総和, i列目}
+    // row[i] = {i番目に多い行の総和, id行目}, col[i] = {i番目に多いi列の総和, id列目}
     vector row(N, pair<ll, int>(0LL, -1)), col(N, pair<ll, int>(0LL, -1));
 
     // mp[{r, c}] := r行目, c列目の整数の値x[i]
