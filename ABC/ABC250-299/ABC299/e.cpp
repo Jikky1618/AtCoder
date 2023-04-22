@@ -46,7 +46,6 @@ int main(){
         }
 
         // 距離がd[i]未満は必ず白色
-        bool flag = true;
         for(int j = 0; j < N; j++){
             if(dist[j] != -1 && dist[j] < d[i]) col[j] = 0;
         }
