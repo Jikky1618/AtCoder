@@ -57,7 +57,7 @@ int main(){
 
         // ワープを使う場合
         if('a' <= A[x][y] && A[x][y] <= 'z'){
-            char c = A[x][y] - 'a';
+            int c = A[x][y] - 'a';
             if(used[c]) continue;
             used[c] = true;
             for(auto [nx, ny]: tp[c]){
