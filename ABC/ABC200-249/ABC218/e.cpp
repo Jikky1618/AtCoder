@@ -84,9 +84,11 @@ int main(){
     ll ans = sum;
     // 罰金を最小化させる最小全域木
     for(auto [cost, from, to]: G){
+        // 負の値なら積極的に残す
         if(cost <= 0){
             uf.merge(from, to);
             ans -= cost;
+        // 全域木にしないといけない場合は残す
         }else if(!uf.same(from, to)){
             uf.merge(from, to);
             ans -= cost;
