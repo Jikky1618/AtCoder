@@ -12,16 +12,13 @@ using ll = long long;
 vector<int> make_is_prime(ll x){
     vector<bool> prime(x + 1, true);
     prime[0] = prime[1] = false;
-    for(int i = 2; i * i <= x; i++){
-        if(!prime[i]) continue;
-        for(int j = i * 2; j <= x; j += i){
-            prime[j] = false; // iの倍数を削除
-        }
-    }
-    
     vector<int> res;
-    for(int i = 0; i <= x; i++){
-        if(prime[i]) res.emplace_back(i);
+    for(int i = 2; i <= x; i++){
+        if(!prime[i]) continue;
+        res.emplace_back(i);
+        for(int j = i * 2; j <= x; j += i){
+            prime[j] = false;
+        }
     }
     return res;
 }
@@ -39,10 +36,10 @@ int main(){
     int ans = 0;
     for(int i = 0; i < M; i++){
         ll a = p[i];
-        if(a * a * a * a * a > N) break;
+        if(a * a * a * a * a >= N) break;
         for(int j = i + 1; j < M; j++){
             ll b = p[j];
-            if(a * a * b * b * b > N) break;
+            if(a * a * b * b * b >= N) break;
             for(int k = j + 1; k < M; k++){
                 ll c = p[k];
                 if(a * a * b * c * c > N) break;
