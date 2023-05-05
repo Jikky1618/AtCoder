@@ -32,7 +32,7 @@ int main(){
             dp[j] = min({dp[j], dp[i], A[i]});
         }
     }
-    debug(val);
+
     ll ans = -INF;
     for(int i = 0; i < N; i++) ans = max(ans, A[i] - dp[i]);
 
