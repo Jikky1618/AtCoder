@@ -38,6 +38,7 @@ int main(){
     ll ans = INF, val = 0;
     for(int i = 1; i < N - 1; i += 2) val += diff[i];
 
+    // ペアとなる児童を全探索
     for(int i = 0; i < N - 1; i++){
         // H[i] とペアになる最適なWの値を見つけ, 答えを更新
         int pos = lower_bound(W.begin(), W.end(), H[i]) - W.begin();
