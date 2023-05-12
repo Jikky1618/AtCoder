@@ -36,7 +36,7 @@ int main(){
     while(Q--){
         int L, R; cin >> L >> R;
         len = 1;
-        while(len * 2 <= R - L + 1) len = len * 2;
+        while(len * 2 <= R - L + 1) len *= 2;
         int a = mp[{L, L + len - 1}], b = mp[{R - len + 1, R}];
         cout << a << " " << b << endl;
         debug(P[a - 1], P[b - 1]);
