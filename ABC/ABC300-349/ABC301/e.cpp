@@ -24,12 +24,13 @@ int main(){
 
     // s, g, o の地点の{x, y}配列
     vector<pair<int, int>> P;
-    int start = -1, goal = -1; // s, g がそれぞれPの何番目にあるかを求める
+    // s, g がそれぞれPの何番目にあるかを求める
+    int start = -1, goal = -1;
     for(int i = 0; i < H; i++){
-        for(int j = 0; j < W; j++){
-            if(A[i][j] == 'o') P.emplace_back(i, j);
-            if(A[i][j] == 'S') start = P.size(), P.emplace_back(i, j);
-            if(A[i][j] == 'G') goal = P.size(), P.emplace_back(i, j);
+        for (int j = 0; j < W; j++) {
+            if (A[i][j] == 'o') P.emplace_back(i, j);
+            if (A[i][j] == 'S') start = P.size(), P.emplace_back(i, j);
+            if (A[i][j] == 'G') goal = P.size(), P.emplace_back(i, j);
         }
     }
 
@@ -56,14 +57,15 @@ int main(){
 
         for(int j = 0; j < N; j++){
             auto [x, y] = P[j];
-            /* !!! このif文を書いてないとd[i][j]の長さが-1になってバグります !!! */
+            // !!! このif文を書いてないとd[i][j]の長さが-1になってバグります !!!
             if(dist[x][y] != -1) d[i][j] = dist[x][y];
         }
     }
 
     debug(P, start, goal, d);
     // bitDP
-    // dp[i][S] := 今まで訪れた地点(s, g, o)の集合をS, 今いる地点をiとしたときの最短距離
+    // dp[i][S] := 今まで訪れた地点(s, g, o)の集合をS,
+    // 今いる地点をiとしたときの最短距離
     vector dp((1 << N), vector<int>(N, INF));
     dp[1 << start][start] = 0;
 
@@ -79,7 +81,7 @@ int main(){
 
     int ans = -1;
     for(int bit = 0; bit < (1 << N); bit++){
-        if((dp[bit][goal] <= T)) ans = max(ans, __builtin_popcount(bit) - 2);
+        if(dp[bit][goal] <= T) ans = max(ans, __builtin_popcount(bit) - 2);
     }
 
     cout << ans << endl;
