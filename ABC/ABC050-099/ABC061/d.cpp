@@ -49,7 +49,7 @@ int main(){
     vector<vector<pair<int, int>>> G(N);
     for(int i = 0; i < M; i++){
         int A, B, C; cin >> A >> B >> C, A--, B--;
-        // 最大経路 -> 辺の長さを-1倍して最短経路
+        // 最長経路 -> 辺の長さを-1倍して最短経路
         G[A].emplace_back(B, -C);
     }
 
