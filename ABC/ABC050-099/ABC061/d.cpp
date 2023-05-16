@@ -10,6 +10,35 @@ using ll = long long;
 #endif
 
 const ll INF = 1LL << 60;
+template<class T>
+vector<ll> bellman_ford(vector<vector<pair<int, T>>>& G, int start = 0){
+    int n = G.size();
+    vector<ll> dist(n, INF);
+    dist[start] = 0;
+    // 最低でも n 回はループを回して, 頂点の最短距離を更新する
+    // 負の閉路があればもう n 回ループを回して, 負の閉路がある頂点を更新する
+    for(int i = 0; i < 2 * n; i++){
+        bool updated = false;
+        for(int from = 0; from < n; from++){
+            if(dist[from] == INF) continue;
+            for(auto [to, cost]: G[from]){
+                if(dist[to] > dist[from] + cost){
+                    updated = true;
+                    if(i < n){
+                        dist[to] = dist[from] + cost;
+                    }else{
+                        dist[to] = -INF;
+                    }
+                }
+            }
+        }
+        // 距離の更新が行われなかったらもう更新する頂点はない
+        if(!updated){
+            return dist;
+        }
+    }
+    return dist;
+}
 
 int main(){
     cin.tie(nullptr);
@@ -24,35 +53,8 @@ int main(){
         G[A].emplace_back(B, -C);
     }
 
-    // ベルマンフォード法
-    vector<ll> dist(N, INF);
-    dist[0] = 0;
-    for(int i = 0; i < N; i++){
-        for(int from = 0; from < N; from++){
-            if(dist[from] == INF) continue;
-            for(auto [to, cost]: G[from]){
-                if(dist[to] > dist[from] + cost){
-                    dist[to] = dist[from] + cost;
-                }
-            }
-        }
-    }
-
-    // もう N 回更新を行って, 更新されたら, その頂点は負の閉路を含む
-    vector<bool> negative_loop(N);
-    for(int i = 0; i < N; i++){
-        for(int from = 0; from < N; from++){
-            if(dist[from] == INF) continue;
-            for(auto [to, cost]: G[from]){
-                if(dist[to] > dist[from] + cost){
-                    negative_loop[to] = true;
-                    dist[to] = dist[from] + cost;
-                }
-            }
-        }
-    }
-
-    if(negative_loop[N - 1]){
+    auto dist = bellman_ford(G);
+    if(dist[N - 1] == -INF){
         cout << "inf" << endl;
     }else{
         cout << -dist[N - 1] << endl;
