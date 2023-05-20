@@ -26,7 +26,7 @@ int main(){
             L.emplace_back(i);
             pos = i;
         }
-        if(L.size() == K) break;
+        if((int)L.size() == K) break;
     }
 
     pos = INF;
@@ -35,7 +35,7 @@ int main(){
             R.emplace_back(i);
             pos = i;
         }
-        if(R.size() == K) break;
+        if((int)R.size() == K) break;
     }
 
     reverse(R.begin(), R.end());
