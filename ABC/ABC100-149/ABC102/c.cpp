@@ -21,9 +21,9 @@ int main(){
     sort(A.begin(), A.end());
     int b = 0;
     if(N % 2 == 0){
-        b = (A[N/2-1] + A[N/2]) / 2;
+        b = (A[N / 2 - 1] + A[N / 2]) / 2;
     }else{
-        b = A[N/2];
+        b = A[N / 2];
     }
 
     ll ans = 0;
