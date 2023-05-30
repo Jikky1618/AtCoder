@@ -9,18 +9,19 @@ int main(){
     cin >> n;
     vector<int> a(n), b(n);
     for(int i = 0; i < n; i++) cin >> a[i] >> b[i];
+    const int MAX = 1000001;
 
-    vector<int> diff(1000005);
+    vector<int> diff(MAX);
     for(int i = 0; i < n; i++){
         diff[a[i]]++;
         diff[b[i] + 1]--;
     }
 
-    vector<int> sum(1000005);
-    for(int i = 0; i <= 1000000; i++) sum[i + 1] = sum[i] + diff[i];
+    vector<int> sum(MAX + 1);
+    for(int i = 0; i <= MAX; i++) sum[i + 1] = sum[i] + diff[i];
 
     int ans = 0;
-    for(int i = 0; i < 1000005; i++){
+    for(int i = 0; i <= MAX; i++){
         ans = max(ans, sum[i]);
     }
 
