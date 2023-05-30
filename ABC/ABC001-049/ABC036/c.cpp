@@ -2,23 +2,36 @@
 using namespace std;
 using ll = long long;
 
+#ifdef LOCAL
+#include <debug_print.hpp>
+#define debug(...) debug_print::multi_print(#__VA_ARGS__, __VA_ARGS__)
+#else
+#define debug(...) (static_cast<void>(0))
+#endif
+
+template<class T>
+vector<T> compress(vector<T>& v){
+    int n = v.size();
+    vector<T> res = v;
+    sort(res.begin(), res.end());
+    res.erase(unique(res.begin(), res.end()), res.end());
+    for(int i = 0; i < n; i++){
+        v[i] = lower_bound(res.begin(), res.end(), v[i]) - res.begin();
+    }
+    return res;
+}
+
 int main(){
     cin.tie(nullptr);
     ios::sync_with_stdio(false);
     cout << fixed << setprecision(20);
-    int n;
-    cin >> n;
-    vector<int> a(n);
-    for(int i = 0; i < n; i++) cin >> a[i];
+    int N;
+    cin >> N;
+    vector<int> A(N);
+    for(int i = 0; i < N; i++) cin >> A[i];
 
-    vector<int> b = a;
-    sort(b.begin(), b.end());
-    b.erase(unique(b.begin(),b.end()),b.end());
-
-    for(int i = 0; i < n; i++){
-        a[i] = lower_bound(b.begin(), b.end(),a[i]) - b.begin();
+    compress(A);
+    for(int i = 0; i < N; i++){
+        cout << A[i] << '\n';
     }
-
-    for(auto &&ans: a) cout << ans << endl;
-    return 0;
 }
