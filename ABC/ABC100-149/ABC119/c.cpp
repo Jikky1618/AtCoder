@@ -3,41 +3,36 @@ using namespace std;
 using ll = long long;
 const int INF = (1 << 30) - 1;
 
-int n,a,b,c;
-vector<int> l;
-//構築する3本: A,B,C
-int dfs(int cnt, int A, int B, int C){
-    // 全ての竹を探索できたら
-    if(cnt == n){
-        if(min({A, B, C}) == 0) return INF; // 3本が決定していない
-        return abs(A - a) + abs(B - b) + abs(C - c); // 目的の長さの差分が必要
-    }
-
-    // l[cnt] の竹を合成魔法に使わない場合
-    int res = dfs(cnt + 1, A, B, C);
-    // l[cnt] の竹を合成魔法に使う場合
-    /*
-        (X ? 10 : 0) の意味
-        Xが0(まだ合成していない)なら追加MPは0, 0ではないなら(合成する)追加MPは10になる
-    */ 
-    // Aを合成
-    res = min(res, dfs(cnt + 1, A + l[cnt], B, C) + (A ? 10 : 0));
-    // Bを合成
-    res = min(res, dfs(cnt + 1, A, B + l[cnt], C) + (B ? 10 : 0));
-    // Cを合成
-    res = min(res, dfs(cnt + 1, A, B, C + l[cnt]) + (C ? 10 : 0));
-
-    return res;
-}
+#ifdef LOCAL
+#include <debug_print.hpp>
+#define debug(...) debug_print::multi_print(#__VA_ARGS__, __VA_ARGS__)
+#else
+#define debug(...) (static_cast<void>(0))
+#endif
 
 int main(){
     cin.tie(nullptr);
     ios::sync_with_stdio(false);
     cout << fixed << setprecision(20);
-    cin >> n >> a >> b >> c;
-    l.resize(n);
-    for(int i = 0; i < n; i++) cin >> l[i];
-    
-    cout << dfs(0,0,0,0) << endl;
-    return 0;
+    int N, A, B, C;
+    cin >> N >> A >> B >> C;
+    vector<int> l(N);
+    for(int i = 0; i < N; i++) cin >> l[i];
+
+    int ans = INF;
+    auto dfs = [&](auto&& self, int pos, int a, int b, int c, int val) -> void {
+        if(pos == N){
+            if(min({a, b, c}) == 0) return;
+            ans = min(ans, val + abs(A - a) + abs(B - b) + abs(C - c));
+            return;
+        }
+        
+        self(self, pos + 1, a, b, c, val);
+        self(self, pos + 1, a + l[pos], b, c, val + (a ? 10 : 0));
+        self(self, pos + 1, a, b + l[pos], c, val + (b ? 10 : 0));
+        self(self, pos + 1, a, b, c + l[pos], val + (c ? 10 : 0));
+    };
+
+    dfs(dfs, 0, 0, 0, 0, 0);
+    cout << ans << endl;
 }
