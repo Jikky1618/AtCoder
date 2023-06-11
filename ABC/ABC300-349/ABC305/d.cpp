@@ -25,14 +25,11 @@ int main(){
         if(i % 2 == 1) st.emplace_back(A[i]);
         else end.emplace_back(A[i]);
     }
-    st.emplace_back(INF), end.emplace_back(INF); // 一応の番兵
-    debug(st, end);
 
     int M = (N + 1) / 2;
     // 累積和
     vector<ll> acc(M + 1);
     for(int i = 0; i < M; i++) acc[i + 1] = acc[i] + (end[i] - st[i]);
-    debug(acc);
 
     int Q;
     cin >> Q;
