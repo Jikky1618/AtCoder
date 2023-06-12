@@ -24,7 +24,7 @@ int main(){
     }
 
     // 「警備室」の超頂点を作成
-    // https://twitter.com/kyopro_friends/status/1667530762693021705
+    // ref. https://twitter.com/kyopro_friends/status/1667530762693021705
     for(int i = 0; i < K; i++){
         int p, h; cin >> p >> h, p--;
         // 警備室(頂点 N)から頂点 p に長さ N - h の辺を貼る

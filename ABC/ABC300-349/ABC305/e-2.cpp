@@ -24,7 +24,7 @@ int main(){
     }
 
     // 超頂点を作成
-    // cf. https://twitter.com/leaf_1415/status/1667531694507974656
+    // ref. https://twitter.com/leaf_1415/status/1667531694507974656
     for(int i = 0; i < K; i++){
         int p, h; cin >> p >> h, p--;
         G[N + h].emplace_back(p);

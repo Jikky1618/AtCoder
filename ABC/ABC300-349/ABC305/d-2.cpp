@@ -18,6 +18,7 @@ int main(){
     vector<int> A(N);
     for(int i = 0; i < N; i++) cin >> A[i];
 
+    // ref. https://qiita.com/GeekMasahiro/items/08f8094057ad81d90a2f
     // A[i] までの睡眠時間の合計
     vector<int> S(N);
     for(int i = 1; i < N; i++){
