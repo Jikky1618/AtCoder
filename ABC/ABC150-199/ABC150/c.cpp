@@ -2,32 +2,40 @@
 using namespace std;
 using ll = long long;
 
+#ifdef LOCAL
+#include <debug_print.hpp>
+#define debug(...) debug_print::multi_print(#__VA_ARGS__, __VA_ARGS__)
+#else
+#define debug(...) (static_cast<void>(0))
+#endif
+
 int main(){
     cin.tie(nullptr);
     ios::sync_with_stdio(false);
-    int n;
-    cin >> n;
-    vector<int> p(n),q(n);
-    for(int i = 0; i < n; i++) cin >> p[i];
-    for(int i = 0; i < n; i++) cin >> q[i];
+    cout << fixed << setprecision(20);
+    int N;
+    cin >> N;
+    vector<int> P(N), Q(N);
+    for(int i = 0; i < N; i++) cin >> P[i];
+    for(int i = 0; i < N; i++) cin >> Q[i];
 
-    vector<int> r;
-    for(int i = 1; i <= n; i++) r.push_back(i);
-    int a = -1,b = -1,cnt = 1;
+
+    vector<int> p(N);
+    iota(p.begin(), p.end(), 1); // 1, 2, ..., N
+
+    int a = 0, b = 0, cnt = 0;
     do{
-        bool found_p = true, found_q = true;
-        for(int i = 0; i < n; i++){
-            if(p[i] != r[i]) found_p = false;
+        bool flag_P = true, flag_Q = true;
+        for(int i = 0; i < N; i++){
+            if(p[i] != P[i]) flag_P = false;
+            if(p[i] != Q[i]) flag_Q = false;
         }
-        for(int i = 0; i < n; i++){
-            if(q[i] != r[i]) found_q = false;
-        }
-        if(found_p) a = cnt;
-        if(found_q) b = cnt;
-        cnt++;
-    }while(next_permutation(r.begin(),r.end()));
-    int ans = abs(a - b);
 
-    cout << ans << endl;
-    return 0;
+        if(flag_P) a = cnt;
+        if(flag_Q) b = cnt;
+
+        cnt++;
+    }while(next_permutation(p.begin(), p.end()));
+
+    cout << abs(a - b) << endl;
 }
