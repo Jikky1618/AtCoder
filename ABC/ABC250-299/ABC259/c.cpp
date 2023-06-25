@@ -2,19 +2,25 @@
 using namespace std;
 using ll = long long;
 
-vector<pair<char, int>> rle(string s){
-    int n = s.size();
-    vector<pair<char, int>> res;
-    int cnt = 1;
-    for(int i = 0; i < n; i++){
-        if (s[i] != s[i + 1]){
-            res.push_back({s[i], cnt});
-            cnt = 1;
-        }
-        else cnt++;
-    }
 
-    res.push_back({s.back(), cnt});
+#ifdef LOCAL
+#include <debug_print.hpp>
+#define debug(...) debug_print::multi_print(#__VA_ARGS__, __VA_ARGS__)
+#else
+#define debug(...) (static_cast<void>(0))
+#endif
+
+vector<pair<char, int>> run_length_encodeing(const string& s){
+    vector<pair<char, int>> res;
+    int n = s.size(), cnt = 1;
+    for(int i = 0; i < n; i++){
+        if(i == n - 1 || s[i] != s[i + 1]){
+            res.emplace_back(s[i], cnt);
+            cnt = 1;
+        }else{
+            cnt++;
+        }
+    }
     return res;
 }
 
@@ -22,22 +28,23 @@ int main(){
     cin.tie(nullptr);
     ios::sync_with_stdio(false);
     cout << fixed << setprecision(20);
-    string s,t;
-    cin >> s >> t;
-    auto s2 = rle(s), t2 = rle(t);
+    string S, T;
+    cin >> S >> T;
+    auto S2 = run_length_encodeing(S), T2 = run_length_encodeing(T);
     
-    if(s2.size() != t2.size()){
+    if(S2.size() != T2.size()){
         cout << "No" << endl;
         return 0;
     }
 
+    debug(S2, T2);
     bool flag = true;
-    for(int i = 0; i < (int)s2.size(); i++){
-        if(s2[i].first != t2[i].first) flag = false;
-        if(s2[i].second != t2[i].second && (s2[i].second > t2[i].second || s2[i].second == 1)) flag = false;
+    for(unsigned i = 0; i < S2.size(); i++){
+        // 文字が異なる時点で一致できない
+        if(S2[i].first != T2[i].first) flag = false;
+        // 文字数が異なり, S > T または, S が1文字なら一致できない
+        if(S2[i].second != T2[i].second && (S2[i].second == 1 || S2[i].second > T2[i].second)) flag = false;
     }
 
-    if(flag) cout << "Yes" << endl;
-    else cout << "No" << endl;
-    return 0;
+    cout << (flag ? "Yes" : "No") << endl;
 }
