@@ -163,7 +163,7 @@ int main() {
         if (t[i] == 1) {
             // この時点で 負の加算操作での最小値 K 個は無視できる
             while (SMS.size_low() > K) {
-                SMS.decrease_l();
+                SMS.decrease_low();
             }
             // i 番目での代入操作での最大値は
             // sum := i番目以降の正の値の加算操作の総和
@@ -172,7 +172,7 @@ int main() {
             // これらの和となる
             ll val = sum + y[i] + SMS.sum_high();
             debug(sum, y[i], SMS.sum_high());
-            ans = max(ans, sum + y[i] + SMS.sum_high());
+            ans = max(ans, val);
             // K = 0 なら, この再入操作は無視できないのでこれ以上最大化できない
             if (K == 0) break;
             // それ以降の代入操作は無視するので, この操作も無視するために K--
