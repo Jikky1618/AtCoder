@@ -18,17 +18,12 @@ int main(){
     vector<int> A(N);
     for(int i = 0; i < N; i++) cin >> A[i];
 
-    // 差が1以下の集まり
+    // 0で区切ったグループを作成
     vector<ll> groups;
     groups.emplace_back(0);
     for(int i = 0; i < N; i++){
         if(A[i] == 0){
-            if(groups.back() == 0){
-                continue;
-            }else{
-                groups.emplace_back();
-                continue;
-            }
+            if(groups.back() != 0) groups.emplace_back(0);
         }else{
             groups.back() += A[i];
         }
