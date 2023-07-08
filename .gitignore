@@ -8,6 +8,10 @@ library/
 test.cpp
 tempCodeRunnerFile.cpp
 
+# input / output test file
+in.txt
+out.txt
+
 # Executable file
 *.exe
 *.out
