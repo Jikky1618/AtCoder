@@ -32,14 +32,18 @@ AtCoderの問題をC++で解く、個人精進用プロジェクトです。全�
 <a name="arc"></a>
 
 ## ARC
-- [ARC](https://github.com/Jikky1618/AtCoder/tree/main/ARC)
+- [ARC001-049](https://github.com/Jikky1618/AtCoder/tree/main/ARC/ARC001-049)
+- [ARC050-099](https://github.com/Jikky1618/AtCoder/tree/main/ARC/ARC050-099)
+- [ARC100-149](https://github.com/Jikky1618/AtCoder/tree/main/ARC/ARC100-149)
+- [ARC150-199](https://github.com/Jikky1618/AtCoder/tree/main/ARC/ARC150-199)
 - [ARC-Like](https://github.com/Jikky1618/AtCoder/tree/main/ARC/ARC-Like)
 
 
 <a name="agc"></a>
 
 ## AGC
-- [AGC](https://github.com/Jikky1618/AtCoder/tree/main/AGC)
+- [AGC001-049](https://github.com/Jikky1618/AtCoder/tree/main/AGC/AGC001-049)
+- [AGC050-099](https://github.com/Jikky1618/AtCoder/tree/main/AGC/AGC050-099)
 - [AGC-Like](https://github.com/Jikky1618/AtCoder/tree/main/AGC/AGC-like)
 
 
