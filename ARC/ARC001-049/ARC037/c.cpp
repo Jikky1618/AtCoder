@@ -9,16 +9,6 @@ using ll = long long;
 #define debug(...) (static_cast<void>(0))
 #endif
 
-template<class T, class U>
-T ceil(T x, U y){
-    return (x ? (x + y - 1) / y : x / y);
-}
-
-template<class T, class U>
-T floor(T x, U y){
-    return (x ? x / y : (x + y - 1) / y);
-}
-
 int main(){
     cin.tie(nullptr);
     ios::sync_with_stdio(false);
@@ -31,15 +21,14 @@ int main(){
 
     sort(B.begin(), B.end());
     // mid 以下の値が K 個以上かを二分探索
-    // この条件を満たす最も小さい値の1つ前の値が答え
+    // この条件を満たす最も小さい値が答え
     auto check = [&](ll mid) -> bool {
         int cnt = 0;
         // A の要素を全探索
         for(int i = 0; i < N; i++){
             // A[i] * B[pos] <= mid となる最大の pos を二分探索
-            int pos = lower_bound(B.begin(), B.end(), ceil(mid, A[i])) - B.begin();
+            int pos = upper_bound(B.begin(), B.end(), mid / A[i]) - B.begin();
             cnt += pos;
-            debug(pos, ceil(mid, A[i]));
         }
         
         debug(mid, cnt);
@@ -53,5 +42,5 @@ int main(){
         (check(mid) ? ok : ng) = mid;
     }
     debug(ok, ng);
-    cout << ng << endl;
+    cout << ok << endl;
 }
