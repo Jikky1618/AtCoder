@@ -11,32 +11,30 @@ using ll = long long;
 #endif
 
 // エラトラネスの篩で spf を求める
-vector<int> smallest_prime_factor(ll n){
-    vector<bool> prime(n + 1, true);
-    vector<int> spf(n + 1, -1);
-    // 0, 1 は予めふるい落とす
+vector<int> smallest_prime_factor(int N){
+    vector<bool> prime(N + 1, true);
+    vector<int> spf(N + 1);
+    iota(spf.begin(), spf.end(), 0);
     prime[0] = prime[1] = false;
-    spf[1] = 1;
 
-    for(int p = 2; p <= n; p++){
+    for(int p = 2; p * p <= N; p++){
         if(!prime[p]) continue;
-        spf[p] = p;
-        for(int q = p * 2; q <= n; q += p){
+        for(int q = p * p; q <= N; q += p){
             prime[q] = false;
             // p で割り切れる q の spf を更新
-            if(spf[q] == -1) spf[q] = p;
+            if(spf[q] == q) spf[q] = p;
         }
     }
     return spf;
 }
 
-vector<pair<int, int>> prime_factorize(ll n, const vector<int>& spf){
+vector<pair<int, int>> prime_factorize(int N, const vector<int>& spf){
     vector<pair<int, int>> factor;
-    while(n > 1){
-        int p = spf[n];
+    while(N > 1){
+        int p = spf[N];
         int exp = 0;
-        while(spf[n] == p){
-            n /= p;
+        while(spf[N] == p){
+            N /= p;
             exp++;
         }
         factor.emplace_back(p, exp);
