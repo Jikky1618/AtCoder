@@ -1,77 +1,150 @@
 #include <bits/stdc++.h>
 using namespace std;
 using ll = long long;
-const ll MOD = 1e9 + 7;
 
-vector<pair<ll,ll>> prime_factorize(ll x){
-    vector<pair<ll, ll>> factor;
-    for (ll p = 2; p * p <= x; p++){
-        if (x % p != 0) continue;
-        ll exp = 0; // 指数
+#ifdef LOCAL
+#include <debug_print.hpp>
+#define debug(...) debug_print::multi_print(#__VA_ARGS__, __VA_ARGS__)
+#else
+#define debug(...) (static_cast<void>(0))
+#endif
 
-        // 割れる限り割り続ける
-        while (x % p == 0){
-            exp++;
-            x /= p;
+template<int MOD> struct modint {
+    ll val;
+    constexpr modint(ll x = 0): val(x % MOD) {
+        if(val < 0) val += MOD;
+    }
+    constexpr int mod() const { return MOD; }
+    constexpr modint operator + () const {
+        return modint(val);
+    }
+    constexpr modint operator - () const {
+        return modint(MOD - val);
+    }
+    constexpr modint& operator++() {
+        return (*this) += 1;
+    }
+    constexpr modint& operator--() {
+        return (*this) -= 1;
+    }
+    constexpr modint operator++(int) {
+        modint x = (*this); ++(*this);
+        return x;
+    }
+    constexpr modint operator--(int) {
+        modint x = (*this); --(*this);
+        return x;
+    }
+    constexpr modint operator + (const modint& x) const {
+        return modint(*this) += x;
+    }
+    constexpr modint operator - (const modint& x) const {
+        return modint(*this) -= x;
+    }
+    constexpr modint operator * (const modint& x) const {
+        return modint(*this) *= x;
+    }
+    constexpr modint operator / (const modint& x) const {
+        return modint(*this) /= x;
+    }
+    constexpr modint& operator += (const modint& x) {
+        if((val += x.val) >= MOD) val -= MOD;
+        return *this;
+    }
+    constexpr modint& operator -= (const modint& x) {
+        if((val += MOD - x.val) >= MOD) val -= MOD;
+        return *this;
+    }
+    constexpr modint& operator *= (const modint& x) {
+        (val *= x.val) %= MOD;
+        return *this;
+    }
+    constexpr modint& operator /= (const modint& x){
+        return (*this) *= x.inv();
+    }
+    constexpr bool operator == (const modint& x) const {
+        return this->val == x.val;
+    }
+    constexpr bool operator != (const modint& x) const {
+        return this->val != x.val;
+    }
+    constexpr modint pow(ll t) const {
+        if(t == 0) return 1;
+        modint x = *this, res = 1;
+        while(t > 0){
+            if(t & 1) res *= x;
+            x *= x;
+            t >>= 1;
         }
-
-        // その結果を push
-        factor.push_back({p, exp});
+        return res;
     }
-    if (x != 1) factor.push_back({x, 1});
+    constexpr modint inv() const {
+        ll a = val, b = MOD, u = 1, v = 0;
+        while(b > 0){
+            ll t = a / b;
+            swap(a -= t * b, b);
+            swap(u -= t * v, v);
+        }
+        return modint(u);
+    }
+    friend constexpr istream& operator >> (istream& is, modint& x) {
+        is >> x.val;
+        x.val %= MOD;
+        if(x.val < 0) x.val += MOD;
+        return is;
+    }
+    friend constexpr ostream& operator << (ostream& os, const modint& x) {
+        return os << x.val;
+    }
+};
+
+const int MOD = 1e9 + 7;
+using mint = modint<MOD>;
+
+vector<pair<ll, ll>> prime_factorize(ll N) {
+    vector<pair<ll, ll>> factor;
+    for (ll p = 2; p * p <= N; p++) {
+        if (N % p != 0) continue;
+        ll exp = 0;
+        while (N % p == 0) {
+            exp++;
+            N /= p;
+        }
+        factor.emplace_back(p, exp);
+    }
+    if (N != 1) factor.emplace_back(N, 1);
     return factor;
-}
-
-ll mod_pow(ll a, ll b, ll mod){
-    ll res = 1;
-    while(b > 0){
-        if(b & 1) res = res * a % mod;
-        a = a * a % mod;
-        b >>= 1;
-    }
-    return res;
-}
-
-ll mod_div(ll a, ll b, ll mod){
-    return (a % MOD * mod_pow(b, mod - 2, mod)) % mod;
 }
 
 int main(){
     cin.tie(nullptr);
     ios::sync_with_stdio(false);
     cout << fixed << setprecision(20);
-    int n;
-    cin >> n;
-    vector<ll> a(n);
-    for(int i = 0; i < n; i++) cin >> a[i];
+    int N;
+    cin >> N;
+    vector<int> A(N);
+    for(int i = 0; i < N; i++) cin >> A[i]; 
 
-    // num[i] := LCMの素因数iの指数
-    map<ll,ll> num;
-    for(int i = 0; i < n; i++){
-        auto pf = prime_factorize(a[i]);
-        for(auto p: pf) num[p.first] = max(num[p.first], p.second);
-    }
-
-    ll LCM = 1;
-    for(auto p: num){
-        // LCM = i ^ num[i]
-        for(int i = 0; i < p.second; i++){
-            LCM *= p.first;
-            LCM %= MOD;
+    // L = lcm(A[1], ..., A[N]) とすると
+    // 答えは L / A[i] の総和
+    // L を桁あふれしないよう, 素因数分解を用いて求める
+    // L は A の素因数の最大値の積
+    map<ll, ll> div;
+    for(int i = 0; i < N; i++){
+        auto pf = prime_factorize(A[i]);
+        for(auto [p, e]: pf){
+            div[p] = max(div[p], e);
         }
     }
-
-    vector<ll> b(n);
-    for(int i = 0; i < n; i++){
-        b[i] = mod_div(LCM, a[i], MOD);
+    
+    mint L = 1;
+    for(auto [p, e]: div){
+        for(int i = 0; i < e; i++) L *= p;
     }
 
-    ll ans = 0;
-    for(int i = 0; i < n; i++){
-        ans += b[i];
-        ans %= MOD;
-    }
+    // L / A[i] の総和を求める
+    mint ans = 0;
+    for(int i = 0; i < N; i++) ans += L / A[i];
 
     cout << ans << endl;
-    return 0;
 }
