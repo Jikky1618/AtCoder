@@ -2,12 +2,19 @@
 using namespace std;
 using ll = long long;
 
+#ifdef LOCAL
+#include <debug_print.hpp>
+#define debug(...) debug_print::multi_print(#__VA_ARGS__, __VA_ARGS__)
+#else
+#define debug(...) (static_cast<void>(0))
+#endif
+
 int main(){
-    ll n;
-    cin >> n;
-
-    if(pow(-2,31) <= n && n < pow(2,31)) cout << "Yes" << endl;
-    else cout << "No" << endl;
-
-    return 0;
+    cin.tie(nullptr);
+    ios::sync_with_stdio(false);
+    cout << fixed << setprecision(20);
+    ll N;
+    cin >> N;
+    ll M = 1LL << 31;
+    cout << (-M <= N && N < M ? "Yes" : "No") << endl;
 }
