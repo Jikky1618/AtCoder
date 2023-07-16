@@ -9,7 +9,6 @@ using ll = long long;
 #define debug(...) (static_cast<void>(0))
 #endif
 
-// 素因数分解{素数, 次数}の配列を返す
 vector<pair<ll, ll>> prime_factorize(ll n){
     vector<pair<ll, ll>> factor;
     for (ll p = 2; p * p <= n; p++){
@@ -19,9 +18,9 @@ vector<pair<ll, ll>> prime_factorize(ll n){
             exp++;
             n /= p;
         }
-        factor.push_back({p, exp});
+        factor.emplace_back(p, exp);
     }
-	if (n != 1) factor.push_back({n, 1});
+	if (n != 1) factor.emplace_back(n, 1);
 	return factor;
 }
 
@@ -32,8 +31,10 @@ int main(){
     ll A, B;
     cin >> A >> B;
 
+    // GCD の約数であることは公約数であることと同値
     auto pf = prime_factorize(gcd(A, B));
 
-    // 共通の素因数の数 + 1が答え
+    // 公約数の素数 と 1 が今回の条件を満たす
+    // よって pf.size() + 1 が答え
     cout << pf.size() + 1 << endl;
 }
