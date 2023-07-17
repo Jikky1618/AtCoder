@@ -19,30 +19,36 @@ int main(){
     string S;
     cin >> S;
 
-    vector<int> L, R;
-    int pos = -INF;
+    // 左右から働く日を Greedy に求める
+    vector<int> left(N), right(N);
+    int last = -INF; // last := 最後に働いた日
     for(int i = 0; i < N; i++){
-        if(S[i] == 'o' && pos + C + 1 <= i){
-            L.emplace_back(i);
-            pos = i;
+        // 前回働いた日から C + 1 日以上たったなら働ける
+        if(S[i] == 'o' && last + C + 1 <= i){
+            left[i]++;
+            last = i;
         }
-        if((int)L.size() == K) break;
     }
-
-    pos = INF;
+    last = INF;
     for(int i = N - 1; i >= 0; i--){
-        if(S[i] == 'o' && i <= pos - C - 1){
-            R.emplace_back(i);
-            pos = i;
+        // 前回働いた日から C + 1 日以上たったなら働ける
+        if(S[i] == 'o' && i <= last - C - 1){
+            right[i]++;
+            last = i;
         }
-        if((int)R.size() == K) break;
     }
+    // 左右から累積和を取る
+    vector<int> accl(N + 1), accr(N + 1);
+    for(int i = 0; i < N; i++) accl[i + 1] = accl[i] + left[i];
+    for(int i = 0; i < N; i++) accr[i + 1] = accr[i] + right[N - i - 1];
+    debug(accl, accr);
 
-    reverse(R.begin(), R.end());
-
-    for(int i = 0; i < K; i++){
-        if(L[i] == R[i]){
-            cout << L[i] + 1 << endl;
+    // i 日目に働かないときの働く日数の最適解が K 日未満なら i 日目は働く
+    for(int i = 0; i < N; i++){
+        if(S[i] == 'x') continue;
+        // [0, i) + (i, N - 1]
+        if(accl[i] + accr[N - i - 1] < K){
+            cout << i + 1 << '\n';
         }
     }
 }
