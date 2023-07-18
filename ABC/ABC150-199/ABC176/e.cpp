@@ -18,40 +18,33 @@ int main(){
     vector<int> h(M), w(M);
     for(int i = 0; i < M; i++) cin >> h[i] >> w[i], h[i]--, w[i]--;
 
-    // rols[i] := i行目の爆弾対象の数
-    // cols[i] := i列目の爆弾対象の数
-    vector<int> rows(H), cols(W);
+    // r[i] := i行目にある爆弾数, c[i] := i列目にある爆弾数
+    vector<int> r(H), c(W);
     for(int i = 0; i < M; i++){
-        rows[h[i]]++, cols[w[i]]++;
+        r[h[i]]++, c[w[i]]++;
     }
 
-    // 爆弾対象があるかどうかを管理するset
-    set<pair<int, int>> st;
-    for(int i = 0; i < M; i++) st.insert({h[i], w[i]});
+    // 行, 列の最大の爆弾数を求める
+    int mx = *max_element(r.begin(), r.end()), my = *max_element(c.begin(), c.end());
 
-    debug(rows, cols, st);
-    // それぞれの最大値
-    int xmax = *max_element(rows.begin(), rows.end());
-    int ymax = *max_element(cols.begin(), cols.end());
-
-    // 最大値のある行, 列の番号
+    // 最大の爆弾数のある行, 列を X, Y に入れる
     vector<int> X, Y;
-    for(int i = 0; i < H; i++){
-        if(rows[i] == xmax) X.emplace_back(i);
-    }
-    for(int i = 0; i < W; i++){
-        if(cols[i] == ymax) Y.emplace_back(i);
-    }
+    for(int i = 0; i < H; i++) if(r[i] == mx) X.emplace_back(i);
+    for(int i = 0; i < W; i++) if(c[i] == my) Y.emplace_back(i);
 
-    // ここの調べる回数は高々M回
+    // 爆弾リスト
+    set<pair<int, int>> bomb;
+    for(int i = 0; i < M; i++) bomb.insert({h[i], w[i]});
+
+    // X, Y を全探索
     for(auto x: X){
         for(auto y: Y){
-            if(st.find({x, y}) == st.end()){
-                cout << xmax + ymax << endl;
+            if(!bomb.count({x, y})){
+                cout << mx + my << endl;
                 return 0;
             }
         }
     }
 
-    cout << xmax + ymax - 1 << endl;
+    cout << mx + my - 1 << endl;
 }
