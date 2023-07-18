@@ -10,33 +10,36 @@ using ll = long long;
 #endif
 
 int main(){
-	cin.tie(nullptr);
-	ios::sync_with_stdio(false);
-	cout << fixed << setprecision(20);
-	int N, M, Q;
-	cin >> N >> M >> Q;
-	vector<int> a(Q), b(Q), c(Q), d(Q);
-	for(int i = 0; i < Q; i++) cin >> a[i] >> b[i] >> c[i] >> d[i];
+    cin.tie(nullptr);
+    ios::sync_with_stdio(false);
+    cout << fixed << setprecision(20);
+    int N, M, Q;
+    cin >> N >> M >> Q;
+    vector<int> a(Q), b(Q), c(Q), d(Q);
+    for(int i = 0; i < Q; i++){
+        cin >> a[i] >> b[i] >> c[i] >> d[i], a[i]--, b[i]--;
+    }
 
-	int ans = 0;
-	vector<int> A;
-	auto dfs = [&](auto &&self, int pos, int last) -> void {
-		if(pos == N){
-			int val = 0;
-			for(int i = 0; i < Q; i++){
-				if(A[b[i] - 1] - A[a[i] - 1] == c[i]) val += d[i];
-			}
-			ans = max(ans, val);
-			return;
-		}
+    int ans = 0;
+    vector<int> A;
+    auto dfs = [&](auto&& self, int pos, int last) -> void {
+        if(pos == N){
+            int point = 0;
+            for(int i = 0; i < Q; i++){
+                if(A[b[i]] - A[a[i]] == c[i]) point += d[i];
+            }
 
-		for(int i = last; i <= M; i++){
-			A.push_back(i);
-			self(self, pos + 1, i);
-			A.pop_back();
-		}
-	};
+            ans = max(ans, point);
+            return;
+        }
 
-	dfs(dfs, 0, 1);
-	cout << ans << endl;
+        for(int i = last; i <= M; i++){
+            A.emplace_back(i);
+            self(self, pos + 1, i);
+            A.pop_back();
+        }
+    };
+
+    dfs(dfs, 0, 1);
+    cout << ans << endl;
 }
