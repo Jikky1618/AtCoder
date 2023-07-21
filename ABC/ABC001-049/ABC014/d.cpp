@@ -9,6 +9,7 @@ using ll = long long;
 #define debug(...) (static_cast<void>(0))
 #endif
 
+
 int main(){
     cin.tie(nullptr);
     ios::sync_with_stdio(false);
@@ -18,68 +19,73 @@ int main(){
     vector<vector<int>> G(N);
     for(int i = 0; i < N - 1; i++){
         int x, y; cin >> x >> y, x--, y--;
-        G[x].emplace_back(y), G[y].emplace_back(x);
+        G[x].emplace_back(y);
+        G[y].emplace_back(x);
     }
 
-    // LCA を求める
-    int L = 1;
-    while((1 << L) < N) L++;
-    vector parent(L, vector<int>(N, -1));
-
-    // 1. 根からの距離, 1つ上の親を求める
-    vector<int> dist(N, -1);
-    auto dfs = [&](auto&& self, int pos, int p = -1) -> void {
-        parent[0][pos] = p; // pos の 1 個上の親は p
+    vector<int> dist(N);
+    // ダブリング
+    // dp[k][i] := 頂点 i の 2^k 個上の親
+    int LOG =1;
+    while((1 << LOG) < N) LOG++;
+    vector dp(LOG, vector<int>(N, -1));
+    // 初期値は dfs で求める
+    auto dfs = [&](auto&& self, int pos, int parent) -> void {
+        dp[0][pos] = parent; // 2^0 個上の親
         for(auto np: G[pos]){
-            if(np == p) continue;
+            if(np == parent) continue;
             dist[np] = dist[pos] + 1;
             self(self, np, pos);
         }
     };
-    dfs(dfs, 0);
-    debug(dist);
 
-    // 2. 頂点 i の 2^L 個上の親を計算
-    // ダブリング
-    for(int i = 0; i + 1 < L; i++){
-        for(int v = 0; v < N; v++){
-            if(parent[i][v] == -1){
-                parent[i + 1][v] = parent[i][v];
+    dfs(dfs, 0, -1);
+    debug(dp[0]);
+    // 遷移
+    for(int k = 0; k < LOG - 1; k++){
+        for(int i = 0; i < N; i++){
+            if(dp[k][i] == -1){
+                dp[k + 1][i] = dp[k][i];
             }else{
-                parent[i + 1][v] = parent[i][parent[i][v]];
+                dp[k + 1][i] = dp[k][dp[k][i]];
             }
         }
     }
 
-    // 3. 二分探索から LCA を求める
-    auto query = [&](int u, int v) -> int {
-        if(dist[u] < dist[v]) swap(u, v); // u のほうが深い頂点とする
-        int K = parent.size();
-        // u を v と同じ距離にする
-        for(int i = 0; i < K; i++){
-            if((dist[u] - dist[v]) & (1 << i)){
-                u = parent[i][u];
-            }
-        }
+    debug(dp.size(), LOG);
 
-        if(u == v) return u;
-        for(int i = K - 1; i >= 0; i--){
-            // LCA の直前まで u, v を移動させる
-            if(parent[i][u] != parent[i][v]){
-                u = parent[i][u];
-                v = parent[i][v];
+    // level ancestor
+    auto LA = [&](int pos, int d) -> int {
+        for(int i = 0; i < LOG; i++){
+            if((d >> i) & 1){
+                pos = dp[i][pos];
             }
         }
-        // 1つ上の親が LCA の頂点
-        return parent[0][u];
+        return pos;
+    };
+
+    auto LCA = [&](int x, int y) -> int {
+        if(dist[x] < dist[y]) swap(x, y); // x の方が深い頂点とする
+        // x の高さを y と同じ高さにする
+        x = LA(x, dist[x] - dist[y]);
+        if(x == y) return x;
+        // LCA の直前をダブリングを用いて二分探索
+        for(int i = LOG - 1; i >= 0; i--){
+            if(dp[i][x] != dp[i][y]){
+                x = dp[i][x];
+                y = dp[i][y];
+            }   
+        }
+        return dp[0][x];
     };
 
     int Q;
     cin >> Q;
     while(Q--){
         int a, b; cin >> a >> b, a--, b--;
-        int lca = query(a, b);
-        int ans = dist[a] + dist[b] - 2 * dist[lca] + 1;
+        int L = LCA(a, b);
+        // a-b 間にパスを繋いだとき, サイクルの長さを求める
+        int ans = (dist[a] - dist[L]) + (dist[b] - dist[L]) + 1;
         cout << ans << '\n';
     }
 }
