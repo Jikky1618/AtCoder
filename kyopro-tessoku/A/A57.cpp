@@ -2,6 +2,15 @@
 using namespace std;
 using ll = long long;
 
+#ifdef LOCAL
+#include <debug_print.hpp>
+#define debug(...) debug_print::multi_print(#__VA_ARGS__, __VA_ARGS__)
+#else
+#define debug(...) (static_cast<void>(0))
+#endif
+
+const int LOG = 30;
+
 int main(){
     cin.tie(nullptr);
     ios::sync_with_stdio(false);
@@ -10,23 +19,28 @@ int main(){
     cin >> N >> Q;
     vector<int> A(N);
     for(int i = 0; i < N; i++) cin >> A[i], A[i]--;
-
-    // dp[i][j] := 穴jにいた2^i日後の場所
-    vector dp(30, vector<int>(N+1));
-    for(int i = 0; i < N; i++) dp[0][i] = A[i];
-    for(int d = 0; d < 29; d++){
+    
+    // ダブリング
+    // dp[k][i] := 穴 i にいたアリの 2^k 日後の場所
+    vector dp(LOG, vector<int>(N));
+    // 初期値
+    dp[0] = A;
+    // 遷移
+    for(int k = 0; k < LOG - 1; k++){
         for(int i = 0; i < N; i++){
-            dp[d+1][i] = dp[d][dp[d][i]];
+            dp[k + 1][i] = dp[k][dp[k][i]];
         }
     }
 
     while(Q--){
         int X, Y; cin >> X >> Y, X--;
-        int ans = X;
-        for(int d = 29; d >= 0; d--){
-            if((Y >> d) & 1) ans = dp[d][ans];
+        int pos = X;
+        for(int i = 0; i < LOG; i++){
+            if((Y >> i) & 1){
+                pos = dp[i][pos];
+            }
         }
 
-        cout << ans + 1 << "\n";
+        cout << pos + 1 << '\n';
     }
 }
