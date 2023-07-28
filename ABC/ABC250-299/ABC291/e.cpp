@@ -9,53 +9,73 @@ using ll = long long;
 #define debug(...) (static_cast<void>(0))
 #endif
 
-int main(){
+vector<int> topological_sort(const vector<vector<int>>& G) {
+    int N = G.size();
+    // 入次数を求める
+    vector<int> indegree(N);
+    for (int i = 0; i < N; i++) {
+        for (auto e : G[i]) indegree[e]++;
+    }
+
+    // 入次数 0 の頂点から取り除く
+    queue<int> que;
+    for (int i = 0; i < N; i++) {
+        if (indegree[i] == 0) que.emplace(i);
+    }
+
+    vector<int> order;
+    while (!que.empty()) {
+        // que の先頭の頂点を取り出す
+        int pos = que.front();
+        que.pop();
+
+        // 頂点 pos を order に追加
+        order.emplace_back(pos);
+        // pos と隣接している頂点の入次数を 1 下げる
+        for (auto e : G[pos]) {
+            indegree[e]--;
+            // 0 になれば, que に追加
+            if (indegree[e] == 0) que.emplace(e);
+        }
+    }
+
+    return ((int)order.size() == N ? order : vector<int>{});
+}
+
+int main() {
     cin.tie(nullptr);
     ios::sync_with_stdio(false);
     cout << fixed << setprecision(20);
     int N, M;
     cin >> N >> M;
-    vector<set<int>> G(N);
-    for(int i = 0; i < M; i++){
-        int X, Y; cin >> X >> Y, X--, Y--;
-        G[X].insert(Y);
+    vector<vector<int>> G(N);
+    for (int i = 0; i < M; i++) {
+        int X, Y;
+        cin >> X >> Y, X--, Y--;
+        G[X].emplace_back(Y);
     }
 
-    // トポロジカルソート
-    vector<int> seen(N), order;
-    auto dfs = [&](auto &&self, int pos) -> void {
-        seen[pos] = 1;
-
-        for(auto np: G[pos]){
-            if(seen[np]) continue;
-            self(self, np);
-        }
-        order.push_back(pos);
-    };
-
+    vector<set<int>> G2(N);
     for(int i = 0; i < N; i++){
-        if(seen[i]) continue;
-        dfs(dfs, i);
+        for(auto e: G[i]){
+            G2[i].insert(e);
+        }
     }
-    reverse(order.begin(), order.end());
 
-    bool flag = false;
+    auto order = topological_sort(G);
+
+    bool flag = true;
+    // トポソ順にしたとき, 隣同士の要素に辺があれば一意に定まる
     for(int i = 0; i < N - 1; i++){
-        // トポソした隣同士の要素に辺があるか判定
-        if(G[order[i]].count(order[i + 1]) == 0) flag = true;
+        if(!G2[order[i]].count(order[i + 1])) flag = false;
     }
 
     if(flag){
-        cout << "No" << endl;
-        return 0;
-    }else{
         cout << "Yes" << endl;
-    }
-
-    vector<int> ans(N);
-    for(int i = 0; i < N; i++) ans[order[i]] = i + 1;
-
-    for(int i = 0; i < N; i++){
-        cout << ans[i] << " \n"[i == N - 1];
+        vector<int> ans(N);
+        for(int i = 0; i < N; i++) ans[order[i]] = i + 1;
+        for(int i = 0; i < N; i++) cout << ans[i] << " \n"[i == N - 1];
+    }else{
+        cout << "No" << endl;
     }
 }
