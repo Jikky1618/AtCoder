@@ -10,15 +10,13 @@ using ll = long long;
 #define debug(...) (static_cast<void>(0))
 #endif
 
-vector<pair<char, int>> run_length_encodeing(const string& s){
+vector<pair<char, int>> run_length_encodeing(const string& S) {
     vector<pair<char, int>> res;
-    int n = s.size(), cnt = 1;
-    for(int i = 0; i < n; i++){
-        if(i == n - 1 || s[i] != s[i + 1]){
-            res.emplace_back(s[i], cnt);
-            cnt = 1;
-        }else{
-            cnt++;
+    for (auto c : S) {
+        if (!res.empty() && c == res.back().first) {
+            res.back().second++;
+        } else {
+            res.emplace_back(c, 1);
         }
     }
     return res;
@@ -42,7 +40,7 @@ int main(){
     for(unsigned i = 0; i < S2.size(); i++){
         // 文字が異なる時点で一致できない
         if(S2[i].first != T2[i].first) flag = false;
-        // 文字数が異なり, S > T または, S が1文字なら一致できない
+        // 文字数が異なり, S > T または, S が 1 文字なら一致できない
         if(S2[i].second != T2[i].second && (S2[i].second == 1 || S2[i].second > T2[i].second)) flag = false;
     }
 
