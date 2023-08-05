@@ -17,17 +17,19 @@ int main(){
     string S;
     cin >> N >> S;
 
-    int Red = 0;
-    for(int i = 0; i < N; i++){
-        if(S[i] == 'R') Red++;
-    }
+    // w := 境目より左側にある W の個数
+    // r := 境目より右側にある R の降雨
+    int w = 0, r = 0;
+    // 最初の境目は左端
+    for(auto c: S) if(c == 'R') r++;
 
-    // L := i番目よりも左側の白の数, R := i番目よりも右側の赤の数
-    int L = 0, R = Red, ans = max(L, R);
-    for(int i = 0; i < N; i++){
-        if(S[i] == 'W') L++;
-        if(S[i] == 'R') R--;
-        ans = min(ans, max(L, R));
+    int ans = max(w, r);
+    // 境目の全探索
+    for(auto c: S){
+        // 境目を移動
+        if(c == 'W') w++;
+        if(c == 'R') r--;
+        ans = min(ans, max(w, r));
     }
 
     cout << ans << endl;
