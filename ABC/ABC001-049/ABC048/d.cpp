@@ -15,5 +15,6 @@ int main(){
     cout << fixed << setprecision(20);
     string S;
     cin >> S;
+    // 消せる文字の偶数奇数を見る
     cout << ((S.size() % 2 == 0) ^ (S.front() == S.back()) ? "Second" : "FIrst") << endl;
 }
