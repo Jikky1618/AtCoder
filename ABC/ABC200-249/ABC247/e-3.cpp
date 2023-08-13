@@ -17,20 +17,14 @@ int main(){
     cin >> N >> X >> Y;
     vector<int> A(N);
     for(int i = 0; i < N; i++) cin >> A[i];
-    
-    // 累積 Max, 累積 Min
-    vector<int> M(N + 1), m(N + 1, 1e9);
-    for(int i = 0; i < N; i++) M[i + 1] = max(M[i], A[i]);
-    for(int i = 0; i < N; i++) m[i + 1] = min(m[i], A[i]);
-    debug(M, m);
 
     ll ans = 0;
-    int posX = -1, posY = -1, B = -1;
+    int px = -1, py = -1, pz = -1;
     for(int i = 0; i < N; i++){
-        if(A[i] == X) posX = i;
-        if(A[i] == Y) posY = i;
-        if(A[i] < Y || X < A[i]) B = i;
-        ans += max(min(posX, posY) - B, 0);
+        if(A[i] == X) px = i;
+        if(A[i] == Y) py = i;
+        if(A[i] < Y || X < A[i]) pz = i;
+        ans += max(0, min(px, py) - pz);
     }
 
     cout << ans << endl;
