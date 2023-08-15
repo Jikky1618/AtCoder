@@ -61,44 +61,68 @@ struct UnionFind {
     }
 };
 
+// 重み付き無向グラフの最小全域木の長さを求める
+ll kruskal(const vector<vector<pair<int, int>>> &G){
+    int n = G.size();
+    // {cost, from, to}のグラフを作成
+    vector<tuple<ll, int, int>> edges;
+    for(int from = 0; from < n; from++){
+        for(auto [to, cost]: G[from]){
+            edges.emplace_back(cost, from, to);
+        }
+    }
+    sort(edges.begin(), edges.end());
+
+    ll res = 0;
+    UnionFind uf(n);
+    for(auto [cost, from, to]: edges){
+        if(!uf.same(from, to)){
+            uf.merge(from, to);
+            res += cost;
+        }
+    }
+
+    return res;
+}
+
 int main(){
     cin.tie(nullptr);
     ios::sync_with_stdio(false);
     cout << fixed << setprecision(20);
     int N;
     cin >> N;
-    vector<pair<int, int>> X(N), Y(N);
+    vector<int> X(N), Y(N);
+    for(int i = 0; i < N; i++) cin >> X[i] >> Y[i];
+
+    vector<pair<int, int>> X2(N), Y2(N);
     for(int i = 0; i < N; i++){
-        int x, y; cin >> x >> y;
-        X[i] = {x, i}, Y[i] = {y, i};
+        X2[i] = {X[i], i};
+        Y2[i] = {Y[i], i};
     }
 
-    // グラフを構築する
-    vector<tuple<int, int, int>> G;
-
-    // Xでソート -> 隣同士の要素の辺を追加
-    sort(X.begin(), X.end());
+    // 最小全域木を求める問題
+    // 普通に辺を貼ると O(N^2) 個
+    // x の隣同士, y の隣同士の頂点で貼ると O(N) 個になる
+    vector<vector<pair<int, int>>> G(N);
+    
+    // x をソート -> x の隣同士で辺を貼る
+    sort(X2.begin(), X2.end());
     for(int i = 0; i < N - 1; i++){
-        int cost = abs(X[i].first - X[i + 1].first);
-        G.emplace_back(cost, X[i].second, X[i + 1].second);
+        int id1 = X2[i].second, id2 = X2[i + 1].second;
+        int dist = min(abs(X[id1] - X[id2]), abs(Y[id1] - Y[id2]));
+        G[id1].emplace_back(id2, dist);
+        G[id2].emplace_back(id1, dist);
     }
-    // Yでソート -> 隣同士の要素の辺を追加
-    sort(Y.begin(), Y.end());
+
+    // y をソート -> y の隣同士で辺を貼る
+    sort(Y2.begin(), Y2.end());
     for(int i = 0; i < N - 1; i++){
-        int cost = abs(Y[i].first - Y[i + 1].first);
-        G.emplace_back(cost, Y[i].second, Y[i + 1].second);
+        int id1 = Y2[i].second, id2 = Y2[i + 1].second;
+        int dist = min(abs(X[id1] - X[id2]), abs(Y[id1] - Y[id2]));
+        G[id1].emplace_back(id2, dist);
+        G[id2].emplace_back(id1, dist);
     }
 
-    // クラスカル法
-    sort(G.begin(), G.end());
-    ll ans = 0;
-    UnionFind uf(N);
-    for(auto [cost, from, to]: G){
-        if(!uf.same(from, to)){
-            uf.merge(from, to);
-            ans += cost;
-        }
-    }
-
+    ll ans = kruskal(G);
     cout << ans << endl;
 }
