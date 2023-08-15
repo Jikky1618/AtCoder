@@ -24,12 +24,12 @@ vector<vector<T>> rotate(const vector<vector<T>>& V) {
 
 // H 行 W 列の V を bg 以外を全て含む最小矩形でトリミングしたものを返す
 template <class T>
-vector<vector<T>> trim(const vector<vector<T>>& V, char bg = '.'){
+vector<vector<T>> trim(const vector<vector<T>>& V, char bg = '.') {
     int H = V.size(), W = V.front().size();
     int minH = H, minW = W, maxH = -1, maxW = -1;
-    for(int i = 0; i < H; i++){
-        for(int j = 0; j < W; j++){
-            if(V[i][j] == bg) continue;
+    for (int i = 0; i < H; i++) {
+        for (int j = 0; j < W; j++) {
+            if (V[i][j] == bg) continue;
             minH = min(minH, i);
             maxH = max(maxH, i);
             minW = min(minW, j);
@@ -38,10 +38,11 @@ vector<vector<T>> trim(const vector<vector<T>>& V, char bg = '.'){
     }
 
     // bg 以外の要素がなければ空の配列を返す
-    if(minH == H) return vector<vector<T>>();
+    if (minH == H) return vector<vector<T>>();
     vector res(maxH - minH + 1, vector<T>(maxW - minW + 1));
-    for(int i = 0; i < maxH - minH + 1; i++){
-        for(int j = 0; j < maxW - minW + 1; j++) res[i][j] = V[i + minH][j + minW];
+    for (int i = 0; i < maxH - minH + 1; i++) {
+        for (int j = 0; j < maxW - minW + 1; j++)
+            res[i][j] = V[i + minH][j + minW];
     }
     return res;
 }
@@ -62,9 +63,9 @@ int main() {
 
     S = trim(S), T = trim(T);
     bool same = false;
-    for(int i = 0; i < 4; i++){
+    for (int i = 0; i < 4; i++) {
         S = rotate(S);
-        if(S == T) same = true;
+        if (S == T) same = true;
     }
 
     cout << (same ? "Yes" : "No") << endl;
