@@ -10,7 +10,7 @@ using ll = long long;
 #endif
 
 template <class T>
-class PresidentStack {
+class PersistentStack {
     struct Node {
         T val = -1;
         int size = 0;
@@ -22,9 +22,9 @@ class PresidentStack {
     int N;
     vector<Node> stk;
 
-   public:
+public:
     // 空の永続スタックで初期化
-    PresidentStack() : N(1), stk(1) {}
+    PersistentStack() : N(1), stk(1) {}
 
     // t 番目のスタックのサイズの大きさを返す
     int size(int t) {
@@ -34,23 +34,22 @@ class PresidentStack {
     int size() { return size(N - 1); }
 
     // t 番目のスタックが空かどうかを返す
-    int empty(int t) {
+    bool empty(int t) {
         assert(0 <= t && t < N);
         return t == 0;
     }
-    int empty() { return empty(N - 1); }
+    bool empty() { return empty(N - 1); }
 
     // t 番目のスタックの先頭要素を返す
-    int top(int t) {
+    T top(int t) {
         assert(0 <= t && t < N);
-        assert(!empty()); // called PresidentStack::top on an empty stack
+        assert(!empty()); // called PersistentStack::top on an empty stack
         debug(stk[t].val, stk[t].size, stk[t].prev);
         return stk[t].val;
     }
-    int top() { return top(N - 1); }
+    T top() { return top(N - 1); }
 
-    // t 番目のスタックに対し、x
-    // を先頭に追加したスタックを最新のスタックとして記録し、スタック番号を返す
+    // t 番目のスタックに対し、x を先頭に追加したスタックを最新のスタックとして記録し、スタック番号を返す
     int push(T x, int t) {
         assert(0 <= t && t < N);
         stk.emplace_back(Node(x, stk[t].size + 1, t));
@@ -61,7 +60,7 @@ class PresidentStack {
     // t 番目のスタックに対し先頭要素を追加する前のスタック番号を返す
     int pop(int t) {
         assert(0 <= t && t < N);
-        assert(!empty()); // called PresidentStack::top on an empty stack
+        assert(!empty()); // called PersistentStack::top on an empty stack
         return stk[t].prev;
     }
     int pop() { return pop(N - 1); }
@@ -74,7 +73,7 @@ int main() {
     int Q;
     cin >> Q;
     map<int, int> mp;
-    PresidentStack<int> stk;
+    PersistentStack<int> stk;
     int id = 0;
 
     while (Q--) {
