@@ -2,31 +2,58 @@
 using namespace std;
 using ll = long long;
 
-string dec_to_n(ll num, ll n){
-    if(num == 0) return "0";
-    string ans;
-    while(num > 0){
-        char c = ((num % n) + '0');
-        ans = c + ans;
-        num /= n;
+#ifdef LOCAL
+#include <debug_print.hpp>
+#define debug(...) debug_print::multi_print(#__VA_ARGS__, __VA_ARGS__)
+#else
+#define debug(...) (static_cast<void>(0))
+#endif
+
+// num を r 進数表記したときの桁の配列を返す
+vector<int> digits_convert(ll num, int r = 10) {
+    vector<int> res;
+    // corner case: num = 0
+    if (num == 0) {
+        res.emplace_back(0);
+        return res;
     }
-    return ans;
+    // mod |r| を取れば最下位桁順に決定していく
+    while (num != 0) {
+        int d = (num % abs(r)) + (num < 0 ? abs(r) : 0);
+        res.emplace_back(d);
+        num = (num - d) / r;
+    }
+    reverse(res.begin(), res.end());
+    return res;
 }
 
-int main(){
+// r 進表記で上位桁から順に digits が並んだ数の値を返す．
+ll integer_convert(vector<int>& digits, int r = 10) {
+    int N = int(digits.size());
+
+    ll res = 0, base = 1;
+    for (int i = N - 1; i >= 0; i--) {
+        res += digits[i] * base;
+        base *= r;
+    }
+    return res;
+}
+
+int main() {
     cin.tie(nullptr);
     ios::sync_with_stdio(false);
-    ll k;
-    cin >> k;
-
-    string bit = dec_to_n(k, 2);
-
-    string ans;
-    for(int i = 0; i < bit.size(); i++){
-        if(bit[i] & 1) ans += "2";
-        else ans += "0";
+    cout << fixed << setprecision(20);
+    ll K;
+    cin >> K;
+    auto d = digits_convert(K, 2);
+    string ans = "";
+    for(auto e: d){
+        if(e == 0){
+            ans += "0";
+        }else{
+            ans += "2";
+        }
     }
 
     cout << ans << endl;
-    return 0;
 }
