@@ -2,19 +2,24 @@
 using namespace std;
 using ll = long long;
 
+#ifdef LOCAL
+#include <debug_print.hpp>
+#define debug(...) debug_print::multi_print(#__VA_ARGS__, __VA_ARGS__)
+#else
+#define debug(...) (static_cast<void>(0))
+#endif
+
 int main(){
     cin.tie(nullptr);
     ios::sync_with_stdio(false);
-    int n,k;
-    cin >> n >> k;
-    vector<int> h(n);
-    for(int i = 0;i < n; i++) cin >> h[i];
+    cout << fixed << setprecision(20);
+    int N, K;
+    cin >> N >> K;
+    vector<int> h(N);
+    for(int i = 0; i < N; i++) cin >> h[i];
 
     int ans = 0;
-    for(int i = 0;i < n; i++){
-        if(k <= h[i]) ans++;
-    }
+    for(int i = 0; i < N; i++) if(h[i] >= K) ans++;
 
     cout << ans << endl;
-    return 0;
 }
