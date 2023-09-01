@@ -27,14 +27,17 @@ int main(){
         }
     }
 
+    // 現在残っている行と列の数
     int nH = H, nW = W;
+    // 行と列をすでに消しているかを管理
     vector<int> fx(H), fy(W);
-    for(int _ = 0; _ <= 4000; _++){
-        vector<pair<int, char>> dx, dy; // 消す予定の行と列
+    while(1){
+        vector<pair<int, char>> dx, dy; // 印を付ける行と列
         // 各行を見る
         for(int i = 0; i < H; i++){
-            // i 行目が全て同じかを確認する
+            // すでに消している行は continue
             if(fx[i]) continue;
+            // i 行目が全て同じかを確認する
             for(char c = 'a'; c <= 'z'; c++){
                 if(X[i][c - 'a'] == nW && nW >= 2){
                     // i 行目に印をつける
@@ -44,25 +47,34 @@ int main(){
         }
         // 各列を見る
         for(int j = 0; j < W; j++){
+            // すでに消している列は continue
+            if(fy[j]) continue;
             for(char c = 'a'; c <= 'z'; c++){
                 // i 列目が全て同じかを確認する
-                if(fy[j]) continue;
                 if(Y[j][c - 'a'] == nH && nH >= 2){
                     // j 列目に印をつける
                     dy.emplace_back(j, c);
                 }
             }
         }
+
+        // 印を付ける行と列がなければ終了
+        if(dx.empty() && dy.empty()) break;
+
+        // 印を付けた行を全て消す
         for(auto [x, c]: dx){
             fx[x] = true;
+            // 全ての列の c の個数を 1 減らす
             for(int y = 0; y < W; y++){
                 Y[y][c - 'a']--;
                 C[x][y] = '.';
             }
             nH--;
         }
+        // 印を付けた列を全て消す
         for(auto [y, c]: dy){
             fy[y] = true;
+            // 全ての行の c の個数を 1 減らす
             for(int x = 0; x < H; x++){
                 X[x][c - 'a']--;
                 C[x][y] = '.';
@@ -78,5 +90,5 @@ int main(){
         }
     }
 
-    cout << ans << endl;
+    cout << ans << '\n';
 }
