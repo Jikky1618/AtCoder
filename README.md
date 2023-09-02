@@ -9,7 +9,6 @@ AtCoderの問題をC++で解く、個人精進用プロジェクトです。全�
 |**[ABC](#abc)**|ABCの問題|
 |**[ARC](#arc)**|ARCの問題|
 |**[AGC](#agc)**|AGCの問題|
-|**[JOI](#joi)**|JOIの問題|
 |**[kyopro-tessoku](#kyopro-tessoku)**|「競技プログラミングの鉄則」の演習問題|
 |**[kyopro90](#kyopro90)**|「競プロ典型 90 問」の問題|
 |**[other-contest](#other)**|その他のコンテスト|
@@ -45,16 +44,6 @@ AtCoderの問題をC++で解く、個人精進用プロジェクトです。全�
 - [AGC001-049](https://github.com/Jikky1618/AtCoder/tree/main/AGC/AGC001-049)
 - [AGC050-099](https://github.com/Jikky1618/AtCoder/tree/main/AGC/AGC050-099)
 - [AGC-Like](https://github.com/Jikky1618/AtCoder/tree/main/AGC/AGC-like)
-
-
-<a name="joi"></a>
-
-## JOI
-- [JOI 2022/2023](https://github.com/Jikky1618/AtCoder/tree/main/JOI/2023)
-- [JOI 2021/2022](https://github.com/Jikky1618/AtCoder/tree/main/JOI/2022)
-- [JOI 2020/2021](https://github.com/Jikky1618/AtCoder/tree/main/JOI/2021)
-- JOI 2019/2020
-- JOI 2018/2019
 
 
 <a name="kyopro-tessoku"></a>
