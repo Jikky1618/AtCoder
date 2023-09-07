@@ -22,20 +22,25 @@ int main(){
         G[b].emplace_back(a);
     }
 
-    vector<int> ans(N);
+    // dp[i] := 頂点 i のカウンターの数
+    vector<int> dp(N); 
     while(Q--){
         int p, x; cin >> p >> x, p--;
-        ans[p] += x;
+        dp[p] += x;
     }
 
-    auto dfs = [&](auto &&self, int pos, int par) -> void {
+    // 根から順に dp を遷移
+    auto dfs = [&](auto&& self, int pos, int par) -> void {
         for(auto np: G[pos]){
             if(np == par) continue;
-            ans[np] += ans[pos]; // imos法
+            // pos の子に遷移
+            dp[np] += dp[pos];
             self(self, np, pos);
         }
     };
     dfs(dfs, 0, -1);
-    
-    for(int i = 0; i < N; i++) cout << ans[i] << " \n"[i == N - 1];
+
+    for(int i = 0; i < N; i++){
+        cout << dp[i] << " \n"[i == N - 1];
+    }
 }
