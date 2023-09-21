@@ -1,33 +1,44 @@
 #include <bits/stdc++.h>
 using namespace std;
 using ll = long long;
-const ll LINF = 1LL << 60;
+const ll INF = 1LL << 60;
+
+#ifdef LOCAL
+#include <debug_print.hpp>
+#define debug(...) debug_print::multi_print(#__VA_ARGS__, __VA_ARGS__)
+#else
+#define debug(...) (static_cast<void>(0))
+#endif
 
 int main(){
     cin.tie(nullptr);
     ios::sync_with_stdio(false);
     cout << fixed << setprecision(20);
-    int N,W;
+    int N, W;
     cin >> N >> W;
-    vector<int> w(N), v(N);
+    vector<ll> w(N), v(N);
     for(int i = 0; i < N; i++) cin >> w[i] >> v[i];
 
-    // dp[i][j] := i番目までの品物の中から価値がj以上になる重さの最小値
-    // j_max = 100 * 10^3
-    vector<vector<ll>> dp(N+1, vector<ll>(100100, LINF));
+    // M := 価値の上限
+    int M = N * 1000;
+    // dp[i][j] := i 番目以前まで選んだとき, 価値が j になる重さの最小値
+    vector dp(N + 1, vector<ll>(M + 1, INF));
     dp[0][0] = 0;
+    
     for(int i = 0; i < N; i++){
-        for(int j = 0; j <= 100000; j++){
-            if(0 <= j-v[i]) dp[i+1][j] = min(dp[i][j], dp[i][j-v[i]]+w[i]);
-            else dp[i+1][j] = dp[i][j];
+        for(int j = 0; j <= M; j++){
+            // i 番目を選ぶとき
+            if(j + v[i] <= M) dp[i + 1][j + v[i]] = min(dp[i + 1][j + v[i]], dp[i][j] + w[i]);
+            // i 番目を選ばないとき
+            dp[i + 1][j] = min(dp[i + 1][j], dp[i][j]);
         }
     }
 
-    int ans = 0;
-    for(int j = 0; j <= 100000; j++){
-        if(dp[N][j] <= W) ans = max(ans, j);
+    ll ans = 0;
+    // 重さが W 以下を達成できるなら価値 i を達成できる
+    for(int i = 0; i <= M; i++){
+        if(dp[N][i] <= W) ans = i;
     }
 
     cout << ans << endl;
-    return 0;
 }

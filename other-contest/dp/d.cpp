@@ -1,26 +1,37 @@
 #include <bits/stdc++.h>
 using namespace std;
 using ll = long long;
+const ll INF = 1LL << 60;
 
+#ifdef LOCAL
+#include <debug_print.hpp>
+#define debug(...) debug_print::multi_print(#__VA_ARGS__, __VA_ARGS__)
+#else
+#define debug(...) (static_cast<void>(0))
+#endif
 
 int main(){
     cin.tie(nullptr);
     ios::sync_with_stdio(false);
     cout << fixed << setprecision(20);
-    int N,W;
+    int N, W;
     cin >> N >> W;
-    vector<int> w(N), v(N);
+    vector<ll> w(N), v(N);
     for(int i = 0; i < N; i++) cin >> w[i] >> v[i];
+    
+    // dp[i][j] := i 番目以前まで選んだとき, 重さの総和が j のときの価値の最大値
+    vector dp(N + 1, vector<ll>(W + 1, -INF));
+    dp[0][0] = 0;
 
-    // dp[i][j] := i番目までの品物の中から重さjを超えないように選んだときの価値の最大値
-    vector<vector<ll>> dp(N+1,vector<ll>(W+1));
     for(int i = 0; i < N; i++){
         for(int j = 0; j <= W; j++){
-            if(0 <= j-w[i]) dp[i+1][j] = max(dp[i][j], dp[i][j-w[i]]+v[i]);
-            else dp[i+1][j] = dp[i][j];
+            // i 番目を選ぶとき
+            if(j + w[i] <= W) dp[i + 1][j + w[i]] = max(dp[i + 1][j + w[i]], dp[i][j] + v[i]);
+            // i 番目を選ばないとき
+            dp[i + 1][j] = max(dp[i + 1][j], dp[i][j]);
         }
     }
 
-    cout << dp[N][W] << endl;
-    return 0;
+    ll ans = *max_element(dp[N].begin(), dp[N].end());
+    cout << ans << endl;
 }
