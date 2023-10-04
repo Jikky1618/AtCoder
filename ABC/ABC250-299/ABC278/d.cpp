@@ -2,34 +2,42 @@
 using namespace std;
 using ll = long long;
 
+#ifdef LOCAL
+#include <debug_print.hpp>
+#define debug(...) debug_print::multi_print(#__VA_ARGS__, __VA_ARGS__)
+#else
+#define debug(...) (static_cast<void>(0))
+#endif
+
 int main(){
     cin.tie(nullptr);
     ios::sync_with_stdio(false);
     cout << fixed << setprecision(20);
-    int n,q;
-    cin >> n;
-    vector<ll> a(n);
-    for(int i = 0; i < n; i++) cin >> a[i];
-    cin >> q;
+    int N;
+    cin >> N;
+    vector<int> A(N);
+    for(int i = 0; i < N; i++) cin >> A[i];
+    int Q;
+    cin >> Q;
 
     ll base = 0;
     map<int, ll> mp;
-    for(int i = 0; i < n; i++) mp[i] = a[i];
+    for(int i = 0; i < N; i++) mp[i] = A[i];
 
-    for(int _ = 0; _ < q; _++){
-        int type; cin >> type;
-        if(type == 1){
-            int x; cin >> x; base = x;
+    while(Q--){
+        int t; cin >> t;
+        if(t == 1){
+            int x; cin >> x;
+            base = x;
             mp.clear();
         }
-        if(type == 2){
-            int i, x; cin >> i >> x;
-            mp[i-1] += x;
+        if(t == 2){
+            int i, x; cin >> i >> x, i--;
+            mp[i] += x;
         }
-        if(type == 3){
-            int i; cin >> i;
-            cout << mp[i-1] + base << endl;
+        if(t == 3){
+            int i; cin >> i, i--;
+            cout << mp[i] + base << '\n';
         }
     }
-    return 0;
 }
