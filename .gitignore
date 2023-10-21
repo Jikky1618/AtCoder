@@ -16,3 +16,4 @@ out.txt
 *.exe
 *.out
 *.app
+*.o
