@@ -18,36 +18,33 @@ int main(){
     vector<vector<int>> G(N);
     for(int i = 0; i < M; i++){
         int a, b; cin >> a >> b, a--, b--;
-        G[a].push_back(b);
-        G[b].push_back(a);
+        G[a].emplace_back(b);
+        G[b].emplace_back(a);
     }
-    int Q;
-    cin >> Q;
 
+    int Q; cin >> Q;
     while(Q--){
         int x, k; cin >> x >> k, x--;
-
-        // 枝刈りBFSをしてみる
-        map<int, int> dist;
+        // map で距離を管理
+        unordered_map<int, int> dist;
         queue<int> que;
-
         dist[x] = 0;
         que.emplace(x);
-
-        ll ans = 0;
         while(!que.empty()){
             int pos = que.front(); que.pop();
-            ans += (pos + 1);
-            
-            if(dist[pos] == k) continue;
-
-            for(auto np: G[pos]){
+            for(auto&& np : G[pos]){
+                // 既に訪問済みなら continue
                 if(dist.count(np)) continue;
+                // 距離が k を超えていたら枝刈り
+                if(dist[pos] + 1 > k) continue;
                 dist[np] = dist[pos] + 1;
                 que.emplace(np);
             }
         }
 
-        cout << ans << "\n";
+        int ans = 0;
+        // 訪れた頂点集合の番号の総和を取る
+        for(auto [key, val]: dist) ans += key + 1;
+        cout << ans << '\n';
     }
 }
