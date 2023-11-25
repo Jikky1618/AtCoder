@@ -9,9 +9,14 @@ using ll = long long;
 #define debug(...) (static_cast<void>(0))
 #endif
 
-template<class T, class U>
-T ceil(T x, U y){
-    return (x ? (x + y - 1) / y : x / y);
+template <class T, class U>
+T ceil(T x, U y) {
+    return (x > 0 ? (x + y - 1) / y : x / y);
+}
+
+template <class T, class U>
+T floor(T x, U y) {
+    return (x > 0 ? x / y : (x - y + 1) / y);
 }
 
 int main(){
@@ -23,25 +28,22 @@ int main(){
     vector<int> A(N);
     for(int i = 0; i < N; i++) cin >> A[i];
 
-    // x回目の操作後の数列にどの数があるか(数は0以上, N以下で十分)
-    vector<set<int>> st(M + 1);
+    // st[i] := i 回目の操作で Mex に関係のある数の集合
+    vector<unordered_set<int>> st(M + 1);
     for(int i = 0; i < N; i++){
-        // cnt := 何回目の操作でA[i]が0以上になるか
-        int cnt = max(0, ceil(-A[i], (i + 1)));
-        for(int j = cnt; j <= M; j++){
-            int val = A[i] + (i + 1) * j;
-            if(val > N) break;
-            st[j].insert(val);
+        if(A[i] + (i + 1) >= N) continue;
+        int left = max(1, ceil(-A[i], i + 1));
+        int right = min(M + 1, ceil(N - A[i], i + 1));
+        // [left, right) までシミュレーション
+        for(int j = left; j < right; j++){
+            st[j].insert(A[i] + (i + 1) * j);
         }
     }
 
-    // 1回目からM回目までのMexを求める
+    debug(st);
     for(int i = 1; i <= M; i++){
-        for(int j = 0; j <= N; j++){
-            if(!st[i].count(j)){
-                cout << j << "\n";
-                break;
-            }
-        }
+        int mex = 0;
+        while(st[i].count(mex)) mex++;
+        cout << mex << '\n';
     }
 }
