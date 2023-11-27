@@ -1,34 +1,49 @@
 #include <bits/stdc++.h>
 using namespace std;
 using ll = long long;
-const int INF = (1 << 30) - 1;
+
+#ifdef LOCAL
+#include <debug_print.hpp>
+#define debug(...) debug_print::multi_print(#__VA_ARGS__, __VA_ARGS__)
+#else
+#define debug(...) (static_cast<void>(0))
+#endif
 
 int main(){
     cin.tie(nullptr);
     ios::sync_with_stdio(false);
     cout << fixed << setprecision(20);
-    int n;
-    cin >> n;
-    // dp[i] := i円引き出すのにかかる最低操作回数
-    vector<int> dp(n+1, INF);
+    int N;
+    cin >> N;
+
+    // dp[i] := i 円引き出す為の最小手数
+    vector<int> dp(N + 1, -1);
+    queue<int> que;
     dp[0] = 0;
-    for(int i = 0; i < n; i++){
-        // 1円
-        dp[i+1] = min(dp[i+1], dp[i]+1);
-        // 6^x円
-        int x = 6;
-        while(i+x <= n){
-            dp[i+x] = min(dp[i+x], dp[i]+1);
-            x *= 6;
+    que.emplace(0);
+    while(!que.empty()){
+        int now = que.front();
+        que.pop();
+        // 1 円引き出す
+        if(now + 1 <= N && dp[now + 1] == -1){
+            dp[now + 1] = dp[now] + 1;
+            que.emplace(now + 1);
         }
-        // 9^x円
-        x = 9;
-        while(i+x <= n){
-            dp[i+x] = min(dp[i+x], dp[i]+1);
-            x *= 9;
+        // 6^n 円引き出す
+        for(int nx = 6; now + nx <= N; nx *= 6){;
+            if(dp[now + nx] == -1){
+                dp[now + nx] = dp[now] + 1;
+                que.emplace(now + nx);
+            }
+        }
+        // 9^n 円引き出す
+        for(int nx = 9; now + nx <= N; nx *= 9){
+            if(dp[now + nx] == -1){
+                dp[now + nx] = dp[now] + 1;
+                que.emplace(now + nx);
+            }
         }
     }
 
-    cout << dp[n] << endl;
-    return 0;
+    cout << dp[N] << endl;
 }
