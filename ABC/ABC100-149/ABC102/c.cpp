@@ -1,6 +1,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 using ll = long long;
+
 #ifdef LOCAL
 #include <debug_print.hpp>
 #define debug(...) debug_print::multi_print(#__VA_ARGS__, __VA_ARGS__)
@@ -15,21 +16,15 @@ int main(){
     int N;
     cin >> N;
     vector<int> A(N);
-    for(int i = 0; i < N; i++) cin >> A[i], A[i] -= (i + 1);
+    for(int i = 0; i < N; i++) cin >> A[i], A[i] -= i + 1;
 
-    // マンハッタン距離の差の総和を最小 -> 中央値
+    // |A_i - i - b| の総和を最小化
     sort(A.begin(), A.end());
-    int b = 0;
-    if(N % 2 == 0){
-        b = (A[N / 2 - 1] + A[N / 2]) / 2;
-    }else{
-        b = A[N / 2];
-    }
 
+    // 絶対値最小は中央値
+    int b = A[N / 2];
     ll ans = 0;
-    for(int i = 0; i < N; i++){
-        ans += abs(A[i] - b);
-    }
+    for(int i = 0; i < N; i++) ans += abs(A[i] - b);
 
     cout << ans << endl;
 }
