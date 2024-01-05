@@ -18,27 +18,35 @@ int main(){
     string S, T;
     cin >> S >> T;
 
-    // S の連続部分列で T を構築できる pos を que に入れる
+    queue<int> que;
+    vector<int> seen(N);
+
     auto check = [&](int pos) -> bool {
-        bool flag = true, other = false;
+        bool flag = false; // # 以外の文字があるか
         for(int i = 0; i < M; i++){
-            if(S[pos + i] != '#') other = true;
-            if(S[pos + i] != T[i] && S[pos + i] != '#') flag = false;
+            if(S[pos + i] == T[i]) flag = true;
+            if(S[pos + i] != T[i] && S[pos + i] != '#') return false;
         }
-        return flag && other;
+        return flag;
     };
 
-    queue<int> que;
-    for(int i = 0; i < N - M + 1; i++) if(check(i)) que.emplace(i);
+    for(int i = 0; i + M <= N; i++){
+        if(check(i)) que.emplace(i), seen[i] = true;
+    }
 
     while(!que.empty()){
-        int p = que.front(); que.pop();
-        for(int i = 0; i < M; i++) S[p + i] = '#';
-        // 前後 m 要素を見て, # + S の連続部分列で T を構築できる pos を que に入れる
-        for(int i = max(0, p - M + 1); i < min(N - M + 1, p + M + 1); i++){
-            if(check(i)) que.emplace(i);
+        int pos = que.front();
+        que.pop();
+        for(int i = 0; i < M; i++){
+            S[pos + i] = '#';
+        }
+        for(int i = pos - M + 1; i <= pos + M - 1; i++){
+            if(i < 0 || i + M > N) continue;
+            if(seen[i]) continue;
+            if(check(i)) que.emplace(i), seen[i] = true;
         }
     }
 
+    debug(S);
     cout << (S == string(N, '#') ? "Yes" : "No") << endl;
 }
