@@ -15,27 +15,35 @@ int main(){
     cout << fixed << setprecision(20);
     int N;
     cin >> N;
-    vector<pair<int, int>> R(N), B(N);
-    for(int i = 0; i < N; i++) cin >> R[i].first >> R[i].second;
+    vector<pair<int, int>> A(N), B(N);
+    for(int i = 0; i < N; i++) cin >> A[i].first >> A[i].second;
     for(int i = 0; i < N; i++) cin >> B[i].first >> B[i].second;
 
-    sort(B.begin(), B.end()); // 青をxの昇順にソート
-    sort(R.begin(), R.end(),[&](auto &a, auto &b){
-        return a.second > b.second;
-    }); // 赤をyの降順にソート
+    // 平面走査
+    vector<tuple<int, int, int>> P;
+    for(int i = 0; i < N; i++) P.emplace_back(A[i].first, A[i].second, 0);
+    for(int i = 0; i < N; i++) P.emplace_back(B[i].first, B[i].second, 1);
+    // x 座標でソート
+    sort(P.begin(), P.end());
 
     int ans = 0;
-    vector<int> usedR(N); // 赤い点が既にペアかを管理
-    // 青の点を全探索
-    for(int i = 0; i < N; i++){
-        for(int j = 0; j < N; j++){
-            if(usedR[j]) continue;
-            if(R[j].first < B[i].first && R[j].second < B[i].second){
-                usedR[j] = true, ans++;
-                break;
-            }
+    // 残っている赤い点の y 座標を管理
+    set<int> remain;
+    // 平面走査
+    for(int i = 0; i < N * 2; i++){
+        auto [x, y, t] = P[i];
+        // 赤い点なら残りに追加する
+        if(t == 0){
+            remain.insert(y);
+        }
+        // 青い点なら残りから y 未満で最大の赤い点とペアにする
+        if(t == 1){
+            if(remain.empty()) continue;
+            auto itr = remain.lower_bound(y);
+            if(itr == remain.begin()) continue;
+            remain.erase(prev(itr)), ans++;
         }
     }
 
-    cout << ans << endl;
+    cout << ans << '\n';
 }
