@@ -9,30 +9,32 @@ using ll = long long;
 #define debug(...) (static_cast<void>(0))
 #endif
 
-int main(){
+int main() {
     cin.tie(nullptr);
     ios::sync_with_stdio(false);
     cout << fixed << setprecision(20);
     int N;
-    cin >> N;
     string S;
-    cin >> S;
+    cin >> N >> S;
 
-    auto NAND = [&](int i, int j) -> int {
-        return 1 - min(i, j);
-    };
+    vector<int> A(N);
+    for (int i = 0; i < N; i++) A[i] = S[i] - '0';
 
-    // dp[i + 1][j] := S[i] までで値が j になるパターン数
-    vector dp(N + 1, vector<ll>(2));
-    for(int i = 0; i < N; i++){
-        for(int j = 0; j < 2; j++){
-            dp[i + 1][NAND(j, S[i] - '0')] += dp[i][j];
+    // dp[i][j] := i 文字目まで見たとき, 値が j になる組合せ
+    vector dp(N + 1, vector<ll>(2, 0));
+    for (int i = 0; i < N; i++) {
+        // A[i] の値で場合分け
+        if (A[i] == 0) {
+            dp[i + 1][0] += 1;
+            dp[i + 1][1] += dp[i][0] + dp[i][1];
         }
-        dp[i + 1][S[i] - '0']++;
+        if (A[i] == 1) {
+            dp[i + 1][0] += dp[i][1];
+            dp[i + 1][1] += dp[i][0] + 1;
+        }
     }
 
     ll ans = 0;
-    for(int i = 1; i <= N; i++) ans += dp[i][1];
-
-    cout << ans << endl;
+    for (int i = 0; i <= N; i++) ans += dp[i][1];
+    cout << ans << '\n';
 }
