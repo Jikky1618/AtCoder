@@ -122,23 +122,23 @@ int main() {
     string S;
     cin >> N >> S;
 
-    vector<mint> dp(N + 1);
+    vector<mint> cnt(N + 1);
     for (auto&& M : make_is_divisors(N)) {
         if(M == N) continue;
         // 周期 M で各 i 日について全探索
-        dp[M] = 1;
+        cnt[M] = 1;
         for(int i = 0; i < M; i++){
             // flag := kM + i 日目に高橋くんが出勤しない日があるか
             bool flag = false;
             for(int j = i; j < N; j += M) if(S[j] == '.') flag = true;
             // 出勤しない日がある場合 1 通り, 出勤しない日がない場合 2 通り 
-            dp[M] *= flag ? 1 : 2;
+            cnt[M] *= flag ? 1 : 2;
         }
         // 周期 M の約数 m についての場合が重複しているので引く
-        for(auto&& m: make_is_divisors(M)) if(m != M) dp[M] -= dp[m];
+        for(auto&& m: make_is_divisors(M)) if(m != M) cnt[M] -= cnt[m];
     }
 
-    debug(dp);
-    mint ans = reduce(dp.begin(), dp.end());
+    debug(cnt);
+    mint ans = reduce(cnt.begin(), cnt.end());
     cout << ans << '\n';
 }
