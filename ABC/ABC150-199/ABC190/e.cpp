@@ -61,6 +61,7 @@ int main(){
             for(int j = 0; j < K; j++){
                 // S に j が既に含まれている場合 continue
                 if(bit >> j & 1) continue;
+                if(dist[i][j] == INF) continue;
                 dp[bit | (1 << j)][j] = min(dp[bit | (1 << j)][j], dp[bit][i] + dist[i][j]);
             }
         }
