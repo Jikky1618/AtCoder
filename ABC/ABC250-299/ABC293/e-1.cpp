@@ -1,6 +1,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 using ll = long long;
+
 #include <atcoder/modint>
 using namespace atcoder;
 
@@ -11,45 +12,97 @@ using namespace atcoder;
 #define debug(...) (static_cast<void>(0))
 #endif
 
-template<class T>
-vector<vector<T>> mul(vector<vector<T>> &A, vector<vector<T>> &B){
-    int ha = A.size(), hb = B.size(), wb = B.front().size();
-    vector<vector<T>> R(ha, vector<T>(wb, 0));
-    for(int i = 0; i < ha; i++){
-        for(int j = 0; j < wb; j++){
-            for(int k = 0; k < hb; k++){
-                R[i][j] += A[i][k] * B[k][j];
+template <class T>
+struct Matrix {
+    int m, n;
+    vector<vector<T>> A;
+    
+    Matrix(int H, int W): m(H), n(W), A(H, vector<T>(W)) {}
+    Matrix(const vector<vector<T>>& V): m(V.size()), n(V[0].size()), A(V) {}
+    Matrix() = default;
+    bool operator == (const Matrix& other) const {
+        return *this->A == other.A;
+    }
+    bool operator != (const Matrix& other) const {
+        return *this->A != other.A;
+    }
+    vector<T> operator [] (int i) const {
+        return A[i];
+    }
+    vector<T>& operator [] (int i) {
+        return A[i];
+    }
+    Matrix operator + (const Matrix& other) const {
+        return *this += other;
+    }
+    Matrix operator - (const Matrix& other) const {
+        return *this -= other;
+    }
+    Matrix operator * (const T& other) const {
+        return *this *= other;
+    }
+    Matrix operator * (const Matrix& other) const {
+        return *this *= other;
+    }
+    Matrix operator += (const Matrix& other) {
+        for(int i = 0; i < m; i++){
+            for(int j = 0; j < n; j++){
+                A[i][j] += other[i][j];
             }
         }
+        return *this;
     }
-    return R;
-}
-
-template<class T>
-vector<vector<T>> pow(vector<vector<T>> &A, uint64_t n){
-    int a = A.size();
-    vector<vector<T>> R(a, vector<T>(a));
-    auto B = A;
-    for(int i = 0; i < a; i++) R[i][i] = 1;
-    while(n > 0){
-        if(n & 1) R = mul(R, B);
-        B = mul(B, B);
-        n >>= 1;
+    Matrix operator -= (const Matrix& other) {
+        for(int i = 0; i < m; i++){
+            for(int j = 0; j < n; j++){
+                A[i][j] -= other[i][j];
+            }
+        }
+        return *this;
     }
-    return R;
-}
+    Matrix operator *= (const T& other) {
+        for(int i = 0; i < m; i++){
+            for(int j = 0; j < n; j++){
+                A[i][j] *= other;
+            }
+        }
+        return *this;
+    }
+    Matrix operator *= (const Matrix& other) {
+        assert(n == other.m);
+        Matrix res(m, other.n);
+        for(int i = 0; i < m; i++){
+            for(int j = 0; j < other.n; j++){
+                for(int k = 0; k < n; k++){
+                    res[i][j] += A[i][k] * other[k][j];
+                }
+            }
+        }
+        return (*this) = res;
+    }
+    Matrix pow(ll d) const {
+        assert(m == n);
+        Matrix res(m, n), x(*this);
+        for(int i = 0; i < m; i++) res[i][i] = 1;
+        while(d > 0){
+            if(d & 1) res *= x;
+            x *= x;
+            d >>= 1;
+        }
+        return res;
+    }
+};
 
 int main(){
     cin.tie(nullptr);
     ios::sync_with_stdio(false);
     cout << fixed << setprecision(20);
-    ll A, X, M;
+    ll A, M, X;
     cin >> A >> X >> M;
 
     modint::set_mod(M);
-
-    vector<vector<modint>> mat = {{A, 1}, {0, 1}};
-    vector<vector<modint>> ans = pow(mat, X);
-
-    cout << ans[0][1].val() << endl;
+    Matrix<modint> mat({{A, 1}, {0, 1}});
+    mat = mat.pow(X);
+    debug(mat.A);
+    cout << mat[0][1].val() << '\n';
 }
