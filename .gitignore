@@ -7,6 +7,7 @@ library/
 # test file
 test.cpp
 tempCodeRunnerFile.cpp
+src/
 
 # input / output test file
 in.txt
